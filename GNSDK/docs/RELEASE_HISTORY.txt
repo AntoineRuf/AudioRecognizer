@@ -1,0 +1,290 @@
+#
+# Copyright (c) 2000-present Gracenote, Inc.
+#
+# This software may not be used in any way or distributed without
+# permission. All rights reserved.
+#
+# Some code herein may be covered by US and international patents.
+#
+
+GRACENOTE SDK RELEASE 3.07.7.3701
+Packaged 2015/07/14
+
+
+Please send Gracenote SDK feedback to:
+	gnsdk_feedback@gracenote.com
+
+CONTENTS:
+
+builds/:                Contains the make files to build the samples for each of the
+                        supported platforms
+docs/:                  Gracenote SDK API Reference Guide (in HTML)
+images/:                Contains standard JPG files to display when playing tracks that
+                        were not matched
+include/:               Gracenote SDK header files
+lib/:                   Gracenote SDK shared libraries
+lib_static/:            Gracenote SDK static libraries
+sample_data/:           Test vectors for the samples and a sample local database
+samples/:               Buildable sample code tutorials for Gracenote SDK usage
+wrappers/:              Contains C++ and Java wrapper interfaces to GNSDK
+
+
+REQUIREMENTS:
+- GNU Make 3.81+ required to build sample applications
+- Microsoft Windows platforms please see README_windows.txt
+
+
+PLATFORMS:
+lib/android_armeabi:     32-bit Android ARM EABI
+lib/android_armeabi-v7a: 32-bit Android ARM EABI
+lib/android_x86:         32-bit Android x86
+lib/linux_arm-32:        32-bit Linux ARM (requires: glibc 2.3.2+)
+lib/linux_armhf-32:      32-bit Linux ARM with hard floating point (requires: glibc
+                         2.3.2+)
+lib/linux_x86-32:        32-bit Linux x86 (requires: glibc 2.3.2+)
+lib/linux_x86-64:        64-bit Linux x86 (requires: glibc 2.3.2+)
+lib/mac_x86-32:          32-bit Mac OS X x86 (10.5 and above)
+lib/mac_x86-64:          64-bit Mac OS X x86 (10.5 and above)
+lib/win_x86-32:          32-bit MS Windows x86 (XP and above)
+lib/win_x86-64:          64-bit MS Windows x64
+
+lib_static/ios_armv7-32:    32-bit Mac iOS (ARMv7)
+lib_static/ios_armv7s-32:   32-bit Mac iOS (ARMv7S)
+lib_static/ios_x86-32:      32-bit Mac iOS Simulator(x86)
+lib_static/ios_x86-64:      64-bit Mac iOS Simulator(x86)
+lib_static/linux_arm-32:    32-bit Linux ARM (requires: glibc 2.3.2+)
+lib_static/linux_armhf-32:  32-bit Linux ARM with hard floating point (requires: glibc
+                            2.3.2+)
+lib_static/linux_mips-32EL: 32-bit Linux MIPS Little Endian (requires: glibc 2.3.2+)
+lib_static/linux-x86-32:    32-bit Linux x86 (requires: glibc 2.3.2+)
+lib_static/linux_x86-64:    64-bit Linux x86 (requires: glibc 2.3.2+)
+
+
+RELEASE NOTES:
+See Release Notes for more details.
+
+----------------------------------------------------------  
+3.07.7: 2015/07/06
+
+* Fixed Java Security Vulnerability (CVE-2015-2004) in the Java layer of the GNSDK that is
+  potentially exploitable if your application serializes GnException and stores or
+  transmits the serialized object.
+
+----------------------------------------------------------  
+3.07.6: 2015/06/19
+
+* Fixed an issue in SQLite support in which deletion of a large number of items could
+  subsequently lead to errors. Deletion of a large number of items could occur, for
+  example, during background cache management processes.
+
+----------------------------------------------------------  
+3.07.5: 2015/05/15
+
+* Changes applied to GNSDK 3.07.4 in order to allow use of an external SQLite library
+  could lead to database contention. Under some conditions this could cause an application
+  to crash. This has been fixed.
+* Fixed a potential crash when performing online queries with multiple threads in
+  parallel.
+* Fixed a potential crash in MusicID-Stream. This could occur if an identify was cancelled
+  very soon after it was issued. This could happen whether the identify was requested in
+  manual query mode or under the hood in automatic query mode.
+* Fixed an issue which resulted in an extra network trip to fetch all data available to
+  MusicID-Stream queries, resulting in additional bandwidth.
+* Fixed an issue in which client side load balancing was not available when an http
+  proxy was in use.
+* Fixed an issue in Playlist generation which impacted the use of LIMIT clauses for tracks
+  in the collection summary in which the attribute to which the LIMIT was applied was
+  missing.
+* Fixed a bug in the handling of GNSDK_GDO_VALUE_IDENT for contributor objects.
+
+----------------------------------------------------------  
+3.07.4: 2015/04/13
+
+* GNSDK has SQLite built in. This was causing symbol clashes in some cases where
+  developers were using another instance of SQLite in their application. These symbol
+  clashes have been eliminated.
+* In addition, a new API has been added that will force GNSDK to use an
+  application specified SQLite instance. The new API is
+  - gnsdk_storage_sqlite_use_external_library(Ö)
+  This might be desired, for example, to allow sharing databases across processes. Note
+  that in order to use GNSDK with an external version of SQLite, that instance of
+  SQLite may need to be built with the following options
+    SQLITE_ENABLE_COLUMN_METADATA
+    SQLITE_ENABLE_UNLOCK_NOTIFY
+    SQLITE_OMIT_DEPRECATED
+* Fixed an issue in which Playlist Collection summaries generated with 3.07 version 
+  were not compatible with earlier GNSDK 3.06 releases 
+* Fixed Link Errors for linux_armhf-32 libs
+* Fixed an issue in which GNSDK_GDO_VALUE_FULL_RESULT was returning a True value if
+  Classical data was missing even in cases where Classical data was not requested. This
+  key now only returns True for missing Classical data if Classical data was requested and
+  expected.
+* Fixed an issue in the C# layer in which an invalid argument exception would be thrown
+  when accessing GnMusicIdFileInfoManager values with non ASCII UTF8 characters.
+
+----------------------------------------------------------  
+3.07.3: 2015/03/10
+
+* MusicID Stream
+  - Fixed an issue in which the audio quality setting was sometimes ignored.
+
+* Playlist
+  - Fixed a crash when adding to a pre-existing stored playlist collection which had
+    exactly 3 entries when loaded.
+
+* Networking
+  - Fixed issues with GNSDK_USER_OPTION_NETWORK_TIMEOUT. A recently introduced issue
+    caused this setting to be ignored. In addition, setting it to a very low value, in the
+    low millisecond range, would cause the timeout to be essentially infinite.
+
+----------------------------------------------------------  
+3.07.2: 2015/01/14
+
+* Rolled back modifications to language preferences for online TOC, Text and file based
+  fingerprint queries. The modifications were causing issues in some regions in which the
+  preferred result was being filtered out. This did not impact streaming fingerprint
+  queries and so the language preference improvements are still in place for those.
+
+----------------------------------------------------------  
+3.07.1: 2014/10/31
+
+Issues fixed in GNSDK 3.07.1
+* Removed some diagnostic output which should not have been in release builds.
+* Wrappers
+  - GnVideo.FindContributors(gnsdk_cstr_t textInput, GnVidoeSearchType searchType)
+    has been deprecated. A new method, taking a search field as well, has been added
+    GnVideo.FindContributors(gnsdk_cstr_t textInput, GnVideoSearchField searchField,
+                             GnVidoeSearchType searchType)
+
+----------------------------------------------------------  
+3.07.0: 2014/10/14
+
+New in GNSDK 3.07
+* Gracenote Rhythm
+  - Rhythm is an online Gracenote service that provides track recommendations
+    based on a seed (e.g. artist, album or track). Once a seed has been provided 
+    to the Rhythm API, the application can continue to request additional
+    tracks. The tracks returned may have links to online music catalogs to
+    support playback. The Gracenote Rhythm API supports actions such as “like”,
+    “dislike”, “played” and “skipped” which will dynamically modify tracks
+    returned on subsequent fetches.
+
+Changes in GNSDK 3.07.0
+* Data Model
+  - The key GNSDK_GDO_VALUE_DISPLAY_SCRIPT_DISPLAY, which was to be used to
+    return the display string of the script of a result, e.g. Latin, has been
+    removed pending provision of supporting data. The key
+    GNSDK_GDO_VALUE_DISPLAY_SCRIPT, which returns the script code, is still
+    available.
+  - Added the following fields
+    . GNSDK_GDO_VALUE_BIRTH_PLACE_LANGUAGE
+    . GNSDK_GDO_VALUE_DEATH_PLACE_LANGUAGE
+    . GNSDK_GDO_VALUE_CURRENT_MATCH_POSITION_MS
+    . GNSDK_GDO_VALUE_MATCH_DURATION_MS
+    . GNSDK_GDO_CHILD_TITLE_REGIONAL
+    . GNSDK_GDO_CHILD_TITLE_REGIONAL_LOCALE
+  - Deprecated the following keys
+    . GNSDK_GDO_VALUE_TRACK_MATCHED_POSITION.
+      Use GNSDK_GDO_VALUE_MATCH_POSITION_MS instead.
+    . GNSDK_GDO_VALUE_ACR_MATCH_POSITION_ACTUAL.
+      Use GNSDK_GDO_VALUE_MATCH_POSITION_MS instead.
+    . GNSDK_GDO_VALUE_ACR_MATCH_POSITION.
+      Use GNSDK_GDO_VALUE_MATCH_POSITION_MS instead.
+    . GNSDK_GDO_VALUE_ADJUSTED_MATCH_POSITION_MS.
+      Use GNSDK_GDO_VALUE_CURRENT_POSITION_MS instead.
+    . GNSDK_GDO_VALUE_ACR_MATCH_POSITION_ADJUSTED.
+      Use GNSDK_GDO_VALUE_CURRENT_POSITION_MS instead.
+* Locales and Lists
+  - Logic has been added to prefer query results most consistent with the set
+    locale in cases where there is more than 1 match.
+  - The Region GNSDK_REGION_NORTH_AMERICA has been deprecated. Use
+    GNSDK_REGION_US instead.
+* MusicID
+  - GNSDK_MUSICID_FP_DATA_TYPE_GNFPX has been deprecated. Use
+    GNSDK_MUSICID_FP_DATA_TYPE_STREAM3 or GNSDK_MUSICID_FP_DATA_TYPE_STREAM6
+    instead.
+  - GNSDK_MUSICID_FP_DATA_TYPE_CMX has been deprecated. Use
+    GNSDK_MUSICID_FP_DATA_TYPE_FILE instead.
+* MusicID-Stream
+  There have been numerous changes to the MusicID-Stream API. Note that much of
+  this API is marked as Experimental and so may change in future releases.
+  - Renamed some enumeration values from gnsdk_mids_* to gnsdk_musicidstream_*
+    for consistency.
+  - Added presets to set up MusicID-Stream for different use cases. Currently
+    microphone and radio use cases are supported. This impacts traits such as
+    the assumed audio quality.
+    . Added a “preset” argument to gnsdk_musicidstreamp_channel_create().
+  - The 5 GNSDK_MUSICIDSTREAM_AUDIO_QUALITY_ option values have been
+    replaced by 2 option values, MICROPHONE and TUNER.
+  - Added gnsdk_musicidstream_channel_identify_cancel() to cancel identification
+  - Added an operating mode in which recognition is carried on in the
+    background. This is enabled via a new API,
+    gnsdk_musicidstream_channel_automatic_set() and is primarily intended to
+    support Radio use cases. In automatic mode, the application can also send
+    events to a MusicID-Stream channel such as broadcast metadata changes.
+  - Added query flag argument to gnsdk_musicidstream_channel_identify().
+    Currently only supports GNSDK_MUSICIDSTREAM_QUERY_FLAG_ASYNC.
+  - APIs added for support of broadcast metadata inputs.
+* Playlist
+  -  Added a new attribute, GNSDK_PLAYLIST_ATTRIBUTE_NAME_TRACK, to playlist
+     entries.
+  - Added support for adding empty entries to a Playlist Collection Summaries
+    via a new API gnsdk_playlist_collection_add_ident().
+* Video
+  - Added GNSDK_VIDEO_OPTION_ENABLE_MINIMAL_DATA which currently reduces the
+    number of Credits returned from a Video Contributor query.
+  - Fixed an issue in which the Official name of a contributor could be missing
+    if it was not in the same as the configured locale.
+* Platform Support
+  - Added libraries
+    . android_armeabi
+    . android_x86
+    . linux_armhf-32 : 32 bit ARM linux with hard floating point support
+  - Removed libraries for Winrt and Windows Phone 8. Please contact Gracenote 
+    Global Services & Solutions team if you need to develop on these platforms.
+* Other Improvements
+  - Made cancellations from query callbacks return Warning instead of Error from
+    all states. Up to now cancellation would sometimes return an error and other
+    times return a warning.
+  - GNSDK_MANAGER_STORAGE_LISTSCACHE has been deprecated. Please use
+    GNSDK_MANAGER_STORAGE_LISTS instead.
+  - Added a new value, gnsdk_status_cancelled, to the status callback
+    enumeration type, gnsdk_status_t. This new value indicates to the callback
+    function that a transaction or query has been cancelled.
+  - Added GNSDK_MANAGER_STORAGE_TEMP to set the location of a new storage for
+    internal use by GNSDK.
+  - Added iOS and android support for the fp_generation utility application. 
+
+Issues fixed in GNSDK 3.07.0
+  - Fixed an issue in which after calling
+    gnsdk_storage_sqlite_option_set( GNSDK_STORAGE_SQLITE_OPTION_CACHE_FILESIZE,
+    <value>) a new cache was created, the new cache would not respect the file
+    size limit.
+  - Fixed an in issue in which Android applications using the C API to the GNSDK
+    were required to include the gabi++ library included in the Android NDK.
+    This dependency was not necessary and is no longer required in 3.07. Android
+    applications using the GNSDK C++ and Java APIs will require the gabi++
+    library from the Android NDK.
+  - Fixed an issue in which GNSDK_GDO_VALUE_DISPLAY_LANGUAGE_DISPLAY was
+    returning the incorrect field. The language display string returned with
+    this key is now the language corresponding to the code returned by
+    GNSDK_GDO_VALUE_DISPLAY_LANGUAGE.
+  - Fixed an issue in C++ in which cancel from MusicID was not always effective.
+  - Fixed an issue in which queries against the cache using
+    GNSDK_LOOKUP_MODE_ONLINE_CACHEONLY would create a cache if none existed.
+  - Fixed a potential crash when executing gnsdk_musicidfile_query_do_albumid()
+    could crash of the flag GNSDK_MUSICIDFILE_QUERY_FLAG_AGGRESSIVE was set.
+  - Fixed a crashing bug in the query status callback. If a query was aborted
+    when the query state was gnsdk_status_complete, then library shutdown with
+    gnsdk_manager_shutdown() would crash.
+  - Fixed an issue in which the Official name of a contributor resulting from an
+    online query was missing in some cases where the official language was not
+    the same as the locale language.
+  - Improved error reporting for querying with silent stream fingerprints.
+    Includes a new error code: GNSDKERR_SilentAudio
+  - Fixed an issue in with Contributor GNUIDs in MusicID. in which Album and
+    Track IDs were not being properly propagated to Contributor.
+
+----------------------------------------------------------  
+3.02.0: 2013/01/08
+Inaugural release of GNSDK to Open Developers.

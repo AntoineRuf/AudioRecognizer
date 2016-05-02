@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Accessing Core Metadata|Accessing Video Metadata|Getting Video Metadata">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Accessing Video Product Metadata</title>
+        <link href="../../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../../index.html#c-topics/accessing_metadata/video/Accessing Video Product Metadata.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Accessing Core Metadata</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Accessing Video Metadata</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Accessing Video Product Metadata</span>
+        </div>
+        <h1>Accessing Video Product Metadata</h1>
+        <p>This example demonstrates accessing and parsing metadata from a video Product: Disc &gt; Side &gt; Layer &gt; Feature &gt; Chapter (see sample output below). A Product refers to the commercial release of a Film, TV Series, or video content. Products contain a unique commercial code such as a UPC, Hinban, or EAN. Products are for the most part released on a physical format, such as a DVD or Blu-ray.</p>
+        <p>Sample Code: </p>
+        <p>video_product_metadata/main.c
+        </p>
+        <p>Application steps:</p>
+        <ol>
+            <li value="1">Authenticate caller, initialize GNSDK and Video module, load a locale, enable SDK logging, and get a user handle</li>
+            <li value="2">Perform title search</li>
+            <li value="3">Select first match and parse/display metadata.</li>
+            <li value="4">Release resources and shutdown GNSDK and Video module</li>
+        </ol>
+        <p><strong>Sample output</strong>
+        </p><pre>GNSDK Product Version	: 3.2.0.274 	(built 2012-11-30 09:09-0800)
+
+*****Sample Title Search: 'Star'*****
+
+Possible Matches: 20
+
+Selecting first one:
+
+Title: Star!
+Production type: Motion Picture
+Orig release: 1968
+Rating: G [MPAA (USA)]
+Release: 2004-04-20
+Discs: 1
+
+Discs:1
+disc 1 -------- 
+	Title: Star! Side A: Feature
+	Number sides: 2
+	Side 1 -------- 
+	Number layers: 1
+		Layer 1 -------- 
+		Media type: DVD
+		TV system: NTSC
+		Region Code: FE
+		Video Region: 1
+		Features: 1
+
+			Feature 4 -------- 
+			Feature title: Star!
+			Length: 2:52:51
+			Aspect ratio: 2.20:1 [STANDARD]
+			Primary genre: Comedy
+			Rating: G [MPAA (USA)]
+			Feature type: Main
+			Production type: Motion Picture
+			chapters: 44
+				1: Overture [0:04:19]
+				2: Main Titles [0:01:28]
+				3: A Poor Start [0:04:13]
+				4: Piccadilly [0:04:06]
+				5: Bon Voyage [0:01:25]
+				6: Oh, It's A Lovely War [0:02:02]
+				7: Bloody Awful [0:01:38]
+				8: In My Garden Of Joy [0:02:04]
+				9: London! [0:02:08]
+				10: Forbidden Fruit [0:01:47]
+				11: An Original Entrance [0:03:28]
+				12: 'n' Everything [0:02:17]
+				13: Love And Marriage [0:04:12]
+				14: Burlington Bertie From Bow [0:04:21]
+				15: The Knight Returns [0:08:15]
+				16: An Uncrowned Queen [0:07:14]
+				17: Parisian Pierrot [0:03:17]
+				18: Naked Men, Naked Women [0:03:05]
+				19: America! [0:05:20]
+				20: Limehouse Blues [0:08:19]
+				21: Ruling The Yanks [0:06:59]
+				22: Someone To Watch Over Me [0:03:16]
+				23: Toga Party [0:02:43]
+				24: Dear Little Boy (Dear Little Girl) [0:01:57]
+				25: Who Am I? [0:03:12]
+				26: On Holiday [0:06:26]
+				27: Not-So-Private Lives [0:04:09]
+				28: Someday I'll Find You [0:01:20]
+				29: Safety In Numbers [0:04:42]
+				30: Farewell, Kind Sir [0:05:07]
+				31: Witness For The Defense [0:04:14]
+				32: Physician [0:04:22]
+				33: I'll Show You! [0:01:06]
+				34: Do Do Do [0:02:59]
+				35: What Do You Want? [0:03:07]
+				36: Has Anybody Seen Our Ship? [0:02:55]
+				37: The Act Continues [0:06:33]
+				38: Faultless Timing [0:10:27]
+				39: Skylark [0:04:52]
+				40: My Ship [0:02:36]
+				41: Stop Acting! [0:03:06]
+				42: The Saga Of Jenny [0:07:05]
+				43: Love And Marriage II [0:01:21]
+				44: End Credits [0:03:01]
+	Side 2 -------- 
+	Number layers: 1
+		Layer 1 -------- 
+		Media type: DVD
+		TV system: NTSC
+		Region Code: FE
+		Video Region: 1
+		Features: 3
+
+			Feature 2 -------- 
+			Feature title: Star! The Sound Of A Legend
+			Length: 0:10:53
+			Aspect ratio: 2.35:1 [ANAMORPHIC]
+			Primary genre: Comedy
+			Rating: G [MPAA (USA)]
+			Feature type: Main
+			Production type: Motion Picture
+			chapters: 0
+
+			Feature 9 -------- 
+			Feature title: Silver Star
+			Length: 0:09:04
+			Primary genre: Documentary
+			Feature type: Extra
+			chapters: 0
+
+			Feature 10 -------- 
+			Feature title: Julie Andrews And Daniel Massey Screen Test
+			Length: 0:10:36
+			Aspect ratio: 2.35:1 [ANAMORPHIC]
+			Primary genre: Comedy
+			Rating: G [MPAA (USA)]
+			Feature type: Main
+			Production type: Motion Picture
+			chapters: 0
+       </pre>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

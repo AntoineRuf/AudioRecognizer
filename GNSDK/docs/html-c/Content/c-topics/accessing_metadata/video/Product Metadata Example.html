@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Accessing Core Metadata|Accessing Video Metadata|Video Metadata Reference">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Product Metadata  Example</title>
+        <link href="../../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../../index.html#c-topics/accessing_metadata/video/Product Metadata Example.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Accessing Core Metadata</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Accessing Video Metadata</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Product Metadata Example</span>
+        </div>
+        <h1>Product Metadata  Example</h1>
+        <p>The following is intended to give the reader some idea of the metadata returned in a gnsdk_video_query_find_products() API call. The output was generated using the sample code in the "Find Products" article.</p><pre>
+&lt;VIDEO_PRODUCT&gt;
+  &lt;PACKAGE_LANG ID="1" LANG="eng"&gt;English&lt;/PACKAGE_LANG&gt;
+  &lt;PRODUCTION_TYPE ID="16635"&gt;Motion Picture&lt;/PRODUCTION_TYPE&gt;
+  &lt;TITLE_OFFICIAL&gt;
+    &lt;DISPLAY&gt;A Bug&amp;apos;s Life&lt;/DISPLAY&gt;
+    &lt;MAIN_TITLE&gt;A Bug&amp;apos;s Life&lt;/MAIN_TITLE&gt;
+  &lt;/TITLE_OFFICIAL&gt;
+  &lt;RATING TYPE="MPAA (USA)" TYPE_ID="1" ID="1"&gt;G&lt;/RATING&gt;
+  &lt;DATE_RELEASE&gt;2000-08-01&lt;/DATE_RELEASE&gt;
+  &lt;DATE_ORIGINAL&gt;1995-11-20&lt;/DATE_ORIGINAL&gt;
+  &lt;ASPECT_RATIO TYPE="STANDARD"&gt;2.35:1&lt;/ASPECT_RATIO&gt;
+  &lt;VIDEO_REGION ID="2"&gt;1&lt;/VIDEO_REGION&gt;
+  &lt;DURATION UNITS="sec"&gt;5700&lt;/DURATION&gt;
+  &lt;VIDEO_DISC ORD="1"&gt;
+    &lt;DISC_NUM&gt;1&lt;/DISC_NUM&gt;
+    &lt;VIDEO_SIDE ORD="1"&gt;
+      &lt;SIDE_NUM&gt;1&lt;/SIDE_NUM&gt;
+      &lt;VIDEO_LAYER ORD="1"&gt;
+        &lt;LAYER_NUM&gt;1&lt;/LAYER_NUM&gt;
+        &lt;TV_SYSTEM&gt;NTSC&lt;/TV_SYSTEM&gt;
+        &lt;REGION_CODE&gt;FE&lt;/REGION_CODE&gt;
+        &lt;VIDEO_REGION ID="2"&gt;1&lt;/VIDEO_REGION&gt;
+        &lt;MEDIA_TYPE ID="2"&gt;DVD&lt;/MEDIA_TYPE&gt;
+        &lt;VIDEO_FEATURE ORD="1"&gt;
+          &lt;FEATURE_NUM&gt;4&lt;/FEATURE_NUM&gt;
+          &lt;FEATURE_TYPE ID="1"&gt;Main&lt;/FEATURE_TYPE&gt;
+          &lt;PRODUCTION_TYPE ID="16635"&gt;Motion Picture&lt;/PRODUCTION_TYPE&gt;
+          &lt;TITLE_OFFICIAL&gt;
+            &lt;DISPLAY&gt;A Bug&amp;apos;s Life [Full Screen Version]&lt;/DISPLAY&gt;
+          &lt;/TITLE_OFFICIAL&gt;
+          &lt;ASPECT_RATIO TYPE="STANDARD"&gt;2.35:1&lt;/ASPECT_RATIO&gt;
+          &lt;DURATION UNITS="sec"&gt;5688&lt;/DURATION&gt;
+          &lt;GENRE_LEVEL1&gt;Action/Adventure&lt;/GENRE_LEVEL1&gt;
+          &lt;GENRE_LEVEL2&gt;Adventure&lt;/GENRE_LEVEL2&gt;
+          &lt;RATING TYPE="MPAA (USA)" TYPE_ID="1" ID="1"&gt;G&lt;/RATING&gt;
+          &lt;CHAPTER ORD="1"&gt;
+            &lt;CHAPTER_NUM&gt;1&lt;/CHAPTER_NUM&gt;
+            &lt;TITLE_OFFICIAL&gt;
+              &lt;DISPLAY&gt;Program Start&lt;/DISPLAY&gt;
+            &lt;/TITLE_OFFICIAL&gt;
+            &lt;DURATION UNITS="sec"&gt;27&lt;/DURATION&gt;
+          &lt;/CHAPTER&gt;
+          &lt;CHAPTER ORD="2"&gt;
+            &lt;CHAPTER_NUM&gt;2&lt;/CHAPTER_NUM&gt;
+            &lt;TITLE_OFFICIAL&gt;
+              &lt;DISPLAY&gt;Main Titles&lt;/DISPLAY&gt;
+            &lt;/TITLE_OFFICIAL&gt;
+            &lt;DURATION UNITS="sec"&gt;241&lt;/DURATION&gt;
+          &lt;/CHAPTER&gt;
+          
+          ...More Chapters
+          
+
+        &lt;/VIDEO_FEATURE&gt;
+        
+        ... More Video Features
+
+      &lt;/VIDEO_LAYER&gt;
+    &lt;/VIDEO_SIDE&gt;
+  &lt;/VIDEO_DISC&gt;
+&lt;/VIDEO_PRODUCT&gt;
+
+</pre>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

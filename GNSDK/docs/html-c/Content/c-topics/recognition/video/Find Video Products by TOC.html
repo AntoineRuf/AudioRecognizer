@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Implementing Recognition Features|Recognizing Video">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Find Video Products by TOC</title>
+        <link href="../../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../../index.html#c-topics/recognition/video/Find Video Products by TOC.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Implementing Recognition Features</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Recognizing Video</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Finding Video Products by TOC</span>
+        </div>
+        <h1>Find Video Products by TOC</h1>
+        <p>Below is sample code showing a find query using a Product's TOC.</p><pre>
+/* Create query handle */
+gnsdk_video_query_create(user_handle, GNSDK_NULL, GNSDK_NULL, &amp;query_handle);
+
+/* Set the input ID */
+gnsdk_video_query_set_toc_string( query_handle,
+"1:15;2:198 15;3:830 7241 6099 3596 9790 3605 2905 2060 10890 3026 6600 2214
+5825 6741 3126 6914 1090 2490 3492 6515 6740 4006 6435 3690 1891 2244 5881 1435 7975 4020
+4522 2179 3370 2111 7630 2564 8910 15;4:830 7241 6099 3596 9790 3605 2905 2060 10890 3026
+6600 2214 5825 6741 3126 6914 1090 2490 3492 6515 6740 4006 6435 3690 1891 2244 5881 1435
+7975 4020 4522 2179 3370 2111 7630 2564 8910 15;5:8962 15;6:11474 15;7:11538 15;", 0 );
+
+/* Attempt to look up this TOC */
+gnsdk_video_query_find_products(query_handle, &amp;response_gdo);
+</pre>
+        <p>The example below demonstrates using VideoID to perform a Products query (gnsdk_video_query_find_products()). While this example focuses on looking up a video Product using a TOC, the basic query steps are similar for most GNSDK lookups. </p>
+        <p>Sample code: </p>
+        <p>video_products_lookup/main.c
+        </p>
+        <p>Application steps:</p>
+        <ol>
+            <li value="1">Authenticate caller, initialize GNSDK and Video module, enable SDK logging, load a locale, and get a user handle.</li>
+            <li value="2">Create query using TOC.</li>
+            <li value="3">Get Product <a href="javascript:void(0);" class="MCTextPopup MCTextPopupHotSpot MCTextPopup_Open MCTextPopupHotSpot_ MCTextPopupHotSpot_Popup #text #textPopup">GDO<span class="MCTextPopupBody popupBody"><span class="MCTextPopupArrow"></span>Gracenote Data Object: Containers most-commonly used to store information returned by a query. GDOs can contain metadata values (names, titles, external IDs, and so on) that can be accessed by an application using Value keys.  GDOs can also contain references to other GDOs, which can be accessed using Child GDO keys.</span></a>.</li>
+            <li value="4">Get Product title GDO and display title.</li>
+            <li value="5">Access and display Product metadata<br /></li>
+            <li value="6">Release resources and shutdown GNSDK and Video module.</li>
+        </ol>
+        <p>When you run this program, you should see the following output, though the GNSDK versions are likely to be different.</p>
+        <p><strong>Sample output:</strong>
+        </p><pre xml:space="preserve">GNSDK Product Version	: 3.2.0.274 	(built 2012-11-30 09:09-0800)
+
+Title: A Bug's Life
+Aspect ratio: 2.35:1
+Production Type: Motion Picture
+Package language: English
+Rating: G</pre>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

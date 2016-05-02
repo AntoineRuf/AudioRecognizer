@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Basic Application Design Tasks|Setup and Initialization">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Setting Network and Proxy Options</title>
+        <link href="../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../index.html#c-topics/basic_app_design/Setting Network and Proxy Values.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Basic Application Design Tasks</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Setup and Initialization</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Setting Network and Proxy Options</span>
+        </div>
+        <h1>Setting Network and Proxy Options</h1>
+        <p>An application can set options to aid in working with networks and proxy servers. Depending on the topology of your network, you can alter certain values using gnsdk_manager_user_option_set() so your Gracenote application can effectively work within your system.</p>
+        <p>&#160;</p>
+        <h2>Proxy Server Options</h2>
+        <p><span class="GNVariablesProductName">GNSDK for Desktop</span> supports the ability to set proxy server values such as host name, port numbers, and user IDs. The following table contains options available to gnsdk_manager_user_option_set() that support use of a proxy server:</p>
+        <p>&#160;</p>
+        <table style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">
+            <col style="width: 221px;" />
+            <col style="width: 392px;" />
+            <thead>
+                <tr>
+                    <th>Option</th>
+                    <th>Use</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>GNSDK_USER_OPTION_PROXY_HOST</td>
+                    <td>Value for this option is a fully qualified host name with optional port number. The default port number is 80.</td>
+                </tr>
+                <tr>
+                    <td>GNSDK_USER_OPTION_PROXY_USER</td>
+                    <td>Value for this option is a valid user name for the proxy server. You do not need to set this option if a user name is not required.</td>
+                </tr>
+                <tr>
+                    <td>GNSDK_USER_OPTION_PROXY_PASS</td>
+                    <td>Value for this option is the valid password for the proxy server. &#160;You do not need to set this option if a password is not required.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>The following calls set options for the proxy server:</p><pre xml:space="preserve">
+gnsdk_manager_user_option_set(
+    user_handle,
+    GNSDK_USER_OPTION_PROXY_HOST,
+    "http://proxy.example.com:8080/"
+);
+gnsdk_manager_user_option_set(
+    user_handle,
+    GNSDK_USER_OPTION_PROXY_USER,
+    "proxyUserName"
+);			
+gnsdk_manager_user_option_set(
+    user_handle,
+    GNSDK_USER_OPTION_PROXY_PASS,
+    "proxyPW"
+);	
+			
+/* 
+ * To set an option as global to all users, pass in NULL
+ * for the user handle. Options set globally apply only 
+ * to user handles created after the global option is set.
+ */
+			
+gnsdk_manager_user_option_set(
+    GNSDK_NULL,
+    GNSDK_USER_OPTION_PROXY_HOST, 
+    proxy_host);
+				
+			</pre>
+        <h2>&#160;</h2>
+        <h2>Network Options</h2>
+        <p><span class="GNVariablesProductName">GNSDK for Desktop</span> supports the ability to set options for network timeouts, load balancing, or interface types. The following table contains network options available to gnsdk_manager_user_option_set():</p>
+        <p>&#160;</p>
+        <table style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">
+            <col style="width: 221px;" />
+            <col style="width: 392px;" />
+            <thead>
+                <tr>
+                    <th>Option</th>
+                    <th>Use</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>GNSDK_USER_OPTION_NETWORK_TIMEOUT</td>
+                    <td>Sets the network timeout for all GNSDK&#160;queriess. Value for this option is a string with a numeric value representing the number of milliseconds to set for network timeouts. The default internal timeout is 30 seconds.  If the network connection is weak or lost during communication, the SDK does not attempt a retry. The user application must make all retry attempts.</td>
+                </tr>
+                <tr>
+                    <td>GNSDK_USER_OPTION_NETWORK_LOADBALANCE</td>
+                    <td>Enables distributing queries across multiple Gracenote co-location facilities. When not enabled, queries will resolve to a single co-location. You must ensure that any security settings, such as a firewall, in your network infrastructure do not affect outbound access and prevent GNSDK&#160;from transmitting queries to various hosts with unique IP&#160;addresses,</td>
+                </tr>
+                <tr>
+                    <td>GNSDK_USER_OPTION_NETWORK_INTERFACE	</td>
+                    <td>This option provides NIC&#160;support, such as WIFI&#160;and GSM. For devices with multiple Network Interfaces, you can set which NIC is used by Gracenote online features for all queries and per query, respectively. The NIC is selected through its IP address.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2>Testing Connection Ability</h2>
+        <p>You can test your applications ability to conncect to the Gracenote Service by calling gnsdk_manager_test_gracenote_connection(). This is a quick way to see if your application has been properly set up.</p>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

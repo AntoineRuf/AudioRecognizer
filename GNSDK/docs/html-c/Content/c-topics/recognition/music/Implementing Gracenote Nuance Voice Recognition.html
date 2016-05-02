@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Implementing Gracenote/Nuance Voice Recognition</title>
+        <link href="../../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../../index.html#c-topics/recognition/music/Implementing Gracenote Nuance Voice Recognition.html">Open topic with navigation</a>
+        </p>
+        <h1>Implementing Gracenote/Nuance Voice Recognition</h1>
+        <p>You can access phonetic transcriptions for a variety of music data after it has been recognized by <span class="GNVariablesProductName">GNSDK for Desktop</span>, by using the Nuance VoCon® Hybrid SDK (v4.4 or above). These transcriptions can then be used to implement voice commands in your application. You can access transcriptions for the following types of music data:</p>
+        <ul>
+            <li value="1">Artist names and nicknames</li>
+            <li value="2">Artist regional names</li>
+            <li value="3">Artist collaborations</li>
+            <li value="4">Album titles and nicknames</li>
+            <li value="5">Track titles</li>
+            <li value="6">Genre</li>
+            <li value="7">Mood</li>
+            <li value="8">Era</li>
+            <li value="9">Tempo</li>
+        </ul>
+        <p><span class="GNVariablesProductName">GNSDK for Desktop</span> provides global IDs for recognized artists and albums, which you can pass to the VoCon SDK to retrieve an array of pre-generated transcriptions. A global ID is a unique identifier created by Gracenote for the Nuance transcription buffer (database of pre-generated transcriptions), and is used as a key to retrieve transcriptions associated with the orthography. For all other data types, the orthography should be passed to the Nuance CLC Component to generate transcriptions.</p>
+        <p class="note"><span class="note">Note:</span>  You must use the option GNSDK_MUSICID_OPTION_ENABLE_GLOBALIDS when performing online queries for Global IDs.</p>
+        <p>The following table shows how transcriptions are obtained for each data type:
+        </p>
+        <table style="width: 100%;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <thead>
+                <tr>
+                    <th>Data Type</th>
+                    <th>Transcription Type</th>
+                    <th>Transcription Retrieval Based On</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Artist name</td>
+                    <td>Pre-generated</td>
+                    <td>Global ID</td>
+                    <td>In addition to the transcriptions for the artist name, the transcription array will include transcriptions for the associated artist alternate names</td>
+                </tr>
+                <tr>
+                    <td>Regional artist name*</td>
+                    <td>Pre-generated</td>
+                    <td>Global ID</td>
+                    <td>In addition to the transcriptions for the regional artist name, the transcription array will include transcriptions for the associated regional artist alternate names</td>
+                </tr>
+                <tr>
+                    <td>Artist collaboration</td>
+                    <td>Pre-generated</td>
+                    <td>Global ID</td>
+                    <td>Same as artist once collaborators are retrieved</td>
+                </tr>
+                <tr>
+                    <td>Album title</td>
+                    <td>Pre-generated</td>
+                    <td>Global ID</td>
+                    <td>In addition to the transcriptions for the album title, the transcription array will include transcriptions for the associated album title alternate names</td>
+                </tr>
+                <tr>
+                    <td>Track title</td>
+                    <td>CLC</td>
+                    <td>Orthography</td>
+                    <td>&#160;</td>
+                </tr>
+                <tr>
+                    <td>Genre</td>
+                    <td>CLC</td>
+                    <td>Orthography</td>
+                    <td>&#160;</td>
+                </tr>
+                <tr>
+                    <td>Mood</td>
+                    <td>CLC</td>
+                    <td>Orthography</td>
+                    <td>&#160;</td>
+                </tr>
+                <tr>
+                    <td>Era</td>
+                    <td>CLC</td>
+                    <td>Orthography</td>
+                    <td>&#160;</td>
+                </tr>
+                <tr>
+                    <td>Tempo</td>
+                    <td>CLC</td>
+                    <td>Orthography</td>
+                    <td>&#160;</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>*Retrieving transcriptions for regional artist names is the same as retrieving native artist names. To retrieve a regional artist name, use the GNSDK_<a href="javascript:void(0);" class="MCTextPopup MCTextPopupHotSpot MCTextPopup_Open MCTextPopupHotSpot_ MCTextPopupHotSpot_Popup #text #textPopup">GDO<span class="MCTextPopupBody popupBody"><span class="MCTextPopupArrow"></span>Gracenote Data Object: Containers most-commonly used to store information returned by a query. GDOs can contain metadata values (names, titles, external IDs, and so on) that can be accessed by an application using Value keys.  GDOs can also contain references to other GDOs, which can be accessed using Child GDO keys.</span></a>_CHILD_NAME_REGIONAL key  to access the GDO. For an example of retrieving a similiar GDO, see <a href="#Getting" class="GNBasic MCXref xref xrefGNBasic selected">Getting Orthographies</a>. Regional names are not available from online lookup results.</p>
+        <p class="note"><span class="note">Note:</span>  If a global ID is not found in the Nuance database for an artist name or album title, use the Nuance CLC to create a transcription with the orthography data.</p>
+        <p>Retrieving transcriptions involves the following steps:</p>
+        <p><b>Initialization</b>
+        </p>
+        <ol>
+            <li value="1">Initialize <span class="GNVariablesProductName">GNSDK for Desktop</span>, the GNSDK Manager and MusicID modules, and set the locale.</li>
+            <li value="2">Initialize the VoCon SDK, Base, Pronunciation, ASR, Recognizer, CLC, and Context Components.<p class="note"><span class="note">Note:</span> Remember to get the "magic string" from Gracenote and pass it to the VoCon SDK when initializing the CLC Component, to ensure that the global IDs used in the two systems are compatible. If you find that the SDKs are not compatible, contact your Gracenote Global Services &amp;&#160;Support representative to upgrade the SDKs.</p></li>
+            <li value="3">Use the VoCon SDK to set the default number of transcriptions per orthography. Higher values will increase recognition rates, but might slow down the recognition process.</li>
+        </ol>
+        <p><b>Adding Transcriptions to the Nuance Context</b> (the following steps can be done multiple times to add transcriptions for new names to the Context)</p>
+        <ol>
+            <li value="1">Perform a Gracenote music recognition and retrieve global IDs and orthography data from the GDOs for album titles and artist names, and retrieve the orthographies for track titles, genres, moods, eras, and tempos, depending on your use case.</li>
+            <li value="2">Retrieve transcriptions from the Nuance database with the Gracenote global IDs. If a transcription doesn’t exist in the Nuance database for a global ID, use the Nuance CLC to create a transcription with the orthography data. Track titles, genres, moods, eras, and tempos do not have global IDs, so you must use the Nuance CLC to create transcriptions with the  orthography data. Any available transcriptions for alternate names are delivered with the transcriptions for the official artist and album orthographies.</li>
+            <li value="3">Add the transcriptions to a Nuance context.</li>
+        </ol>
+        <p><b>Performing Voice Recognition Events</b>
+        </p>
+        <ol>
+            <li value="1">Finalize the Nuance context, close down the Pronunciation and CLC Components, and close <span class="GNVariablesProductName">GNSDK for Desktop</span>.</li>
+            <li value="2">Add the context to the Nuance recognizer.</li>
+            <li value="3">Perform voice recognition events.  At this stage, you can perform multiple voice recognition events.  If you want to add more transcriptions to the context, you must perform the initialization again and add the additional transcriptions to the Nuance context. Refer to the Nuance documentation if you would like to create a context that can be reused to add more transcriptions at a later date.</li>
+        </ol>
+        <p class="note"><span class="note">Note:</span> <span class="GNVariablesProductName">GNSDK for Desktop</span> provides reference code that demonstrates how to integrate <span class="GNVariablesProductName">GNSDK for Desktop</span> with the VoCon SDK to retrieve phonetic transcriptions. You can find the reference code in the reference_apps folder of the <span class="GNVariablesProductName">GNSDK for Desktop</span> SDK package.</p>
+        <h2>Checking SDK Compatibility</h2>
+        <p>To ensure that <span class="GNVariablesProductName">GNSDK for Desktop</span> and the VoCon SDK are in sync, and that the global IDs from <span class="GNVariablesProductName">GNSDK for Desktop</span> are valid for the Nuance database, you must pass the global ID "magic string" when transcriptions are retrieved with Gracenote global IDs. The magic string is a versioning string that helps ensure that the SDKs are in sync. You must call the gnsdk_manager_get_globalid_magic() function and pass the string returned as the compatibility string parameter to lh_IdTransLookupLoadData(), when initializing the CLC Component. This will safeguard against the Gracenote and Nuance databases getting out of sync.</p>
+        <h2 class="Heading2">Getting Global IDs and Orthographies</h2>
+        <p>Before retrieving transcription data, you must get global IDs for album titles and artist names, and orthographies for track titles, genres, moods, eras, and tempos. To get global IDs, start with an album or artist name GDO from a successful music recognition event. For more information, see <a href="Music Recognition Overview.html" class="GNBasic MCXref xref xrefGNBasic">Music Recognition Overview</a>. Once you have obtained a GDO, you can use the following function to get the global ID for the album or artist name GDO:</p><pre xml:space="preserve">gnsdk_manager_gdo_value_get(gdo, GNSDK_GDO_VALUE_GLOBALID, 1, &amp;globalid);</pre>
+        <p>The global ID can then be passed to the VoCon SDK to retrieve transcriptions.</p>
+        <h3>Getting Album Title Global IDs</h3>
+        <p>You can retrieve a global ID for an album title from the album GDO.</p><pre xml:space="preserve">gnsdk_cstr_t globalid = GNSDK_NULL;
+error = gnsdk_manager_gdo_value_get(album_gdo, GNSDK_GDO_VALUE_GLOBALID, 1, &amp;globalid);
+if (GNSDK_SUCCESS  == error)
+{
+    printf(“%25s %s\n”, “Album Global-ID:”, globalid);
+}
+</pre>
+        <p>The global IDs are used to retrieve a list of transcriptions from the Nuance database.  If a global ID is not found in the Nuance database, use the Nuance CLC to create a transcription with the album orthography data. See the Nuance documentation for more information.</p>
+        <h3>Getting Artist Name Global IDs</h3>
+        <p>You can retrieve a global ID for an artist name from the artist name GDO. To get an artist name GDO, you can first get an artist GDO from an album or track GDO. Then you can obtain the name GDO for the artist by getting the contributor GDO, and getting the official name from that. For example:</p><pre xml:space="preserve">error = gnsdk_manager_gdo_child_get(contrib_gdo, GNSDK_GDO_CHILD_NAME_OFFICIAL, 1, &amp;name_gdo);
+if (GNSDK_SUCCESS == error)
+{
+    gnsdk_cstr_t globalid = GNSDK_NULL;
+
+    /* Global ID */
+    error = gnsdk_manager_gdo_value_get(name_gdo, GNSDK_GDO_VALUE_GLOBALID, 1, &amp;globalid);
+    if (GNSDK_SUCCESS == error)
+    {
+        printf( "%25s %s\n", "Artist Global-ID:", globalid );
+    }
+
+    gnsdk_manager_gdo_release(name_gdo);
+}
+</pre>
+        <p>You can also extract regional names for the artist (and artist collaborations) from GDOs in a similar way, and you can retrieve transcriptions for these as well.</p>
+        <p>The global IDs are used to retrieve a list of transcriptions from the Nuance database, which will include any available alternate name transcriptions.  If a global ID is not found in the Nuance database, use the Nuance CLC to create a transcription with the artist orthography data. See the Nuance documentation for more information.</p>
+        <h3><a name="Getting"></a>Getting Orthographies</h3>
+        <p>Track titles, genres, moods, eras, and tempos don't have global IDs, because transcriptions for them are not pre-generated or stored in the Nuance transcription buffer. Because these data types present minimal challenges for speech systems, use the Nuance CLC to create transcriptions with the  orthography data. The following example shows how to retrieve the orthography data for a track title. Orthographies for the other data types can be retrieved in a similar way.</p><pre xml:space="preserve">/* Retrieve title GDO */
+error = gnsdk_manager_gdo_child_get(track_gdo, GNSDK_GDO_CHILD_TITLE_OFFICIAL, 1,&amp;title_gdo);
+if (GNSDK_SUCCESS == error)
+{
+    gnsdk_cstr_t orthography = GNSDK_NULL;
+
+    /* Retrieve orthography */
+    error = gnsdk_manager_gdo_value_get(title_gdo, GNSDK_GDO_VALUE_DISPLAY, 1, &amp;orthography);
+    if (GNSDK_SUCCESS == error)
+    {
+           printf(“%25s %s\n”, “Track Orthography:”, orthography);
+    }
+}
+</pre>
+        <p>See the Nuance documentation for a description of how to create a transcription with orthography data using the CLC. </p>
+        <h2 class="Heading2">Retrieving a Transcription Array from the VoCon SDK</h2>
+        <p>See the documentation provided with the Nuance VoCon Hybrid SDK for information about how to work with the transcription array it returns, and how to add the transcriptions to the Nuance context to provide voice recognition.</p>
+        <h2>Sample Voice Commands</h2>
+        <p>Once transcriptions of names and musical attributes have been added to the appropriate Nuance contexts, end users can use voice commands to navigate their music collection and generate playlists. Sample commands are provided below. Ultimately the supported commands must be defined by the developer, but Gracenote recommends supporting multiple ways for each command to be spoken by the end user for a more natural, easier user experience.</p>
+        <h3>Sample Artist Playlisting Commands</h3>
+        <p>The following commands can generate a playlist by The Beatles:</p>
+        <ul>
+            <li value="1">Play artist, The Beatles</li>
+            <li value="2">Play songs by The Beatles</li>
+            <li value="3">Play The Beatles</li>
+            <li value="4">Play artist, The Fab Four (nickname used)</li>
+            <li value="5">Play songs by The Fab Four (nickname used)</li>
+            <li value="6">Play 甲壳虫乐队 (Jiǎkéchóng yuèduì) (regional name for The Beatles in Mainland China)</li>
+        </ul>
+        <h3>Sample Play Track Commands</h3>
+        <p>The following commands can play the song Lucy in the Sky with Diamonds:</p>
+        <ul>
+            <li value="1">Play song, Lucy In The Sky With Diamonds</li>
+            <li value="2">Play Lucy In The Sky With Diamonds</li>
+        </ul>
+        <h3>Sample Album Playlisting Commands</h3>
+        <p>The following commands can play songs from the album Sgt. Pepper’s Lonely Hearts Club Band:</p>
+        <ul>
+            <li value="1">Play album, Sgt. Pepper's Lonely Hearts Club Band</li>
+            <li value="2">Play Sgt. Pepper's Lonely Hearts Club Band</li>
+            <li value="3">Play Sgt. Pepper's (nickname used)</li>
+        </ul>
+        <h3>Sample More Like This™ Playlisting Commands</h3>
+        <p>If Gracenote Playlist has been licensed, the following commands can generate a playlist of similar music based a particular song, including the song currently playing:</p>
+        <ul>
+            <li value="1">Play more like this (the song currently playing)</li>
+            <li value="2">Play more songs like this (the song currently playing)</li>
+            <li value="3">Play songs like Lucy In The Sky with Diamonds</li>
+        </ul>
+        <h3>Sample Genre Playlisting Commands</h3>
+        <p>The following commands can generate a playlist of music in the specified genre:</p>
+        <ul>
+            <li value="1">Play Rock</li>
+            <li value="2">Play genre, Rock</li>
+            <li value="3">Play British Invasion Music</li>
+            <li value="4">Play Dubstep</li>
+        </ul>
+        <h3>Sample Mood Playlisting Commands</h3>
+        <p>If Gracenote MoodGrid has been licensed, mood names can be passed to the Nuance CLC to create playlists based on mood. The following commands can generate a playlist based on the specified mood:</p>
+        <ul>
+            <li value="1">Play Empowering music</li>
+            <li value="2">Play mood, Empowering</li>
+            <li value="3">Play Peaceful music</li>
+        </ul>
+        <h3>Sample Tempo Playlisting Commands</h3>
+        <p>The following commands can generate a playlist based on the specified song tempo:</p>
+        <ul>
+            <li value="1">Play Fast music</li>
+            <li value="2">Play Faster music</li>
+            <li value="3">Play Upbeat music</li>
+            <li value="4">Play Slow music</li>
+        </ul>
+        <h3>Sample Era Playlisting Commands</h3>
+        <p>The following commands can generate a playlist based on the specified era:</p>
+        <ul>
+            <li value="1">Play music from the 1960’s</li>
+            <li value="2">Play music from early 80’s</li>
+            <li value="3">Play music from the Romantic Period</li>
+        </ul>
+        <div class="MCRelationshipsProxy_0">
+            <p class="conceptHeading_concept_0">Related Information</p>
+            <p class="conceptItem_concept_0"><a href="../../../shared-topics/concepts/Enhanced Voice Recognition Support.html">Enhanced Voice Recognition Support</a>
+            </p>
+        </div>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

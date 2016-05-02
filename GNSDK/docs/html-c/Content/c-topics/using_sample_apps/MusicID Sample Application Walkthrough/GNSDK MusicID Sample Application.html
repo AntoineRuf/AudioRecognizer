@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Getting Started|MusicID Sample Application Walkthrough">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>GNSDK MusicID Sample Application</title>
+        <link href="../../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../../index.html#c-topics/using_sample_apps/MusicID Sample Application Walkthrough/GNSDK MusicID Sample Application.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Getting Started</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">MusicID Sample Application Walkthrough</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">GNSDK MusicID Sample Application</span>
+        </div>
+        <h1>GNSDK MusicID Sample Application</h1>
+        <p>This topic steps through the <span class="GNVariablesProductName">GNSDK for Desktop</span> sample application called musicid_gdo_navigation. </p>
+        <p>Sample Application: musicid_gdo_navigation/main.c</p>
+        <p>This application uses MusicID to look up Album content, navigate the hierarchy of data returned, and extract and display metadata results. As shown in the following image, most of the sample applications follow a similar pattern—authenticate/initialize, query Gracenote Service, parse and display results, and shut down.</p>
+        <p>This sample application:</p>
+        <ul>
+            <li value="1">Initializes the GNSDK Manager, the MusicID library and local storage, enables logging, sets localization options, and registers the application user with the Gracenote Service.</li>
+            <li value="2">Performs album lookup queries using internal Gracenote identifiers.</li>
+            <li value="3">Parses returned Gracenote Data Objects (GDOs) and displays the results.</li>
+            <li value="4">Releases resources and shuts down the <span class="GNVariablesProductName">GNSDK for Desktop</span> when done.</li>
+        </ul>
+        <p>
+            <img src="../../../Resources/Images/02000001_566x168.jpg" style="width: 566;height: 168;" />
+        </p>
+        <p class="info"> In this topic, error handling is minimized and function calls are sometimes shown without some of their parameters. Refer to the sample application code to see how to implement error handling, and see the actual function call syntax.</p>
+        <h2>Albums That This Sample Queries On</h2>
+        <p>The sample application queries the Gracenote Service for the following albums:</p>
+        <ul>
+            <li value="1">Nelly -	Nellyville</li>
+            <li value="2">Dido -	Life for Rent</li>
+            <li value="3">Jean-Pierre Rampal	- Portrait Of Rampal</li>
+            <li value="4">Various Artists - Grieg: Piano	Concerto, Peer Gynth Suites	#1</li>
+            <li value="5">Stephen Kovacevich	- Brahms: Rhapsodies, Waltzes &amp;	Piano Pieces</li>
+            <li value="6">Nirvana - Nevermind</li>
+            <li value="7">Eminem	- Encore</li>
+            <li value="8">Japanese album: &lt;Japanese title&gt;</li>
+            <li value="9">Chinese album: &lt;Chinese title&gt;</li>
+        </ul>
+        <p>The following shows the metadata displayed for one album.</p>
+        <p><strong>Sample album output:</strong>
+        </p><pre>*****Sample MusicID Query*****
+Match.
+
+***Navigating	Result <a href="javascript:void(0);" class="MCTextPopup MCTextPopupHotSpot MCTextPopup_Open MCTextPopupHotSpot_ MCTextPopupHotSpot_Popup #text #textPopup">GDO<span class="MCTextPopupBody popupBody"><span class="MCTextPopupArrow"></span>Gracenote Data Object: Containers most-commonly used to store information returned by a query. GDOs can contain metadata values (names, titles, external IDs, and so on) that can be accessed by an application using Value keys.  GDOs can also contain references to other GDOs, which can be accessed using Child GDO keys.</span></a>***
+Album:
+	Package Language: English
+	Credit:
+		Contributor:
+			Name Official:
+				Display: Nirvana
+			Origin Level 1: North America
+			Origin Level 2: United States
+			Origin Level 3: Washington
+			Origin Level 4: Seattle
+			Era Level 1: 1990's
+			Era Level 2: 1990's
+			Era Level 3: 1990's
+			Artist Type	Level 1: Male
+			Artist Type	Level 2: Male Group
+	Title	Official:
+		Display: Nevermind
+	Year: 1991
+	Genre Level 1: Alternative &amp; Punk
+	Genre Level 2: Alternative
+	Genre Level 3: Grunge
+	Album Label: Geffen
+	Total In	Set: 1
+	Disc In Set: 1
+	Track	Count: 12
+	Track:
+		Track TUI: 12845136
+		Track Number: 1
+		Title	Official:
+			Display: Smells Like Teen Spirit
+		Year: 1991
+	Track:
+		Track TUI: 2897701
+		Track Number: 2
+		Title	Official:
+			Display: In Bloom
+	Track:
+		Track TUI: 12845138
+		Track Number: 3
+		Title	Official:
+			Display: Come As You Are
+		Year: 1991
+	Track:
+		Track TUI: 2897703
+		Track Number: 4
+		Title	Official:
+			Display: Breed
+	Track:
+		Track TUI: 2897704
+		Track Number: 5
+		Title	Official:
+			Display: Lithium
+	Track:
+		Track TUI: 2897705
+		Track Number: 6
+		Title	Official:
+			Display: Polly
+	Track:
+		Track TUI: 2897706
+		Track Number: 7
+		Title	Official:
+			Display: Territorial Pissings
+	Track:
+		Track TUI: 2897707
+		Track Number: 8
+		Title	Official:
+			Display: Drain You
+	Track:
+		Track TUI: 2897708
+		Track Number: 9
+		Title	Official:
+			Display: Lounge Act
+	Track:
+		Track TUI: 2897709
+		Track Number: 10
+		Title	Official:
+			Display: Stay Away
+	Track:
+		Track TUI: 2897710
+		Track Number: 11
+		Title	Official:
+			Display: On A Plain
+	Track:
+		Track TUI: 2897711
+		Track Number: 12
+		Title	Official:
+			Display: Something In The Way / [Hidden Track]    </pre>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

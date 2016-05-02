@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Basic Application Design Tasks|Using Gracenote Data Objects">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>GDO Navigation Examples</title>
+        <link href="../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../index.html#c-topics/basic_app_design/GDO Navigation Examples.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Basic Application Design Tasks</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Using Gracenote Data Objects</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">GDO Navigation Examples</span>
+        </div>
+        <h1>GDO Navigation Examples</h1>
+        <p>Gracenote Data Objects (GDOs) are the primary identifiers used to access Gracenote metadata.</p>
+        <h2 class="example">Example: Looking Up an Album by a TOC</h2>
+        <p>Sample Application: musicid_lookup_album_toc/main.c</p>
+        <p>Application steps:</p>
+        <ol>
+            <li value="1">Authenticate caller, initialize GNSDK and MusicID module, and initialize SQLite and local lookup</li>
+            <li value="2">Enable logging, load a locale, and get a User handle</li>
+            <li value="3">Perform a MusicID query based on TOC identifier</li>
+            <li value="4">Get album child GDOs from album response <a href="javascript:void(0);" class="MCTextPopup MCTextPopupHotSpot MCTextPopup_Open MCTextPopupHotSpot_ MCTextPopupHotSpot_Popup #text #textPopup">GDO<span class="MCTextPopupBody popupBody"><span class="MCTextPopupArrow"></span>Gracenote Data Object: Containers most-commonly used to store information returned by a query. GDOs can contain metadata values (names, titles, external IDs, and so on) that can be accessed by an application using Value keys.  GDOs can also contain references to other GDOs, which can be accessed using Child GDO keys.</span></a></li>
+            <li value="5">Access and display album titles</li>
+            <li value="6">Release resources and shutdown GNSDK and MusicID module</li>
+        </ol>
+        <p><b>Sample output:</b>
+        </p><pre>
+GNSDK Product Version    : 3.05.0.721 	(built 2013-04-02 22:29-0700)
+
+*****MusicID TOC Query*****
+    Match count: 8
+          Title: Come Away With Me
+          Title: è¿œèµ°é«˜é£ž
+          Title: Come Away With Me
+          Title: Come Away With Me
+          Title: Feels Like Home
+          Title: Norah Jones: Come Away With Me
+          Title: Come Away With Me
+          Title: Feels Like Home
+    Final album:
+          Title: Come Away With Me              
+</pre>
+        <h2 class="example">Example: Accessing Album and Track Metadata Using Album GDO</h2>
+        <p>This example uses an Album GDO to access Album metadata: artist, credits, title, year, and genre, as well as basic Track metadata: artist, credits, title, track number, and genre.</p>
+        <p>Sample Application: musicid_gdo_navigation/main.c</p>
+        <p>Application steps:</p>
+        <ol>
+            <li value="1">Authenticate caller, initialize GNSDK and MusicID module, and initialize SQLite and local lookup</li>
+            <li value="2">Enable logging, load a locale, and get a User handle</li>
+            <li value="3">Perform a MusicID query based on TUI identifier</li>
+            <li value="4">Get album child GDO from album response GDO</li>
+            <li value="5">Access and display album metadata</li>
+            <li value="6">Release resources and shutdown GNSDK and MusicID module</li>
+        </ol>
+        <p><b>Sample output:</b>
+        </p><pre>
+GNSDK Product Version    : 3.05.0.721 	(built 2013-04-02 22:29-0700)
+
+*****Sample MusicID Query*****
+Match.
+
+***Navigating	Result GDO***
+Album:
+	Package Language: English
+	Credit:
+		Contributor:
+			Name Official:
+				Display: Nelly
+			Origin Level 1: North America
+			Origin Level 2: United States
+			Origin Level 3: Missouri
+			Origin Level 4: St. Louis
+			Era Level 1: 2000's
+			Era Level 2: 2000's
+			Era Level 3: 2000's
+			Artist Type	Level 1: Male
+			Artist Type	Level 2: Male
+	Title	Official:
+		Display: Nellyville
+	Year: 2002
+	Genre Level 1: Urban
+	Genre Level 2: Western Hip-Hop/Rap
+	Genre Level 3: Midwestern Rap
+	Album Label: Universal
+	Total In	Set: 1
+	Disc In Set: 1
+	Track	Count: 19
+	Track:
+		Track TUI: 30716058
+		Track Number: 1
+		Title	Official:
+			Display: Nellyville
+	Track:
+		Track TUI: 30716059
+		Track Number: 2
+		Credit:
+			Contributor:
+				Name Official:
+					Display: Nelly Feat. Cedric The Entertainer &amp; La La
+		Title	Official:
+			Display: Gettin It Started
+	Track:
+		Track TUI: 30716060
+		Track Number: 3
+		Title	Official:
+			Display: Hot In Herre
+		Year: 2002
+	Track:
+		Track TUI: 30716061
+		Track Number: 4
+		Title	Official:
+			Display: Dem Boyz
+	Track:
+		Track TUI: 30716062
+		Track Number: 5
+		Title	Official:
+			Display: Oh Nelly
+	Track:
+		Track TUI: 30716063
+		Track Number: 6
+		Title	Official:
+			Display: Pimp Juice
+	Track:
+		Track TUI: 30716064
+		Track Number: 7
+		Title	Official:
+			Display: Air Force Ones
+		Year: 2002
+	Track:
+		Track TUI: 30716065
+		Track Number: 8
+		Credit:
+			Contributor:
+				Name Official:
+					Display: Nelly Feat. Cedric The Entertainer &amp; La La
+		Title	Official:
+			Display: In The Store
+	Track:
+		Track TUI: 30716066
+		Track Number: 9
+		Credit:
+			Contributor:
+				Name Official:
+					Display: Nelly Feat. King Jacob
+				Origin Level 1: North America
+				Origin Level 2: United States
+				Origin Level 3: Missouri
+				Origin Level 4: St. Louis
+				Era Level 1: 2000's
+				Era Level 2: Early 2000's
+				Era Level 3: Early 2000's
+				Artist Type	Level 1: Male
+				Artist Type	Level 2: Male Duo
+		Title	Official:
+			Display: On The Grind 
+
+	... More Tracks
+			
+  ... More Matches
+</pre>
+        <div class="MCRelationshipsProxy_0">
+            <p class="conceptHeading_concept_0">Related Information</p>
+            <p class="conceptItem_concept_0"><a href="../../shared-topics/concepts/Gracenote Data Objects GDOs.html">Gracenote Data Objects GDOs</a>
+            </p>
+        </div>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Basic Application Design Tasks|Setup and Initialization">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Working with Header Files and Libraries</title>
+        <link href="../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../index.html#c-topics/basic_app_design/Working with Header Files and Libraries.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Basic Application Design Tasks</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Setup and Initialization</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Working with Header Files and Libraries</span>
+        </div>
+        <h1><a name="_Toc334991735"></a>Working with Header Files and Libraries</h1>
+        <p><span class="GNVariablesProductName">GNSDK for Desktop</span> consists of a set of shared modules. The GNSDK Manager module is required for all applications. All other modules are optional. Your application's feature requirements determine which of the optional modules should be used.</p>
+        <p>Each <span class="GNVariablesProductName">GNSDK for Desktop</span> module has one or more corresponding header files. Other header files are also provided for public types and error codes. To include the necessary headers for a GNSDK&#160;application to run, simply include <b>gnsdk.h</b>, which automatically include headers for all modules.</p>
+        <p>If you wish to exclude headers for those modules that you will not be using, you may define certain values that the SDK uses to determine which modules to include. This is optional, and is only necessary if you do not wish to provide the GNSDK's pre-defined headers for unused modules. The following list contains the values that can be defined, and what they refer to. All are turned on by default:</p>
+        <ul>
+            <li value="1" data-mc-conditions="Default.ProdAuto,Default.ProdDesktop"><b>GNSDK_DSP:</b> Interface for the DSP&#160;SDK</li>
+            <li value="2" data-mc-conditions="Default.ProdAuto,Default.ProdDesktop"><b>GNSDK_LINK:</b> Interface for Link content</li>
+            <li value="3"><b>GNSDK_LOOKUP_LOCAL:</b> Interface for the Lookup&#160;Local module</li>
+            <li value="4"><b>GNSDK_LOOKUP_LOCALSTREAM:</b> Interface for the Lookup Local Stream module</li>
+            <li value="5"><b>GNSDK_MANAGER:</b> Interface for the GNSDK&#160;Manager module</li>
+            <li value="6"><b>GNSDK_MOODGRID:</b> Interface for Mood Grid</li>
+            <li value="7"><b>GNSDK_MUSICID:</b> Interface for MusicID</li>
+            <li value="8"><b>GNSDK_MUSICID_FILE:</b> Interface for MusicID File</li>
+            <li value="9"><b>GNSDK_MUSICID_STREAM:</b> Interface for MusicID&#160;Stream</li>
+            <li value="10"><b>GNSDK_PLAYLIST:</b> Interface for the Playlist SDK</li>
+            <li value="11"><b>GNSDK_STORAGE_SQLITE:</b> Interface for the SQLite SDK</li>
+            <li value="12">
+                <MadCap:conditionalText data-mc-conditions="Default.ProdDesktop"><b>GNSDK_SUBMIT:</b> Interface for the Submit&#160;SDK</MadCap:conditionalText>
+            </li>
+            <li value="13">
+                <MadCap:conditionalText data-mc-conditions="Default.ProdDesktop"><b>GNSDK_VIDEO:</b> Interface for VideoID</MadCap:conditionalText>
+            </li>
+        </ul>
+        <p>These values must be defined in your application prior to including <b>gnsdk.h</b>, as shown in the example below:</p>
+        <p>&#160;</p>
+        <p class="code"><pre xml:space="preserve">
+#define GNSDK_VIDEO             1 
+#define GNSDK_STORAGE_SQLITE    1
+#define GNSDK_LINK              1    
+#include "gnsdk.h"  //Include all applicable GNSDK headers
+		</pre>
+        </p>
+        <p>If you do not define any of these values, the headers for all modules will be included with your source. Including all headers is the easiest way to ensure that all appropriate headers are included in your application.</p>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

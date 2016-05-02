@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Getting Started">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Sample Applications Overview</title>
+        <link href="../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../index.html#c-topics/using_sample_apps/Sample Applications Overview.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Getting Started</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Using the Sample Applications</span>
+        </div>
+        <h1 class="Heading1">Using the Sample Applications</h1>
+        <p><span class="GNVariablesProductName">GNSDK for Desktop</span> provides working command-line  sample applications that demonstrate common queries and application scenarios. </p>
+        <p> The package also provides sample databases you can use when developing your applications. </p>
+        <p>Gracenote recommends stepping through the sample applications with a debugger to observe module usage and API calls. </p>
+        <h2>Sample Applications and Reference Applications</h2>
+        <p>Below is a list of  sample applications and reference applications for <span class="GNVariablesProductName">GNSDK for Desktop</span>. Sample and reference applications are included in the release package in the /samples and /reference_applications folders. </p>
+        <ul>
+            <li value="1"><i><b>Sample applications</b></i> demonstrate common queries to identify media elements and access metadata. </li>
+            <li value="2"><i><b>Reference applications</b></i> are more extensive and demonstrate specialized or more comprehensive use cases. </li>
+        </ul>
+        <p class="warning">Gracenote recommends that you use the sample and reference applications as a basis for any applications you develop.  </p>
+        <h3>Common Flow and Layout</h3>
+        <p>The sample applications are designed to have the same look and feel, and the same layout and flow, so developers can find their way around them quickly once they become familiar with one of them. In theory, you could do a diff between two samples and only see the meaningful differences - essential calls and so on for a given feature. For this reason, they contain some or all of the following common set of utility functions:</p>
+        <ul>
+            <li value="1">
+                <p><b>_init_gnsdk()</b> - Validate the caller, initialize the SDK Manager and modules, get a user handle, enable logging, initialize local storage and cache, and load a locale. Note that not all these intializations are done in every program.</p>
+            </li>
+            <li value="2">
+                <p><b>_get_user_handle()</b> - Load an existing user handle from file storage, or register a new one.</p>
+            </li>
+            <li value="3">
+                <p><b>_enable_logging()</b> - Enable SDK logging. This helps Gracenote debug your application, if necessary.</p>
+            </li>
+            <li value="4">
+                <p><b>_display_gnsdk_product_info()</b> - Display product version information.</p>
+            </li>
+            <li value="5">
+                <p><b>_display_last_error()</b> - Echo system information from last error.</p>
+            </li>
+            <li value="6">
+                <p><b>_set_locale()</b> - Set application locale. Note that this is only necessary if you are using locale-dependant fields such as genre, mood, origin, era, etc. Your app may or may not be accessing locale_dependent fields, but it does not hurt to do this initialization as a matter of course.</p>
+            </li>
+            <li value="7">
+                <p><b>_shutdown_gnsdk()</b> - Calls shutdown on all initialized GNSDK modules. If the user handle has changed during program execution, it is saved out to file storage.</p>
+            </li>
+            <li value="8">
+                <p><b>_display_embedded_db_info()</b> - Display local Gracenote database information.</p>
+            </li>
+        </ul>
+        <h3>Sample Applications</h3>
+        <table>
+            <col style="width: 233px;" />
+            <col />
+            <col />
+            <col />
+            <thead>
+                <tr>
+                    <th>Name (Click to view in documentation)</th>
+                    <th>Modules Used</th>
+                    <th>Description</th>
+                    <th>Location in Package</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>moodgrid
+                    </td>
+                    <td>Playlist</td>
+                    <td>Provides a complete MoodGrid sample application.</td>
+                    <td>samples/moodgrid/main.c</td>
+                </tr>
+                <tr>
+                    <td>musicid_file_albumid
+                    </td>
+                    <td>MusicID-File</td>
+                    <td>Uses AlbumID for advanced audio recognition. The audio file’s folder location and its similarity to other audio files are used to achieve more accurate identification.</td>
+                    <td>samples/musicid_file_albumid/main.c</td>
+                </tr>
+                <tr>
+                    <td>musicid_file_libraryid
+                    </td>
+                    <td>MusicID-File</td>
+                    <td>Uses LibraryID to perform additional scanning and processing of all the files in an entire collection. This enables LibraryID to find groupings that are not captured by AlbumID processing</td>
+                    <td>samples/musicid_file_libraryid/main.c</td>
+                </tr>
+                <tr>
+                    <td>musicid_file_trackid
+                    </td>
+                    <td>MusicID-File</td>
+                    <td>Uses TrackID, the simplest MusicID-File processing method to process each audio file independently, without regard for any other audio files in a collection.</td>
+                    <td>samples/musicid_file_trackid/main.c</td>
+                </tr>
+                <tr>
+                    <td>musicid_gdo_navigation
+                    </td>
+                    <td>MusicID</td>
+                    <td>Uses MusicID to look up Album <a href="javascript:void(0);" class="MCTextPopup MCTextPopupHotSpot MCTextPopup_Open MCTextPopupHotSpot_ MCTextPopupHotSpot_Popup #text #textPopup">GDO<span class="MCTextPopupBody popupBody"><span class="MCTextPopupArrow"></span>Gracenote Data Object: Containers most-commonly used to store information returned by a query. GDOs can contain metadata values (names, titles, external IDs, and so on) that can be accessed by an application using Value keys.  GDOs can also contain references to other GDOs, which can be accessed using Child GDO keys.</span></a> content,	including Album	artist,	credits, title,	year, and genre.
+ It demonstrates	how	to navigate	the	album GDO that returns basic track information,	including artist, credits, title, track	number,	and	genre.</td>
+                    <td>samples/musicid_gdo_navigation/main.c</td>
+                </tr>
+                <tr>
+                    <td>musicid_image_fetch
+                    </td>
+                    <td>Link</td>
+                    <td>Does a text search and finds images based on gdo type (album or contributor).
+ It also finds an image based on genre.</td>
+                    <td>samples/musicid_image_fetch/main.c</td>
+                </tr>
+                <tr>
+                    <td>musicid_lookup_album_id</td>
+                    <td>MusicID</td>
+                    <td>Looks up an album based on its TOC.</td>
+                    <td>samples/musicid_lookup_album_id/main.c</td>
+                </tr>
+                <tr>
+                    <td>musicid_lookup_album_toc
+                    </td>
+                    <td>MusicID</td>
+                    <td>Looks up an Album based on its TOC using either a local database or online.</td>
+                    <td>samples/musicid_lookup_album_toc/main.c</td>
+                </tr>
+                <tr>
+                    <td>musicid_lookup_matches_text
+                    </td>
+                    <td>MusicID</td>
+                    <td>Performs a sample text query with album, track and artist inputs.</td>
+                    <td>samples/musicid_lookup_matches_text/main.c</td>
+                </tr>
+                <tr>
+                    <td>musicid_stream
+                    </td>
+                    <td>MusicID</td>
+                    <td>Uses MusicID-Stream to fingerprint and identify a music track.</td>
+                    <td>samples/musicid_stream/main.c</td>
+                </tr>
+                <tr>
+                    <td>playlist
+                    </td>
+                    <td>Playlist</td>
+                    <td>Demonstrates using the Playlist APIs to create More Like This and custom playlists.</td>
+                    <td>samples/playlist/main.c</td>
+                </tr>
+                <tr data-mc-conditions="Default.ProdDesktop">
+                    <td>submit_album
+                    </td>
+                    <td>Submit</td>
+                    <td>Demonstrates editing an Album GDO and submitting it to Gracenote</td>
+                    <td>samples/submit_album/main.c</td>
+                </tr>
+                <tr data-mc-conditions="Default.ProdDesktop">
+                    <td>submit_feature
+                    </td>
+                    <td>Submit</td>
+                    <td>Demonstrates processing music features and submitting a parcel to Gracenote</td>
+                    <td>samples/submit_feature/main.c</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3>Reference Applications</h3>
+        <table>
+            <col style="width: 182px;" />
+            <col style="width: 102px;" />
+            <col style="width: 318px;" />
+            <col style="width: 317px;" />
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Modules Used</th>
+                    <th>Description</th>
+                    <th>Location in Package</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>MoodGrid_MoreLikeThis</td>
+                    <td>Playlist</td>
+                    <td>Demonstrates the MoreLikeThis use-case using Playlist and MoodGrid.</td>
+                    <td>reference_apps/MoodGrid_MoreLikeThis</td>
+                </tr>
+            </tbody>
+        </table>
+        <p> </p>
+        <p> </p>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

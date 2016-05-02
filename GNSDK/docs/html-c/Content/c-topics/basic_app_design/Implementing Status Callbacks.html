@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Basic Application Design Tasks">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Implementing Status Callbacks</title>
+        <link href="../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../index.html#c-topics/basic_app_design/Implementing Status Callbacks.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Basic Application Design Tasks</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Implementing Status Callbacks</span>
+        </div>
+        <h1>Implementing Status Callbacks </h1>
+        <p><span class="GNVariablesProductName">GNSDK for Desktop</span>  allows you to implement status callback functions that are called at certain points during ongoing operations. Implementing a callback function allows you to monitor an operation's status, and cancel it if necessary. You can set a callback for any of the following operations:
+</p>
+        <ul>
+            <li value="1">MusicID queries 
+</li>
+            <li value="2">Enriched content fetches
+</li>
+            <li value="3">Locale and List loading and updates
+</li>
+            <li value="4">MoodGrid presentation handle creation</li>
+            <li value="5" data-mc-conditions="Default.ProdDesktop">Submit parcel handle creation</li>
+            <li value="6" data-mc-conditions="Default.ProdDesktop">Video queries</li>
+        </ul>
+        <p>For example, when creating a MusicID query, you can register a status callback, which <span class="GNVariablesProductName">GNSDK for Desktop</span>  calls at different stages. This allows you to display query progress to users or respond to various conditions.
+</p>
+        <h2>Displaying Operation Status</h2>
+        <p>To create a status callback, implement a function with the following prototype:</p><pre xml:space="preserve">typedef gnsdk_void_t
+(GNSDK_CALLBACK_API *gnsdk_status_callback_fn)(
+gnsdk_void_t*     user_data, 
+gnsdk_status_t    status,
+gnsdk_uint32_t    percent_complete,
+gnsdk_size_t      bytes_total_sent,
+gnsdk_size_t      bytes_total_received,
+gnsdk_bool_t*     p_abort
+);</pre>
+        <p>When this function is called, the status parameter contains a value indicating operation status, such as gnsdk_status_begin, gnsdk_status_progress, or gnsdk_status_complete. For example, a status callback might respond to the following statuses to display operation progress:</p><pre xml:space="preserve">switch(status)
+{
+    case gnsdk_status_begin:
+         printf("\nBegin...");
+         break;
+    case gnsdk_status_connecting:
+         printf("\nConnecting...");
+         break;
+    case gnsdk_status_sending:
+         printf("\nSending...");
+         break;
+    case gnsdk_status_receiving:
+         printf("\nReceiving...");
+         break;
+    case gnsdk_status_progress:
+         printf("\nIn progress...");
+         break;
+    case gnsdk_status_complete:
+         printf("\nComplete\n");
+         break;
+    default:
+         break;
+}</pre>
+        <p>For a full list of status values, see “Status Callbacks” in the <span class="GNVariablesProductName">GNSDK for Desktop</span>  C API Reference.</p>
+        <h2>Registering a Status Callback</h2>
+        <p>A status callback is registered when you create a query or load or update a locale or list. The following functions accept a status callback as a parameter:</p>
+        <ul>
+            <li value="1">gnsdk_musicid_query_create()</li>
+            <li value="2">gnsdk_link_query_create()</li>
+            <li value="3">gnsdk_manager_locale_load()</li>
+            <li value="4">gnsdk_manager_locale_update()</li>
+            <li value="5">gnsdk_manager_list_retrieve()</li>
+            <li value="6">gnsdk_manager_list_update()</li>
+            <li value="7">gnsdk_moodgrid_presentation_create()</li>
+            <li value="8" data-mc-conditions="Default.ProdDesktop">gnsdk_submit_parcel_create()</li>
+            <li value="9" data-mc-conditions="Default.ProdDesktop">gnsdk_video_query_create()</li>
+        </ul>
+        <h2>Cancelling Operations</h2>
+        <p>To cancel a query or large operation that is in progress, you can set the status callback's p_abort parameter to GNSDK_TRUE. In response, the query returns an abort error.</p>
+        <h2 class="example">Example: Using a Callback</h2>
+        <p>Sample Application:&#160;musicid_file_libraryid/main.c</p>
+        <p>This example demonstrates using a status callback function for a MusicID query.</p>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

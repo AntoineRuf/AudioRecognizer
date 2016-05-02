@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Accessing Core Metadata|Accessing Video Metadata|Getting Video Metadata">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Accessing Locale-Dependent Data</title>
+        <link href="../../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../../index.html#c-topics/accessing_metadata/video/Accessing Locale-Dependent Data.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Accessing Core Metadata</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Accessing Video Metadata</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Accessing Locale-Dependent Data</span>
+        </div>
+        <h1>Accessing Locale-Dependent Data</h1>
+        <p>The <span class="GNVariablesProductName">GNSDK for Desktop</span> provides <em>locales</em> as a convenient way to group metadata specific to a region (e.g., Europe) and language (e.g., French) that should be returned from the Gracenote service. What defines a locale is a group (such as Video), a language, a region and a descriptor (indicating level of metadata detail), which are identifiers to a specific set of lists in the Gracenote Service. </p>
+        <p>Locale-dependent fields for Video include genre, mood, setting type, origin, and more. For a complete list of Video locale-dependent fields for Video see <a href="../../basic_app_design/Using Locales.html">Locales.htm</a>.</p>
+        <p>Using locales requires making an API call to load a locale and set it as the video group's default:</p><pre xml:space="preserve">
+gnsdk_locale_handle_t locale_handle	= GNSDK_NULL;
+
+/* Setting the 'locale' to return locale-specifc values in English */ 
+gnsdk_manager_locale_load(
+	GNSDK_LOCALE_GROUP_VIDEO,     // Group - Video (others include EPG, Playlist and Music) 
+	GNSDK_LANG_ENGLISH,           // Language - English
+	GNSDK_REGION_DEFAULT,         // Default is US (others include China, Japan, Europe)
+	GNSDK_DESCRIPTOR_SIMPLIFIED,  // Default music descriptor is 'DETAILED'
+	user_handle,                  // User handle
+	_list_status_callback_fn,     // Status callback function for loading locale lists
+	0,                            // Callback user data
+	&amp;locale_handle);              // Locale handle
+			
+/* Setting the 'locale' as default
+ * If default not set, no locale-specific results would be available
+ */
+gnsdk_manager_locale_set_group_default(locale_handle);
+</pre>
+        <p>The load operation blocks the current thread until complete. Your app can receive status callback messages via an optional callback function.</p>
+        <p>Note that loading a locale requires releasing the locale handle on program exit:</p><pre>
+gnsdk_manager_locale_release(locale_handle);		
+</pre>
+        <p>Sample code: </p>
+        <p>video_locale/main.c
+        </p>
+        <p>Application steps:</p>
+        <ol>
+            <li value="1">Authenticate caller, initialize GNSDK and Video module, enable SDK logging, load a locale, and get a user handle</li>
+            <li value="2">Create query using deserialized <a href="javascript:void(0);" class="MCTextPopup MCTextPopupHotSpot MCTextPopup_Open MCTextPopupHotSpot_ MCTextPopupHotSpot_Popup #text #textPopup">GDO<span class="MCTextPopupBody popupBody"><span class="MCTextPopupArrow"></span>Gracenote Data Object: Containers most-commonly used to store information returned by a query. GDOs can contain metadata values (names, titles, external IDs, and so on) that can be accessed by an application using Value keys.  GDOs can also contain references to other GDOs, which can be accessed using Child GDO keys.</span></a></li>
+            <li value="3">Perform find Works query</li>
+            <li value="4">Access and display locale-dependent metadata from first Work</li>
+            <li value="5">Release resources and shutdown GNSDK and Video module</li>
+        </ol>
+        <p><strong>Sample output:</strong>
+        </p><pre>
+GNSDK Product Version	: 3.2.0.274 	(built 2012-11-30 09:09-0800)
+
+*****Sample Video Work Search*****
+
+Number matches: 1
+
+Title: Crouching Tiger, Hidden Dragon
+
+Origin1: Asia
+Origin2: China
+Origin3: China
+Origin4: China
+Genre1: Action/Adventure
+Genre2: Adventure
+Genre3: Adventure
+Rating: PG-13 [MPAA (USA)] Reason: Some Sexuality, Martial Arts Violence
+
+Plot synopsis: Yu Shu Lien (Michelle Yeoh) has been charged with bringing the Green Destiny, a legendary antique sword, to its new owner in the capital. But the sword is stolen by a mysterious black-clad thief whose martial arts expertise outshines even that of Shu Lien herself. Li Mu Bai (Chow Yun Fat) soon arrives to help search for the sword, and his suspicions are aroused when he realises that his old enemy Jade Fox (Cheng Pei-Pei) is nearby. Ang Lee's epic tale of martial arts chivalry broke box office records for foreign language film distribution, received critical acclaim the world over, and won four Oscars (Best Art Direction, Best Cinematography, Best Music, and Best Foreign Language Film).
+</pre>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

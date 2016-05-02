@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Accessing Core Metadata|Accessing Music Metadata|Music Metadata Reference">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Album Metadata Example</title>
+        <link href="../../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../../index.html#c-topics/accessing_metadata/music/Album Metadata Example.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Accessing Core Metadata</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Accessing Music Metadata</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Album Metadata Example</span>
+        </div>
+        <h1>Album Metadata Example</h1>
+        <p>The following is intended to give the reader some idea of the metadata returned in an album <a href="javascript:void(0);" class="MCTextPopup MCTextPopupHotSpot MCTextPopup_Open MCTextPopupHotSpot_ MCTextPopupHotSpot_Popup #text #textPopup">GDO<span class="MCTextPopupBody popupBody"><span class="MCTextPopupArrow"></span>Gracenote Data Object: Containers most-commonly used to store information returned by a query. GDOs can contain metadata values (names, titles, external IDs, and so on) that can be accessed by an application using Value keys.  GDOs can also contain references to other GDOs, which can be accessed using Child GDO keys.</span></a>.</p><pre>&lt;ALBUM&gt;
+  &lt;PACKAGE_LANG ID="1" LANG="eng"&gt;English&lt;/PACKAGE_LANG&gt;
+  &lt;ARTIST&gt;
+    &lt;NAME_OFFICIAL&gt;
+      &lt;DISPLAY&gt;Nelly&lt;/DISPLAY&gt;
+    &lt;/NAME_OFFICIAL&gt;
+    &lt;CONTRIBUTOR&gt;
+      &lt;NAME_OFFICIAL&gt;
+        &lt;DISPLAY&gt;Nelly&lt;/DISPLAY&gt;
+      &lt;/NAME_OFFICIAL&gt;
+      &lt;ORIGIN_LEVEL1&gt;North America&lt;/ORIGIN_LEVEL1&gt;
+      &lt;ORIGIN_LEVEL2&gt;United States&lt;/ORIGIN_LEVEL2&gt;
+      &lt;ORIGIN_LEVEL3&gt;Missouri&lt;/ORIGIN_LEVEL3&gt;
+      &lt;ORIGIN_LEVEL4&gt;St. Louis&lt;/ORIGIN_LEVEL4&gt;
+      &lt;ERA_LEVEL1&gt;2000&amp;apos;s&lt;/ERA_LEVEL1&gt;
+      &lt;ERA_LEVEL2&gt;2000&amp;apos;s&lt;/ERA_LEVEL2&gt;
+      &lt;ERA_LEVEL3&gt;2000&amp;apos;s&lt;/ERA_LEVEL3&gt;
+      &lt;TYPE_LEVEL1&gt;Male&lt;/TYPE_LEVEL1&gt;
+      &lt;TYPE_LEVEL2&gt;Male&lt;/TYPE_LEVEL2&gt;
+    &lt;/CONTRIBUTOR&gt;
+  &lt;/ARTIST&gt;
+  &lt;TITLE_OFFICIAL&gt;
+    &lt;DISPLAY&gt;Nellyville&lt;/DISPLAY&gt;
+  &lt;/TITLE_OFFICIAL&gt;
+  &lt;YEAR&gt;2002&lt;/YEAR&gt;
+  &lt;GENRE_LEVEL1&gt;Urban&lt;/GENRE_LEVEL1&gt;
+  &lt;GENRE_LEVEL2&gt;Western Hip-Hop/Rap&lt;/GENRE_LEVEL2&gt;
+  &lt;LABEL&gt;Universal&lt;/LABEL&gt;
+  &lt;TOTAL_IN_SET&gt;1&lt;/TOTAL_IN_SET&gt;
+  &lt;DISC_IN_SET&gt;1&lt;/DISC_IN_SET&gt;
+  &lt;TRACK_COUNT&gt;19&lt;/TRACK_COUNT&gt;
+  &lt;TRACK ORD="1"&gt;
+    &lt;TRACK_NUM&gt;1&lt;/TRACK_NUM&gt;
+    &lt;TITLE_OFFICIAL&gt;
+      &lt;DISPLAY&gt;Nellyville&lt;/DISPLAY&gt;
+    &lt;/TITLE_OFFICIAL&gt;
+  &lt;/TRACK&gt;
+  &lt;TRACK ORD="2"&gt;
+    &lt;TRACK_NUM&gt;2&lt;/TRACK_NUM&gt;
+    &lt;ARTIST&gt;
+      &lt;NAME_OFFICIAL&gt;
+        &lt;DISPLAY&gt;Nelly Feat. Cedric The Entertainer &amp;amp; La La&lt;/DISPLAY&gt;
+      &lt;/NAME_OFFICIAL&gt;
+      &lt;CONTRIBUTOR&gt;
+        &lt;NAME_OFFICIAL&gt;
+          &lt;DISPLAY&gt;Nelly Feat. Cedric The Entertainer &amp;amp; La La&lt;/DISPLAY&gt;
+        &lt;/NAME_OFFICIAL&gt;
+      &lt;/CONTRIBUTOR&gt;
+    &lt;/ARTIST&gt;
+    &lt;TITLE_OFFICIAL&gt;
+      &lt;DISPLAY&gt;Gettin It Started&lt;/DISPLAY&gt;
+    &lt;/TITLE_OFFICIAL&gt;
+  &lt;/TRACK&gt;
+  &lt;TRACK ORD="3"&gt;
+    &lt;TRACK_NUM&gt;3&lt;/TRACK_NUM&gt;
+    &lt;TITLE_OFFICIAL&gt;
+      &lt;DISPLAY&gt;Hot In Herre&lt;/DISPLAY&gt;
+    &lt;/TITLE_OFFICIAL&gt;
+    &lt;YEAR&gt;2002&lt;/YEAR&gt;
+  &lt;/TRACK&gt;
+  &lt;TRACK ORD="4"&gt;
+    &lt;TRACK_NUM&gt;4&lt;/TRACK_NUM&gt;
+    &lt;TITLE_OFFICIAL&gt;
+      &lt;DISPLAY&gt;Dem Boyz&lt;/DISPLAY&gt;
+    &lt;/TITLE_OFFICIAL&gt;
+  &lt;/TRACK&gt;
+  &lt;TRACK ORD="5"&gt;
+    &lt;TRACK_NUM&gt;5&lt;/TRACK_NUM&gt;
+    &lt;TITLE_OFFICIAL&gt;
+      &lt;DISPLAY&gt;Oh Nelly&lt;/DISPLAY&gt;
+    &lt;/TITLE_OFFICIAL&gt;
+  &lt;/TRACK&gt;
+  &lt;TRACK ORD="6"&gt;
+    &lt;TRACK_NUM&gt;6&lt;/TRACK_NUM&gt;
+    &lt;TITLE_OFFICIAL&gt;
+      &lt;DISPLAY&gt;Pimp Juice&lt;/DISPLAY&gt;
+    &lt;/TITLE_OFFICIAL&gt;
+  &lt;/TRACK&gt;
+  &lt;TRACK ORD="7"&gt;
+    &lt;TRACK_NUM&gt;7&lt;/TRACK_NUM&gt;
+    &lt;TITLE_OFFICIAL&gt;
+      &lt;DISPLAY&gt;Air Force Ones&lt;/DISPLAY&gt;
+    &lt;/TITLE_OFFICIAL&gt;
+    &lt;YEAR&gt;2002&lt;/YEAR&gt;
+  &lt;/TRACK&gt;
+  &lt;TRACK ORD="8"&gt;
+    &lt;TRACK_NUM&gt;8&lt;/TRACK_NUM&gt;
+    &lt;ARTIST&gt;
+      &lt;NAME_OFFICIAL&gt;
+        &lt;DISPLAY&gt;Nelly Feat. Cedric The Entertainer &amp;amp; La La&lt;/DISPLAY&gt;
+      &lt;/NAME_OFFICIAL&gt;
+      &lt;CONTRIBUTOR&gt;
+        &lt;NAME_OFFICIAL&gt;
+          &lt;DISPLAY&gt;Nelly Feat. Cedric The Entertainer &amp;amp; La La&lt;/DISPLAY&gt;
+        &lt;/NAME_OFFICIAL&gt;
+      &lt;/CONTRIBUTOR&gt;
+    &lt;/ARTIST&gt;
+    &lt;TITLE_OFFICIAL&gt;
+      &lt;DISPLAY&gt;In The Store&lt;/DISPLAY&gt;
+    &lt;/TITLE_OFFICIAL&gt;
+  &lt;/TRACK&gt;
+  &lt;TRACK ORD="9"&gt;
+    &lt;TRACK_NUM&gt;9&lt;/TRACK_NUM&gt;
+    &lt;ARTIST&gt;
+      &lt;NAME_OFFICIAL&gt;
+        &lt;DISPLAY&gt;Nelly Feat. King Jacob&lt;/DISPLAY&gt;
+      &lt;/NAME_OFFICIAL&gt;
+      &lt;CONTRIBUTOR&gt;
+        &lt;NAME_OFFICIAL&gt;
+          &lt;DISPLAY&gt;Nelly Feat. King Jacob&lt;/DISPLAY&gt;
+        &lt;/NAME_OFFICIAL&gt;
+        &lt;ORIGIN_LEVEL1&gt;North America&lt;/ORIGIN_LEVEL1&gt;
+        &lt;ORIGIN_LEVEL2&gt;United States&lt;/ORIGIN_LEVEL2&gt;
+        &lt;ORIGIN_LEVEL3&gt;Missouri&lt;/ORIGIN_LEVEL3&gt;
+        &lt;ORIGIN_LEVEL4&gt;St. Louis&lt;/ORIGIN_LEVEL4&gt;
+        &lt;ERA_LEVEL1&gt;2000&amp;apos;s&lt;/ERA_LEVEL1&gt;
+        &lt;ERA_LEVEL2&gt;Early 2000&amp;apos;s&lt;/ERA_LEVEL2&gt;
+        &lt;ERA_LEVEL3&gt;Early 2000&amp;apos;s&lt;/ERA_LEVEL3&gt;
+        &lt;TYPE_LEVEL1&gt;Male&lt;/TYPE_LEVEL1&gt;
+        &lt;TYPE_LEVEL2&gt;Male Duo&lt;/TYPE_LEVEL2&gt;
+      &lt;/CONTRIBUTOR&gt;
+    &lt;/ARTIST&gt;
+    &lt;TITLE_OFFICIAL&gt;
+      &lt;DISPLAY&gt;On The Grind&lt;/DISPLAY&gt;
+    &lt;/TITLE_OFFICIAL&gt;
+    &lt;GENRE_LEVEL1&gt;Urban&lt;/GENRE_LEVEL1&gt;
+    &lt;GENRE_LEVEL2&gt;Western Hip-Hop/Rap&lt;/GENRE_LEVEL2&gt;
+  &lt;/TRACK&gt;
+  
+  ... More Tracks
+			
+&lt;/ALBUM&gt; <![CDATA[
+			
+]]></pre>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

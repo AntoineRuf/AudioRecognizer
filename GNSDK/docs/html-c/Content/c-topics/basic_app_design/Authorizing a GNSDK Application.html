@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Basic Application Design Tasks|Setup and Initialization">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Authorizing a GNSDK for Desktop Application</title>
+        <link href="../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../index.html#c-topics/basic_app_design/Authorizing a GNSDK Application.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Basic Application Design Tasks</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Setup and Initialization</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Authorizing a GNSDK Application</span>
+        </div>
+        <h1><a name="_Toc334991736"></a>Authorizing a <span class="GNVariablesProductName">GNSDK for Desktop</span> Application</h1>
+        <p>Gracenote manages access to metadata using a combination of product licensing and server-side metadata entitlements. </p>
+        <p data-mc-conditions="Default.ProdAuto,Default.ProdDesktop">As a Gracenote customer, Gracenote Global Services &amp;&#160;Support works with you to determine the kind of products you need (such as MusicID, Playlist, and so on). Gracenote also determines the kind and extent of metadata your application requires for the products you license.</p>
+        <p data-mc-conditions="Default.ProdAuto,Default.ProdDesktop">Gracenote uses all of this information to create a unique customer ID (called a client ID), a license file, and server-side metadata entitlements that are tailored to your application goals.&#160;</p>
+        <p>When developing a <span class="GNVariablesProductName">GNSDK for Desktop</span> application, you must include a client ID and license file to authorize your application with Gracenote. In general, the License file enables your application to use the Gracenote products (and their corresponding <span class="GNVariablesProductName">GNSDK for Desktop</span> modules) that you purchased.&#160;The client ID is used by Gracenote Media Services to enable access to the metadata your application is entitled to use.</p>
+        <p data-mc-conditions="Default.ProdAuto,Default.ProdDesktop">All client IDs are entitled to a set of <i>core metadata</i> based on the products that are licensed.&#160;Your application can access <i>enriched metadata</i> through server-side metadata entitlements. Contact your Gracenote Global Services &amp;&#160;Support representative for more information.&#160;</p>
+        <p class="info" data-mc-conditions="Default.ProdAuto,Default.ProdDesktop">Some applications require a local (embedded) database for metadata. These systems do not access Gracenote Media Services to validate metadata entitlements and access metadata. Instead, metadata entitlements are pre-applied to the local database.</p>
+        <h2><a name="_Toc334991738"></a>License Files</h2>
+        <p>Gracenote provides a license file along with your client ID.&#160; The license file notifies Gracenote to enable the <span class="GNVariablesProductName">GNSDK for Desktop</span> products you purchased for your application. License file information is provided to gnsdk_manager_initialize() when initializing the GNSDK. Below is an example license file, showing enabled and disabled Gracenote products for Customer A. These products generally map to corresponding <span class="GNVariablesProductName">GNSDK for Desktop</span> modules.</p><pre xml:space="preserve">-- BEGIN LICENSE v1.0 ABC123XYZ --
+			licensee: Gracenote, Inc.
+			name: CustomerA
+			notes: [CustomerA Account#]
+
+			client_id: 999999
+			musicid_text: enabled
+			musicid_cd: enabled
+			playlist: enabled
+			local_images: enabled
+			local_mood: enabled
+
+			-- SIGNATURE ABC123XYZ --
+			ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890abcedefghijklmnopqrstuvwxyz
+			-- END LICENSE ABC123XYZ --
+		</pre>
+        <h2><a name="_Toc334991737"></a>Client IDs</h2>
+        <p>Each <span class="GNVariablesProductName">GNSDK for Desktop</span> customer receives a unique client ID string from Gracenote.&#160;This string uniquely identifies each application to Gracenote Media Services and lets Gracenote deliver the specific metadata the application requires.&#160;</p>
+        <p>A client ID string has the following format: 123456-12345678901234567. It consists of a six-digit client ID, and  a 17-digit client ID Tag, separated by a hyphen (-).</p>
+        <p>When registering a new User with gnsdk_manager_user_register(), you must pass in the client ID and client ID tag as separate parameters. To create a user handle, use the serialized data created during registering, plus the client ID&#160;tag with the function gnsdk_manager-user_create().</p>
+        <p>It is best practice to save the serialized user data, created during registration, to a file, and then to use the content of that file for later creations of user handles. </p>
+        <p>For more information see the section Users.</p>
+        <h2><a name="_Toc334991739"></a>Users</h2>
+        <p>To perform queries, an application must first register a new User and get its handle. A User represents an individual installation of a specific client ID string. This ensures that each application instance is receiving all required metadata entitlements. </p>
+        <p>Users are represented in <span class="GNVariablesProductName">GNSDK for Desktop</span> by User handles.  You can create a User handle using gnsdk_manager_user_register() and gnsdk_manager_user_create(). </p>
+        <p>When creating a new User with gnsdk_manager_user_create(), you must pass in the serialized user string created with gnsdk_manager_user_register()&#160;and the client ID tag. For more information about client IDs and client ID tags, see <a href="#_Toc334991737" class="GNBasic MCXref xref xrefGNBasic" xrefformat="{paratext}">Client IDs</a>.</p>
+        <p>Each application installation should only request a new User once and store the serialized representation of the User for future use. If an application registers a new User on every use instead of storing a serialized User, then the User quota maintained for the client ID is quickly exhausted. Once the quota is reached, attempting to create new Users will fail. If an application uses a single User registration across multiple installations of the application—in short, forcing all the installations to use the same User—the application risks exhausting Gracenote per-user query quota.</p>
+        <p>To maintain an accurate usage profile of your application, and to ensure that the services you are entitled to are not being used unintentionally, your application should register new Users only when needed, and then store that User for future queries.</p>
+        <p>To store users once they are created,  you specify a callback function that the SDK&#160;calls when a User handle needs to be stored locally. To specify the callback, use gnsdk_manager_user_set_autoregister() and pass to it the associated client_ID. </p>
+        <p>The SDK&#160;triggers the callback function when a change to the User handle occurs. Applications should store serialized User data at a location that can persist between application launches (for example, local file storage). In the callback, you save the user data to persistent storage. This simplifies handling of user data, and ensures data storage occurs at appropriate times.</p>
+        <p>The callback also allows&#160;an application to register a new user in offline mode and then register it for online use during the first online query. In this instance, the callback is triggered after the online query is performed.</p>
+        <p>Basic User management process:</p>
+        <ol>
+            <li value="1">First application run: register new User and get serialized string.</li>
+            <li value="2">Create the user handle from serialized user string and client ID.</li>
+            <li value="3">Specify a callback function to handle User storage and registration.</li>
+            <li value="4">Provide User handle to <span class="GNVariablesProductName">GNSDK for Desktop</span> APIs that require one.</li>
+            <li value="5">Release User handle when finished.</li>
+            <li value="6">Subsequent application runs: create User handle from stored serialized data.</li>
+        </ol>
+        <p>For example:</p><pre xml:space="preserve">
+gnsdk_user_handle_t user_hdl = GNSDK_NULL; // User handle
+gnsdk_str_t         ser_str  = GNSDK_NULL; // Serialized user string
+
+/* Create serialized user string */
+gnsdk_manager_user_register(GNSDK_USER_REGISTER_MODE_ONLINE, client_id, client_id_tag, client_app_version, &amp;ser_str);
+									
+/* Call API to register and create new user. This API takes a serialized user 
+   string ('ser_str') (either created new or retrieved from 
+   storage and creates a non-serialized user handle in 'user_hdl'
+*/
+    gnsdk_manager_user_create(ser_str, client_id, &amp;user_hdl);
+
+/*&#160;Register callback function to store serialized user data */
+
+
+     gnsdk_manager_user_set_autoregister(user_hdl, _user_store_callback,
+                                         &amp;callback_data);
+
+
+/* Perform queries */
+/* ... */
+
+/* Release user */
+
+error = gnsdk_manager_user_release(user_hdl);
+
+/* Close GNSDK */
+
+/* callback function */
+			
+static void _user_store_callback(gnsdk_void_t* callback_data, 
+			gnsdk_cstr_t serialized_user)
+{
+/* Code to store serialized user string for later reuse.  */
+
+save_serialized_user_data(serialized_user); /* NOT a Gracenote API */
+}
+		
+</pre>
+        <p>&#160;</p>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

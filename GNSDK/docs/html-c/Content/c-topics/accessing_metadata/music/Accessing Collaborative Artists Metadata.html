@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Accessing Core Metadata|Accessing Music Metadata">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Accessing Collaborative Artists Metadata</title>
+        <link href="../../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../../index.html#c-topics/accessing_metadata/music/Accessing Collaborative Artists Metadata.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Accessing Core Metadata</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Accessing Music Metadata</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Accessing Collaborative Artists Metadata</span>
+        </div>
+        <h1>Accessing Collaborative Artists Metadata</h1>
+        <p>Some songs are collaborations between two or more artists. For example, the Santana album “Supernatural” contains a number of collaborations, including:
+</p>
+        <ul>
+            <li value="1">“Santana featuring Rob Thomas”
+</li>
+            <li value="2">“Santana featuring Dave Matthews” </li>
+        </ul>
+        <p>
+You might want to take different actions in your application, depending on whether a song is by a single artist or a collaboration. The following topic shows how to navigate collaborations, and how to determine whether text-based lookup results contain collaborative artists. 
+For information about best practices for working with collaborations, see <a href="../../../shared-topics/gnsdk_best_practices/Collaborative Artists.html" class="GNBasic MCXref xref xrefGNBasic">Collaborative Artists Best Practices</a>.</p>
+        <h2><a name="Navigati"></a>Navigating Collaborations</h2>
+        <p>In <span class="GNVariablesProductName">GNSDK for Desktop</span>, artists are represented by contributor GDOs. A contributor <a href="javascript:void(0);" class="MCTextPopup MCTextPopupHotSpot MCTextPopup_Open MCTextPopupHotSpot_ MCTextPopupHotSpot_Popup #text #textPopup">GDO<span class="MCTextPopupBody popupBody"><span class="MCTextPopupArrow"></span>Gracenote Data Object: Containers most-commonly used to store information returned by a query. GDOs can contain metadata values (names, titles, external IDs, and so on) that can be accessed by an application using Value keys.  GDOs can also contain references to other GDOs, which can be accessed using Child GDO keys.</span></a> can represent a single artist or a collaboration. To determine whether a contributor GDO represents a collaboration, check to see if it has a contributor child. If it does, the GDO represents a collaboration and the contributor child is the primary collaborator. </p>
+        <p>The following example checks to see whether the contributor GDO has a contributor child, and if so, it retrieves the primary collaborator GDOs:</p><pre xml:space="preserve">
+error = gnsdk_manager_gdo_child_count(contributor_gdo,
+			GNSDK_GDO_CHILD_CONTRIBUTOR,&amp;collab_count);
+/*  The number of collaborators will either be 0 or 1 depending on      
+ *  whether or not this contributor is a collaboration. 
+ */			
+if (collab_count == 1)
+{
+    /* This contributor is a collaboration 
+     * Retrieve the primary collaborator
+     */
+    error = gnsdk_manager_gdo_child_get(contributor_gdo,
+        GNSDK_GDO_CHILD_CONTRIBUTOR, collab_count, &amp;collaborator_gdo);
+    if (!error)
+    {
+        /* Navigate the collaborator GDO */
+        …
+    }
+} 
+</pre>
+        <p>In addition, the parent contributor GDO contains the collaboration name. As an example, if you have a contributor GDO that represents the collaboration “Santana featuring Rob Thomas,”  it would have a contributor child GDO. The child GDO has the primary collaborator name “Santana,” and the parent GDO has the collaborator name “Santana featuring Rob Thomas.”</p>
+        <p>
+            <img src="../../../Resources/Images/ContributingArtistGDOs.png" />
+        </p>
+        <h2><a name="Working"></a>Working with Collaborative Artists in Text-Lookup Results</h2>
+        <p>When you perform a text-based lookup using gnsdk_musicid_query_find_matches(), one of the possible results is a contributor GDO. This section discusses how to determine whether these contributor lookup results contain collaborative artists.</p>
+        <h3>Using the GNSDK_GDO_VALUE_COLLABORATOR_RESULT Key</h3>
+        <p>If your input artist string represents a collaboration, but that collaboration is not found, <span class="GNVariablesProductName">GNSDK for Desktop</span> attempts to find the primary collaborator instead. If it is able to find the primary collaborator, it returns results for that collaborator, and the GNSDK_GDO_VALUE_COLLABORATOR_RESULT key is set to TRUE. This indicates that your input is a collaboration, but you only matched the primary collaborator.  This allows you to distinguish this case from a situation in which the input was a single artist, and a single artist was identified.</p>
+        <p>For the purposes of this discussion, assume that you’ve done a text-based lookup that included an artist name as input, and you have gotten a contributor GDO back. The input text might be a single artist, such as “Santana,” or it might be a collaboration, such as “Santana featuring Rob Thomas.”</p>
+        <p>To determine whether the lookup results contain collaborative artists, use the following general steps:</p>
+        <ol>
+            <li value="1">Check to see whether the contributor GDO has a contributor child. If it does, the result is a collaboration  and should match your input artist name (“Santana featuring Rob Thomas”).  For more information, see <a href="#Navigati" class="GNBasic MCXref xref xrefGNBasic selected">Navigating Collaborations</a>.</li>
+            <li value="2">If the contributor GDO does not have children, use the GNSDK_GDO_VALUE_COLLABORATOR_RESULT key to distinguish between the following two cases:
+			<ul><li value="1">If the key is FALSE, the result is a single artist that matched your input text (“Santana”).</li><li value="2">If the key is TRUE, your input is a collaboration (“Santana featuring Unknown Artist”), but you only matched the primary collaborator, so the single artist object is returned (“Santana”).  In this case, you’ll want to be careful not to overwrite the users’ input collaboration name with the returned collaborator name.</li></ul></li>
+        </ol>
+        <h3>Collaborative Artist Input Scenarios</h3>
+        <p>The following sections show the results for different inputs and provide more information about how to use the results in your application.</p>
+        <h4>Input Collaboration Found</h4>
+        <p>The following table shows a case where the input string matches a collaboration in the database.</p>
+        <table>
+            <col style="width: 164px;" />
+            <col style="width: 605px;" />
+            <tbody>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Example Input Text	</td>
+                    <td>“Santana featuring Rob Thomas”</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">GDO Results</td>
+                    <td>A contributor GDO that has a child contributor GDO; the parent GDO has the collaboration name “Santana featuring Rob Thomas,” and the child GDO has the primary collaborator name “Santana."</td>
+                </tr>
+            </tbody>
+        </table>
+        <h4>Input Collaboration Not Found</h4>
+        <p>The following table shows a case where the input string does not match a collaboration in the database, but the input string is identified as a collaboration. In this case, the lookup returns the primary collaborator, and the GNSDK_GDO_VALUE_COLLABORATOR_RESULT flag is set to TRUE, which indicates that the input is a collaboration, but the lookup only returned the primary collaborator.</p>
+        <table>
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Example Input Text	</td>
+                    <td>“Santana featuring Unknown Artist”</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">GDO Results</td>
+                    <td>One contributor GDO with artist name “Santana”</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">GNSDK_GDO_VALUE_COLLABORATOR_RESULT Value</td>
+                    <td>TRUE</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="note"><span class="note">Note</span>: If this track is being played, Gracenote recommends that you display the original input text in your interface, but use the returned collaborator to generate playlists for the input track.</p>
+        <h4>Input is Not a Collaboration</h4>
+        <p>The following table shows a case where the input string is not a collaboration, and a single artist match is found.</p>
+        <table>
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <td style="background-color: #dcdcdc;">Example Input Text	</td>
+                    <td>“Santana”</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">GDO Results</td>
+                    <td>One contributor GDO with artist name “Santana”</td>
+                </tr>
+                <tr>
+                    <td style="background-color: #dcdcdc;">GNSDK_GDO_VALUE_COLLABORATOR_RESULT Value</td>
+                    <td>FALSE</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>For more information, see <a href="../../recognition/music/Identifying Music Using Text.html" class="GNBasic MCXref xref xrefGNBasic">Identifying Music Using Text</a>.</p>
+        <div class="MCRelationshipsProxy_0">
+            <p class="conceptHeading_concept_0">Related Information</p>
+            <p class="conceptItem_concept_0"><a href="../../../shared-topics/concepts/Clean-up and Collaborative Artists.html">Clean-up and Collaborative Artists</a>
+            </p>
+        </div>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

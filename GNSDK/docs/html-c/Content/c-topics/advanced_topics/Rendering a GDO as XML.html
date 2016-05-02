@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Advanced Topics">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Rendering a GDO as XML</title>
+        <link href="../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../index.html#c-topics/advanced_topics/Rendering a GDO as XML.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Advanced Topics</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Rendering a GDO as XML</span>
+        </div>
+        <h1><a name="_Toc334991802"></a>Rendering a GDO as XML</h1>
+        <p>To present <a href="javascript:void(0);" class="MCTextPopup MCTextPopupHotSpot MCTextPopup_Open MCTextPopupHotSpot_ MCTextPopupHotSpot_Popup #text #textPopup">GDO<span class="MCTextPopupBody popupBody"><span class="MCTextPopupArrow"></span>Gracenote Data Object: Containers most-commonly used to store information returned by a query. GDOs can contain metadata values (names, titles, external IDs, and so on) that can be accessed by an application using Value keys.  GDOs can also contain references to other GDOs, which can be accessed using Child GDO keys.</span></a> metadata to a user, or to process its contents for other uses, an application can render it in XML format. </p>
+        <p>You can do this with the following call:</p><pre>
+/*
+ * Render the Album GDO as XML to the "xml" parameter
+ */
+gnsdk_manager_gdo_render(album_gdo, GNSDK_GDO_RENDER_XML_FULL, &amp;xml);
+</pre>
+        <p>The following options are available when rendering to XML</p>
+        <table style="width: 100%;">
+            <col style="width: 50%;" />
+            <col style="width: 50%;" />
+            <thead>
+                <tr>
+                    <th>Option</th>
+                    <th>Meaning</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>GNSDK_GDO_RENDER_XML_MINIMAL</td>
+                    <td>Renders minimal metadata.</td>
+                </tr>
+                <tr>
+                    <td>GNSDK_GDO_RENDER_XML_STANDARD</td>
+                    <td>Renders Standard metadata.</td>
+                </tr>
+                <tr>
+                    <td>GNSDK_GDO_RENDER_XML_CREDITS</td>
+                    <td>Renders any credit metadata.</td>
+                </tr>
+                <tr>
+                    <td>GNSDK_GDO_RENDER_XML_GDOS</td>
+                    <td>Renders any serialized GDO&#160;values.</td>
+                </tr>
+                <tr>
+                    <td>GNSDK_GDO_RENDER_XML_IDS</td>
+                    <td>Renders any Gracenote product ID&#160;values.</td>
+                </tr>
+                <tr>
+                    <td>GNSDK_GDO_RENDER_XML_SEEDS</td>
+                    <td>Renders any Gracenote Discover Seed values.</td>
+                </tr>
+                <tr>
+                    <td>GNSDK_GDO_RENDER_XML_RAW_TUIS</td>
+                    <td>Renders any Gracenote TUI&#160;values.</td>
+                </tr>
+                <tr>
+                    <td>GNSDK_GDO_RENDER_XML_SUBMIT</td>
+                    <td>Renders any Gracenote&#160;data supported for Submit editable GDOs. This rendered data includes both the supported editable and non-editable data.</td>
+                </tr>
+                <tr>
+                    <td>GNSDK_GDO_RENDER_XML_GENRE</td>
+                    <td>
+                        <p>Renders any Gracenote genre values.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>GNSDK_GDO_RENDER_XML_GENRE_META</td>
+                    <td>Renders any Gracenote&#160;meta-genre (coarser)&#160;values.</td>
+                </tr>
+                <tr>
+                    <td>GNSDK_GDO_RENDER_XML_GENRE_MICRO</td>
+                    <td>Renders any Gracenote micro-genre (finer)&#160;values.</td>
+                </tr>
+                <tr>
+                    <td>GNSDK_GDO_RENDER_XML_DEFAULT</td>
+                    <td>Renders the default metadata. Identifiers are not included. Equivalent to GNSDK_GDO_RENDER_XML_STANDARD | GNSDK_GDO_RENDER_XML_GENRE.</td>
+                </tr>
+                <tr>
+                    <td>GNSDK_GDO_RENDER_XML_FULL</td>
+                    <td>Renders the majority of metadata. Identifiers not included. Equivalent to GNSDK_GDO_RENDER_XML_DEFAULT | GNSDK_GDO_RENDER_XML_CREDITS</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>The values in the above table can be OR'd together to form combinations of data as needed. &#160;For example, you can use <b>GNSDK_GDO_RENDER_XML_SEEDS |&#160;GNSDK_GDO_RENDER_XML_FULL</b> as a parameter.</p>
+        <h2 class="example">Example: Rendering a GDO as XML</h2>
+        <p>Sample application:submit_album/main.c</p>
+        <p>This example submits a new album to Gracenote, and contains code that renders a GDO&#160;to XML&#160;using GNSDK_GDO_RENDER_XML_SUBMIT.</p>
+        <h1>Creating a GDO&#160;From XML</h1>
+        <p>You may reverse the process described above by calling gnsdk_manager_gdo_create_from_xml(). Pass in the an XML&#160;string, and the function retuns back a handle to the created GDO.</p>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Best Practices and Design Requirements">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Collaborative Artists</title>
+        <link href="../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../index.html#shared-topics/gnsdk_best_practices/Collaborative Artists.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Best Practices and Design Requirements</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Collaborative Artists Best Practices</span>
+        </div>
+        <h1>Collaborative Artists Best Practices</h1>
+        <p>The following topic provides best practices for handling collaborations in your application. </p>
+        <h2>Handling Collaborations when Processing a Collection</h2>
+        <p>When looking up a track using a text-based lookup, such as when initially processing a user’s collection, use the following best practices:</p>
+        <ul>
+            <li value="1">If the input string matches a single artist in the database, such as "Santana," associate the track in the application database with the single artist.</li>
+            <li value="2">
+                <p>If the input string matches a collaboration in the database, such as "Santana featuring Rob Thomas," associate the track in the application database with the primary collaborator and the collaboration. In this case, the Contributor, "Santana featuring Rob Thomas," will have a Contributor child, “Santana,” and the track should be associated with “Santana” and “Santana featuring Rob Thomas."</p>
+            </li>
+            <li value="3">If the input string is a collaboration, but does not match a collaboration in the database, <span class="GNVariablesProductName">GNSDK for Desktop</span> attempts to match on the primary collaborator in the input, which would be “Santana” in this example. If the primary collaborator matches an artist in the database, the result will be the single artist. There will be an indication in the result that only part of the collaboration was matched. Associate the track in the application database with the single artist and with the original input string.</li>
+        </ul>
+        <h2>Displaying Collaborations during Playback</h2>
+        <p>When determining what should be displayed during playback of music, use the following best practices:</p>
+        <ul>
+            <li value="1">When a track by a single artist is playing, your application should display the Gracenote normalized text string. For example, when a track by Santana is playing, “Santana” should be displayed.</li>
+            <li value="2">When a track by a collaboration is playing, and <span class="GNVariablesProductName">GNSDK for Desktop</span> has matched the collaboration, the application should display the collaboration name. For example, when a track by “Santana featuring Rob Thomas” is playing, the collaboration name “Santana featuring Rob Thomas” should be displayed.</li>
+            <li value="3">When a track by a collaboration is playing, but only part of the collaboration was matched, Gracenote recommends that you display the original tag data for that track during playback. For example, when a track by “Santana featuring Unknown Artist” is playing, but only "Santana" was matched, the collaboration name “Santana featuring Unknown Artist” should be displayed. Gracenote recommends that you do not overwrite the original tag data.</li>
+        </ul>
+        <h2>Displaying Collaborations in Navigation</h2>
+        <p>When creating navigation in your application, use the following best practices:</p>
+        <ul>
+            <li value="1">
+                <p>If the user is navigating through the interface, and comes to “Santana” in a drop-down list, all tracks by “Santana” should be displayed, including tracks on which Santana is the primary collaborator. The list should be created using the associations that you created during the initial text-lookup phase. If the user selects “Play songs by Santana,” all songs by Santana and songs on which Santana is the primary collaborator can be played.</p>
+            </li>
+            <li value="2">Gracenote does not recommend that collaborations appear in drop-down lists of artists. For example, don’t list “Santana” and “Santana featuring Rob Thomas” in the same drop-down list. Instead, include “Santana”  in the drop-down list.</li>
+        </ul>
+        <p>
+            <img src="../../Resources/Images/ContributingArtistNav.png" />
+        </p>
+        <h2>Handling Collaborations in Playlists</h2>
+        <p>When creating a playlist, if the user is able to select a collaboration as a seed, then only songs by that collaboration should be played. For example, if the user selects “Santana featuring Rob Thomas” as a seed for a playlist, they should only hear songs by that specific collaboration. This only applies to playlists of the form “Play songs by &lt;artist&gt;.” It does not apply to “More Like This” playlists, such as “Play songs like &lt;artist&gt;,” which use Gracenote descriptors to find similar artists.</p>
+        <div class="MCRelationshipsProxy_0">
+            <p class="conceptHeading_concept_0">Related Information</p>
+            <p class="conceptItem_concept_0"><a href="../concepts/Clean-up and Collaborative Artists.html">Clean-up and Collaborative Artists</a>
+            </p>
+        </div>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Basic Application Design Tasks|Using Gracenote Data Objects">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Common GDO Tasks</title>
+        <link href="../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../index.html#c-topics/basic_app_design/Common GDO Tasks.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Basic Application Design Tasks</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Using Gracenote Data Objects</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Common GDO Tasks</span>
+        </div>
+        <h1>Common GDO Tasks</h1>
+        <h2>Retrieving a Track GDO from an Album GDO</h2>
+        <p>To retrieve a Track <a href="javascript:void(0);" class="MCTextPopup MCTextPopupHotSpot MCTextPopup_Open MCTextPopupHotSpot_ MCTextPopupHotSpot_Popup #text #textPopup">GDO<span class="MCTextPopupBody popupBody"><span class="MCTextPopupArrow"></span>Gracenote Data Object: Containers most-commonly used to store information returned by a query. GDOs can contain metadata values (names, titles, external IDs, and so on) that can be accessed by an application using Value keys.  GDOs can also contain references to other GDOs, which can be accessed using Child GDO keys.</span></a> from an Album GDO, use gnsdk_manager_gdo_child_get() and one of the following keys. For these keys, the term <i>track number</i> is the sequential number of the track on the album’s CD jacket. The <i>ordinal</i> is the track position (1-based) in the array of tracks in an Album GDO.</p>
+        <ul>
+            <li value="1">GNSDK_GDO_CHILD_TRACK retrieves a Track GDO based on the <i>ordinal</i> position of the track.</li>
+            <li value="2">GNSDK_GDO_CHILD_TRACK_BY_NUMBER retrieves a Track GDO that matches the provided <i>track number</i>.</li>
+            <li value="3">GNSDK_GDO_CHILD_TRACK_MATCHED returns one or more Track GDOs that were <i>matched</i> by the prior query. </li>
+        </ul>
+        <p>In general, when retrieving tracks, follow these guidelines:</p>
+        <ul>
+            <li value="1">Write code to manage the return of Partial album GDOs. Although this is likely a rare occurrence, do not assume that an Album GDO will contain all of the tracks of that album. If the Album returned is Partial, make a second query to retrieve the Full Album GDO.</li>
+            <li value="2">When retrieving matched tracks, always use the helper keys: GNSDK_GDO_CHILD_TRACK_MATCHED, and GNSDK_GDO_CHILD_TRACK_MATCHED_NUM.</li>
+        </ul>
+        <p>The following are examples of retrieving Tracks from an Album GDO. In this case, we assume the Album GDO is Full, containing all tracks of the album.</p>
+        <p>Assume a hypothetical TOC lookup of an album with 5 tracks.  We get an album GDO that looks like:</p><pre xml:space="preserve">&lt;album&gt;<br />    Ord 1   &lt;Track 1&gt;<br />    Ord 2   &lt;Track 2&gt;<br />    Ord 3   &lt;Track 3&gt;<br />    Ord 4   &lt;Track 4&gt;<br />    Ord 5   &lt;Track 5&gt;<br />&lt;/album&gt;</pre>
+        <p>In this case:</p>
+        <ul>
+            <li value="1">GNSDK_GDO_CHILD_TRACK with <i>ordinal</i> 4 returns Track 4.</li>
+            <li value="2">GNSDK_GDO_CHILD_TRACK_BY_NUMBER with <i>track number</i> 4 returns Track 4.</li>
+        </ul>
+        <p>The example below shows the Album GDO result after performing a match query, such as looking up a track by its fingerprint or title. Assuming this matched Track 4, we get an album GDO that looks like the following:</p><pre xml:space="preserve">&lt;album&gt;<br />    Ord 1    &lt;track_matched&gt;4&lt;/track_matched&gt;<br />    Ord 1    &lt;Track 1&gt;<br />    Ord 2    &lt;Track 2&gt;<br />    Ord 3    &lt;Track 3&gt;<br />    Ord 4    &lt;Track 4&gt;<br />    Ord 5    &lt;Track 5&gt;<br />&lt;/album&gt;</pre>
+        <p>This GDO contains two arrays: </p>
+        <ul>
+            <li value="1">A track array: containing the actual tracks</li>
+            <li value="2">A matched_track array: containing track number of the matched track or tracks.</li>
+        </ul>
+        <p>The GNSDK_GDO_CHILD_TRACK* keys operate on this GDO as follows:</p>
+        <ul>
+            <li value="1">GNSDK_GDO_CHILD_TRACK with <i>ordinal</i> 4 returns Track 4.</li>
+            <li value="2">GNSDK_GDO_CHILD_TRACK_BY_NUMBER with <i>track number</i> 4 returns Track 4.</li>
+            <li value="3">GNSDK_GDO_CHILD_TRACK_MATCHED with <i>ordinal</i> 1 returns Track 4.</li>
+        </ul>
+        <p>Also, GNSDK_GDO_VALUE_TRACK_MATCHED_NUM with <i>ordinal</i> 1 returns its value, the<i>number 4</i> which is the <i>track number</i> of the matched track.</p>
+        <h2>Getting the Type for a GDO</h2>
+        <p>If needed, your application can get the type of a GDO using the gnsdk_manager_gdo_get_type() function. For example, your application might need to determine a GDO’s type after a text-based lookup:</p><pre xml:space="preserve">gnsdk_manager_gdo_get_type(match_gdo, &amp;gdo_type);
+
+if (0 == strcmp(gdo_type, GNSDK_GDO_TYPE_ALBUM))
+    /*&#160;Work with Album GDO */
+else if (0 == strcmp(gdo_type, GNSDK_GDO_TYPE_CONTRIBUTOR))
+    /*&#160;Work with Contributor GDO */
+</pre>
+        <h2>Checking for Full and Partial Results</h2>
+        <p>You can use the GNSDK_GDO_VALUE_FULL_RESULT value key to see if a child GDO contains full or partial metadata (GNSDK_VALUE_FALSE = partial, GNSDK_VALUE_TRUE = full).</p>
+        <p><b>For example:</b>
+        </p><pre xml:space="preserve">
+...Perform album query and get response GDO
+
+/* Get first child album GDO from response GDO and check if it contains partial data */
+gnsdk_manager_gdo_child_get(response_gdo, GNSDK_GDO_CHILD_ALBUM, 1, &amp;album_gdo);
+
+/* Is this a partial album? */
+gnsdk_manager_gdo_value_get(album_gdo, GNSDK_GDO_VALUE_FULL_RESULT, 1, &amp;value_string);
+
+if (atoi(value_string) == GNSDK_VALUE_FALSE)
+{
+    printf("retrieving FULL RESULT\n");
+			
+    /* Note that we are getting full results for the first child album GDO instead of
+     * presenting partial results from all child GDO matches to the end user to select from
+     */
+
+    /* Add child GDO back to the existing query handle to retrieve full result */
+    gnsdk_musicid_query_set_gdo(query_handle, album_gdo);
+
+    /* Query for this match in full*/
+    gnsdk_musicid_query_find_albums(query_handle, &amp;response_gdo);
+
+    /* Get child GDO with full album results */
+    gnsdk_manager_gdo_child_get(response_gdo, GNSDK_GDO_CHILD_ALBUM, 1, &amp;album_gdo);
+
+    ...
+	
+</pre>
+        <h2>Checking Whether a Match Needs a Decision</h2>
+        <p>You can use the GNSDK_GDO_VALUE_RESPONSE_NEEDS_DECISION boolean value key to see if a GDO needs a decision.</p>
+        <p>To resolve a decision, an application typically presents the end user with a subset of the matches' partial results (e.g., album titles) and lets the user select the correct match or reject them all.  Alternatively, the application may automatically select the first match or reject them all .</p>
+        <p class="note">In all cases, match results can be partial or full, so after selecting a match, the application should test it using GNSDK_GDO_VALUE_FULL_RESULT. </p>
+        <p><b>For example:</b>
+        </p><pre xml:space="preserve">
+gnsdk_cstr_t    value            = (gnsdk_cstr_t)GNSDK_NULL;
+gnsdk_cstr_t    needs_decision   = 0;
+gnsdk_uint32_t  count            = 0;
+ 
+/*
+ * Get count and needs_decision values from response GDO
+ */
+gnsdk_manager_gdo_value_get(response_gdo, GNSDK_GDO_VALUE_RESPONSE_NEEDS_DECISION, 1, &amp;value);
+needs_decision = value;
+gnsdk_manager_gdo_value_get(response_gdo, GNSDK_GDO_VALUE_RESPONSE_RESULT_COUNT, 1, &amp;value)
+count = atoi(value);
+ 
+if (count &gt; 0)  // Either multiple matches or confidence in single match is not high
+{
+   int user_selection = 1;
+    
+   if (0 == strcmp(needs_decision, GNSDK_VALUE_TRUE))
+   (
+        /*
+         * Resolve match(es). Look at count to determine paging, depending on device.
+         * Typically, you would use partial results from matches (e.g., album titles)
+         * and present them to end user to select from
+         *
+         * Set user_selection to user's choice or 0 if they do not make a selection
+         */
+			
+        ...
+			
+   }
+ 
+   if (user_selection)
+   {
+       /* There is a single match */
+       /* Test if GDO has full or partial metadata. If partial, get full (if desired) */
+			
+       ...
+			
+   }
+}
+else
+{
+   /* No match returned  */
+ 
+}</pre>
+        <h2>Serializing a GDO</h2>
+        <p>You can serialize a GDO to save it for later use in an application.&#160; Serializing a GDO retains only key information needed for common GDO functions. Other information is discarded. </p>
+        <p>To restore the discarded information, your application must request the GDO again. An application can reconstitute (de-serialize) a serialized GDO and use it for subsequent processing.</p>
+        <p class="info">For a list of values returned in a partial result, see the Data Model in the <span style="font-style: italic;" class="GNVariablesProductName">GNSDK for Desktop</span><i> C&#160;API&#160;Reference</i>.</p>
+        <p class="warning"><b>Important</b>: A serialized GDO is not a static identifier. You cannot use it as a comparison identifier for any purposes, including straight comparisons, caching, indexing, and so on.</p>
+        <h2>Rendering a GDO as XML</h2>
+        <p><span class="GNVariablesProductName">GNSDK for Desktop</span> supports rendering GDOs as XML.&#160; This is an advanced feature, but may be useful to track user choices, retain query history, or provide data to other applications. Rendering to XML is also helpful when testing queries to see their results. For more information, see <a href="../advanced_topics/Rendering a GDO as XML.html" class="GNBasic MCXref xref xrefGNBasic">Rendering a GDO as XML</a>.</p>
+        <div class="MCRelationshipsProxy_0">
+            <p class="conceptHeading_concept_0">Related Information</p>
+            <p class="conceptItem_concept_0"><a href="../../shared-topics/concepts/Gracenote Data Objects GDOs.html">Gracenote Data Objects GDOs</a>
+            </p>
+        </div>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

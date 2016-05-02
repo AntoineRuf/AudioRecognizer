@@ -1,0 +1,1 @@
+define({r:0.5,st:'Stem',n:1,t:[0],s:['+','descript','implement','physic','typic'],p:[['+',43],['allows',44],['authorize',43],['collection',55],['detailed',44],['faster',19],['gnaudiosourcedelegate',50],['ids',58],['kstatusidentifyingended',51],['models',63],['of',68],['preparation',55],['return',25],['station',58],['the',58],['urls',54]]});

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Submitting Content to Gracenote">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Submit APIs</title>
+        <link href="../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../index.html#c-topics/submit/Submit APIs.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Submitting Content to Gracenote</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Submit APIs</span>
+        </div>
+        <h1>Submit APIs</h1>
+        <p>Submit APIs are grouped into four functional categories: General, Album and Track Metadata, Track Features, and <a href="javascript:void(0);" class="MCTextPopup MCTextPopupHotSpot MCTextPopup_Open MCTextPopupHotSpot_ MCTextPopupHotSpot_Popup #text #textPopup">Parcel<span class="MCTextPopupBody popupBody"><span class="MCTextPopupArrow"></span>A Submit container that wraps around editable GDO and feature metadata to enable the metadata transfer to Gracenote Service. Parcels can contain a single item—only editable GDOs, or only features—or both editable GDOs and features. Submitting a parcel is analogous to performing a query in other  modules—the difference is the interaction and end result with Gracenote Service. In most other  modules, you create and define queries with specific options and inputs to access metadata from Gracenote Service. In Submit, you create a parcel, add metadata, and upload the parcel to Gracenote Service.</span></a>.</p>
+        <table>
+            <tr>
+                <td>
+                    <p>Function</p>
+                </td>
+                <td>
+                    <p>Category</p>
+                </td>
+                <td>
+                    <p>Usage</p>
+                </td>
+                <td>
+                    <p>See Also</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>gnsdk_submit_*()</p>
+                    <p>gnsdk_submit_get_*()</p>
+                </td>
+                <td>
+                    <p>General</p>
+                </td>
+                <td>
+                    <p>Perform standard tasks</p>
+                </td>
+                <td>
+                    <p>&#160;</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>gnsdk_submit_edit_gdo_*()</p>
+                </td>
+                <td>
+                    <p>Album and Track Metadata</p>
+                </td>
+                <td>
+                    <p>Create editable GDOs, and add and maintain children, values, and list value data.</p>
+                </td>
+                <td>
+                    <p>Submit, Album Data</p>
+                    <p>Submit Requirements</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>gnsdk_submit_parcel_feature_*</p>
+                </td>
+                <td>
+                    <p>()Track Features</p>
+                </td>
+                <td>
+                    <p>Initialize, set and get options for, and process features of an audio stream.</p>
+                </td>
+                <td>
+                    <p>Submit, Feature Data</p>
+                    <p>Submit Requirements</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>gnsdk_submit_parcel_data_*()</p>
+                </td>
+                <td>
+                    <p>Parcels</p>
+                </td>
+                <td>
+                    <p>Perform administrative tasks for parcel submits, such as creating parcels, adding information, uploading parcels, and accessing status and state information.</p>
+                    <p>This group also intrinsically contains the following standard GNSDK module APIs:</p>
+                    <ul>
+                        <li value="1">gnsdk_submit_parcel_create()</li>
+                        <li value="2">gnsdk_submit_parcel_upload()</li>
+                        <li value="3">gnsdk_submit_parcel_release ()</li>
+                    </ul>
+                </td>
+                <td>
+                    <p>Submit, Parcel Submit Requirements</p>
+                </td>
+            </tr>
+        </table>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

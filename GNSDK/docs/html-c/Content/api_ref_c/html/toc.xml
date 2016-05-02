@@ -1,0 +1,59 @@
+<toc label="GNSDK for Desktop" topic="index.html">
+  <topic label="Modules" href="modules.html">
+    <topic label="Link" href="group___link.html">
+    </topic>
+    <topic label="ListsandLocales" href="group___listsand_locales.html">
+    </topic>
+    <topic label="Manager" href="group___manager.html">
+    </topic>
+    <topic label="MoodGrid" href="group___mood_grid.html">
+    </topic>
+    <topic label="Music_Fingerprinting" href="group___music___fingerprinting.html">
+    </topic>
+    <topic label="Music_MusicID" href="group___music___music_i_d.html">
+    </topic>
+    <topic label="Music_MusicIDFile" href="group___music___music_i_d_file.html">
+    </topic>
+    <topic label="Music_MusicIDStream" href="group___music___music_i_d_stream.html">
+    </topic>
+    <topic label="Playlist" href="group___playlist.html">
+    </topic>
+    <topic label="Setup" href="group___setup.html">
+    </topic>
+    <topic label="StatusCallbacks" href="group___status_callbacks.html">
+    </topic>
+    <topic label="StorageandCaching" href="group___storageand_caching.html">
+    </topic>
+  </topic>
+  <topic label="Data Structures">
+    <topic label="Data Structures" href="annotated.html">
+      <topic label="_gnsdk_musicidfile_callbacks_s" href="struct__gnsdk__musicidfile__callbacks__s.html">
+        <topic label="callback_get_fingerprint" href="struct__gnsdk__musicidfile__callbacks__s.html#ae35d7eb9f87a124eae3f4b1d86a8c124"/>
+        <topic label="callback_get_metadata" href="struct__gnsdk__musicidfile__callbacks__s.html#a9d2a0a90a9851680d8ade7d0e37f3842"/>
+        <topic label="callback_musicid_complete" href="struct__gnsdk__musicidfile__callbacks__s.html#a89fef21b707d4d82b5c4468b9ce1d3fa"/>
+        <topic label="callback_result_available" href="struct__gnsdk__musicidfile__callbacks__s.html#afb16ed10fc9e2486dc2308e04c416c09"/>
+        <topic label="callback_result_not_found" href="struct__gnsdk__musicidfile__callbacks__s.html#a4243f805135549bfb30a9e612363403e"/>
+        <topic label="callback_status" href="struct__gnsdk__musicidfile__callbacks__s.html#a0cabafb659915c29a12e961c01ffc011"/>
+      </topic>
+      <topic label="_gnsdk_musicidfile_fileinfo_callbacks_s" href="struct__gnsdk__musicidfile__fileinfo__callbacks__s.html">
+        <topic label="callback_get_fingerprint" href="struct__gnsdk__musicidfile__fileinfo__callbacks__s.html#afd9ee1033838707211778836e6be8734"/>
+        <topic label="callback_get_metadata" href="struct__gnsdk__musicidfile__fileinfo__callbacks__s.html#a6673845297cddaec2ed836ad96e67bb4"/>
+      </topic>
+      <topic label="_gnsdk_musicidstream_callbacks_s" href="struct__gnsdk__musicidstream__callbacks__s.html">
+        <topic label="callback_error" href="struct__gnsdk__musicidstream__callbacks__s.html#a9a9c170c229495b0aff8efa4f644d7ab"/>
+        <topic label="callback_identifying_status" href="struct__gnsdk__musicidstream__callbacks__s.html#aba197d874514505b62a482135a272f7f"/>
+        <topic label="callback_processing_status" href="struct__gnsdk__musicidstream__callbacks__s.html#acacd9f99d77280a0612eb45c7ac52a17"/>
+        <topic label="callback_result_available" href="struct__gnsdk__musicidstream__callbacks__s.html#a99fb96f310beb78c89d2cb5c4ab9bafe"/>
+        <topic label="callback_status" href="struct__gnsdk__musicidstream__callbacks__s.html#a9a26c50f66305c81bff2a6168baccc7f"/>
+      </topic>
+      <topic label="gnsdk_error_info_t" href="structgnsdk__error__info__t.html">
+        <topic label="error_api" href="structgnsdk__error__info__t.html#a4084cb1ba5093a703ece75d096a1e560"/>
+        <topic label="error_code" href="structgnsdk__error__info__t.html#a3c2da5bd3c93e3ee37f6ddbd5e140e73"/>
+        <topic label="error_description" href="structgnsdk__error__info__t.html#a8df9af2cac2a51b41723c7e71f0e0bd1"/>
+        <topic label="error_module" href="structgnsdk__error__info__t.html#af7c8fa6ac6da32c198f644fbed3d32d6"/>
+        <topic label="source_error_code" href="structgnsdk__error__info__t.html#a9eb55e69e6723723a24cd2fc40ef2c24"/>
+        <topic label="source_error_module" href="structgnsdk__error__info__t.html#ae1fefcdd2d5eb05f607d1bd7126e0235"/>
+      </topic>
+    </topic>
+  </topic>
+</toc>

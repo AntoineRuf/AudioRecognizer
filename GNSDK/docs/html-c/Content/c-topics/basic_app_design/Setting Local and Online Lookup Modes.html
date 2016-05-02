@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Basic Application Design Tasks|Online and Local Database Lookups">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Setting Local and Online Lookup Modes</title>
+        <link href="../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../index.html#c-topics/basic_app_design/Setting Local and Online Lookup Modes.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Basic Application Design Tasks</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Online and Local Database Lookups</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Setting Local and Online Lookup Modes</span>
+        </div>
+        <h1>Setting Local and Online Lookup Modes</h1>
+        <p>An application can perform local or online lookups as shown in the following diagram.</p>
+        <p>
+            <img src="../../Resources/Images/gnsdk_lookup_modes_411x383.jpg" style="width: 411;height: 383;" />
+        </p>
+        <h2>Lookup Providers</h2>
+        <p>A <i>lookup provider</i> is a module that implements the ability to query data for matches. <span class="GNVariablesProductName">GNSDK for Desktop</span> allows both local and online lookup providers to be enabled at run-time, and you can use lookup modes to configure how they will be used.</p>
+        <p>If the application supports an online connection, by default, <span class="GNVariablesProductName">GNSDK for Desktop</span> enables an online lookup provider that connects to the Gracenote Service. To enable other lookup providers, you can initialize a gnsdk_lookup module. For example, to enable the local lookup provider, call the gnsdk_lookup_local_initialize() function.</p>
+        <h2>Storage Providers</h2>
+        <p>A <i>storage provider</i> is a module that implements storage for the entire SDK. <span class="GNVariablesProductName">GNSDK for Desktop</span> allows various storage providers to be enabled at run-time. There are currently two storage providers available in <span class="GNVariablesProductName">GNSDK for Desktop</span>: one implemented using SQLite, and one using QNX's QDB.</p>
+        <p>By default, no storage provider is enabled. To enable a storage provider, you can initialize a gnsdk_storage module. For example, to enable the SQLite storage provider, call the gnsdk_storage_sqlite_initialize() function.</p>
+        <h2><a name="Lookup"></a>Lookup Modes</h2>
+        <p><span class="GNVariablesProductName">GNSDK for Desktop</span>  allows you to determine whether lookups will be done locally or online, by setting <i>lookup modes</i>. Lookup modes affect the following types of local storage:</p>
+        <ul>
+            <li value="1">Local databases, which are pre-populated to support fast local queries of the most popular items</li>
+            <li value="2">The online cache, which is a local cache for online-query results</li>
+            <li value="3">The lists store, which stores locale and list information and can be pre-populated or downloaded from the Gracenote Service</li>
+        </ul>
+        <p>The lookup mode options allow an application to switch between the two main lookup providers (local and online). <span class="GNVariablesProductName">GNSDK for Desktop</span>  is designed to operate exactly the same way in either mode, providing identical behavior whether operating locally or online.</p>
+        <p><span class="GNVariablesProductName">GNSDK for Desktop</span> supports the following lookup mode options:</p>
+        <ul>
+            <li value="1">GNSDK_LOOKUP_MODE_LOCAL</li>
+            <li value="2">GNSDK_LOOKUP_MODE_ONLINE</li>
+            <li value="3">GNSDK_LOOKUP_MODE_ONLINE_NOCACHE</li>
+            <li value="4">GNSDK_LOOKUP_MODE_ONLINE_NOCACHEREAD</li>
+            <li value="5">GNSDK_LOOKUP_MODE_ONLINE_CACHEONLY</li>
+        </ul>
+        <p>For example, the following call sets the user lookup option so that lookups are performed locally:</p><pre xml:space="preserve">
+gnsdk_manager_user_option_set(
+    user_handle,
+    GNSDK_USER_OPTION_LOOKUP_MODE,
+    GNSDK_LOOKUP_MODE_LOCAL
+);</pre>
+        <p class="tip">Your application can use GNSDK_USER_OPTION_CACHE_EXPIRATION option to set the length of time before a cache lookup times out. </p>
+        <p>The local and online modes are the standard modes for applications to choose between. The other online options (NOCACHE, NOCACHEREAD, and CACHEONLY) are variations of the online mode. These additional online lookup modes give more control over when the SDK is allowed to perform a network connection and how to use the online-query cache. The online-query cache is used as a performance aid for online queries. If no storage provider is present, no online-query cache will be utilized.</p>
+        <p class="note"><span class="note">Note:</span> The lists cache is used as both an online-query cache and a local database for locale and list loading requests.</p>
+        <h3>Lookup Mode Behavior</h3>
+        <p>The following sections show the different lookup modes and their behavior:</p>
+        <h4>GNSDK_LOOKUP_MODE_LOCAL</h4>
+        <p>Queries are done using a local lookup provider.</p>
+        <ul>
+            <li value="1">If a storage provider is enabled<ul><li value="1">If the storage provider is misconfigured, an error occurs and the query fails</li><li value="2">The local lookup database is searched</li></ul></li>
+            <li value="2">If no storage provider is enabled<ul><li value="1">An error occurs and the query fails</li></ul></li>
+        </ul>
+        <h4>GNSDK_LOOKUP_MODE_ONLINE</h4>
+        <p>Queries are done using an online lookup provider.</p>
+        <ul>
+            <li value="1">If a storage provider is enabled<ul><li value="1">If the storage provider is misconfigured, an error occurs and the query fails</li><li value="2">The online-query cache is searched<ul><li value="1">If the online-query search returns no results, a network query is performed</li><li value="2">The results of the network query are written to the online-query cache</li></ul></li></ul></li>
+            <li value="2">If no storage provider is enabled<ul><li value="1">A network query is performed</li></ul></li>
+        </ul>
+        <h4>GNSDK_LOOKUP_MODE_ONLINE_NOCACHE</h4>
+        <p>Queries are done using an online lookup provider.</p>
+        <ul>
+            <li value="1">If a storage provider is enabled<ul><li value="1">The online-query cache is ignored</li><li value="2">A network query is performed</li></ul></li>
+            <li value="2">If no storage provider is enabled<ul><li value="1">A network query is performed</li></ul></li>
+        </ul>
+        <h4>GNSDK_LOOKUP_MODE_ONLINE_NOCACHEREAD</h4>
+        <p>Queries are done using an online lookup provider.</p>
+        <ul>
+            <li value="1">If a storage provider is enabled<ul><li value="1">If the storage provider is misconfigured, an error occurs and the query fails</li><li value="2">A network query is performed<ul><li value="1">The results of the network query are written to the online-query cache</li></ul></li></ul></li>
+            <li value="2">If no storage provider is enabled<ul><li value="1">A network query is performed</li></ul></li>
+        </ul>
+        <h4>GNSDK_LOOKUP_MODE_ONLINE_CACHEONLY</h4>
+        <p>Queries are done using an online lookup provider.</p>
+        <ul>
+            <li value="1">If a storage provider is enabled<ul><li value="1">If the storage provider is misconfigured, an error occurs and the query fails</li><li value="2">The online-query cache is searched</li></ul></li>
+            <li value="2">If no storage provider is enabled<ul><li value="1">An error occurs and the query fails</li></ul></li>
+        </ul>
+        <p class="note"><span class="note">Note:</span> Queries using GNFPX fingerprints are not cached locally.</p>
+        <h3>Default Lookup Mode</h3>
+        <p>If the application doesn’t set a lookup mode option, <span class="GNVariablesProductName">GNSDK for Desktop</span> sets a default lookup mode. The default is GNSDK_LOOKUP_MODE_ONLINE, unless the <span class="GNVariablesProductName">GNSDK for Desktop</span> license file limits all queries to be local-only, which prevents the SDK from connecting online. When this limit is set in the license file, the lookup mode defaults to GNSDK_LOOKUP_MODE_LOCAL.</p>
+        <h3>Overriding the Lookup Mode for a Specific Query</h3>
+        <p>You can set the lookup mode as a user option or set it separately for individual queries as an option on the query handle. Setting the GNSDK_USER_OPTION_LOOKUP_MODE option for a user handle applies to  <i>all queries using the  user handle</i>. You can override this for a specific query by setting the equivalent <i>query handle option</i>. </p>
+        <p>For example, you can override the setting for a music query by setting the GNSDK_MUSICID_OPTION_LOOKUP_MODE option. The query handle option uses the same option value keys as the user handle option.</p>
+        <h3>Using Both Local and Online Lookup Modes</h3>
+        <p>Your application can switch between local and online lookups, as needed.  For example, the following pseudocode shows how to do a local Album TOC lookup using MusicID APIs, followed by an online lookup for cover art using Link APIs:</p><pre xml:space="preserve">/* Local TOC lookup using MusicID
+musicid_option_set(MODE_LOCAL)
+musicid_toc_set(toc)
+musicid_find_album(&amp;album_gdo)
+/* Online cover art lookup using Link
+link_option_set(MODE_ONLINE)
+link_set_gdo(album_gdo)
+link_retrieve_content(cover)</pre>
+        <div class="MCRelationshipsProxy_0">
+            <p class="conceptHeading_concept_0">Related Information</p>
+            <p class="conceptItem_concept_0"><a href="../../shared-topics/concepts/Embedded Gracenote Database.html">Embedded Gracenote Database (GDB)</a>
+            </p>
+        </div>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

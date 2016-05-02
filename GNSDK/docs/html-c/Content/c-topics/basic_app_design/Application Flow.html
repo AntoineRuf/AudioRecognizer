@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Basic Application Design Tasks">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Application Flow</title>
+        <link href="../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../index.html#c-topics/basic_app_design/Application Flow.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Basic Application Design Tasks</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Application Flow</span>
+        </div>
+        <h1 class="Heading1"><a name="_Toc334991731"></a>Application Flow</h1>
+        <p>This topic describes how to get started with <span class="GNVariablesProductName">GNSDK for Desktop</span> development.</p>
+        <p>Every <span class="GNVariablesProductName">GNSDK for Desktop</span> application follows this general design and application flow:</p>
+        <ol>
+            <li value="1">Include the <span class="GNVariablesProductName">GNSDK for Desktop</span> header files for the modules your application requires. These should be based on the Gracenote products you licensed, such as MusicID, or MusicID-File.</li>
+            <li value="2">Include other application headers that your application requires.</li>
+            <li value="3">Initialize GNSDK Manager.</li>
+            <li value="4">Initialize other modules as needed, such as MusicID.</li>
+            <li value="5">If you are using a Gracenote local database, initialize it.</li>
+            <li value="6">Enable Logging. Gracenote recommends that the logging functionality of <span class="GNVariablesProductName">GNSDK for Desktop</span> be enabled to some extent. This aids in application debugging and issue reporting to Gracenote.</li>
+            <li value="7">Create a User (or deserialize an existing User) to get a User handle. All queries require a User handle with correct Client ID information to perform the query.</li>
+            <li value="8">Create a query handle with lookup criteria and any query options.</li>
+            <li value="9">Perform the query. Gracenote returns a response Gracenote Data Object (<a href="javascript:void(0);" class="MCTextPopup MCTextPopupHotSpot MCTextPopup_Open MCTextPopupHotSpot_ MCTextPopupHotSpot_Popup #text #textPopup">GDO<span class="MCTextPopupBody popupBody"><span class="MCTextPopupArrow"></span>Gracenote Data Object: Containers most-commonly used to store information returned by a query. GDOs can contain metadata values (names, titles, external IDs, and so on) that can be accessed by an application using Value keys.  GDOs can also contain references to other GDOs, which can be accessed using Child GDO keys.</span></a>) with full or partial results. The GDO may contain a single match or multiple matches, requiring additional queries to refine the results. See <a href="../../shared-topics/concepts/Gracenote Data Objects GDOs.html" class="GNBasic MCXref xref xrefGNBasic">About Gracenote Data Objects (GDOs)</a>.</li>
+            <li value="10">Process the query result to get to the desired element and retrieve its metadata.</li>
+            <li value="11">Perform clean up by releasing all GDO and query handles.</li>
+            <li value="12">Release the User handle.</li>
+            <li value="13">Shutdown <span class="GNVariablesProductName">GNSDK for Desktop</span> the GNSDK&#160;Manager.</li>
+        </ol>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

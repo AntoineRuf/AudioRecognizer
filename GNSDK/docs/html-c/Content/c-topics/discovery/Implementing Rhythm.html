@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Implementing Discovery Features|Implementing Playlist Features">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Implementing Rhythm</title>
+        <link href="../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../index.html#c-topics/discovery/Implementing Rhythm.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Implementing Discovery Features</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Implementing Playlist Features</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Implementing Rhythm</span>
+        </div>
+        <h1>Implementing Rhythm</h1>
+        <p>The Rhythm API:</p>
+        <ul>
+            <li value="1">Creates radio stations based on <a href="javascript:void(0);" class="MCTextPopup MCTextPopupHotSpot MCTextPopup_Open MCTextPopupHotSpot_ MCTextPopupHotSpot_Popup #text #textPopup">GDO<span class="MCTextPopupBody popupBody"><span class="MCTextPopupArrow"></span>Gracenote Data Object: Containers most-commonly used to store information returned by a query. GDOs can contain metadata values (names, titles, external IDs, and so on) that can be accessed by an application using Value keys.  GDOs can also contain references to other GDOs, which can be accessed using Child GDO keys.</span></a>&#160;seeds.</li>
+            <li value="2">Supports playlist creation either within radio stations, or just with GDO&#160;seeds.</li>
+            <li value="3">Provides for a feedback event mechanism for playlist content modification.</li>
+        </ul>
+        <p>Implementing Rhythm in an application involves the following steps:</p>
+        <ol>
+            <li value="1">Initializing the Rhythm module.</li>
+            <li value="2">Creating a Rhythm query.</li>
+            <li value="3">Providing a GDO&#160;seed.</li>
+            <li value="4">Creating a radio station (optional if you only want a playlist).</li>
+            <li value="5">Retrieving playlist.</li>
+            <li value="6">Providing feedback events to radio station.</li>
+            <li value="7">Observing feedback effects by retrieving updated playlist from radio station.</li>
+            <li value="8">Saving a radio station for later retrieval.</li>
+        </ol>
+        <h2>Initializing the Rhythm Module</h2>
+        <p>Before using Rhythm, follow the usual steps to initialize <span class="GNVariablesProductName">GNSDK for Desktop</span>. The following <span class="GNVariablesProductName">GNSDK for Desktop</span> modules must be initialized:</p>
+        <ul>
+            <li value="1">GNSDK Manager</li>
+            <li value="2">MusicID (optional to retrieve GDOs)</li>
+            <li value="3">Playlist (optional to use generated playlists)</li>
+            <li value="4">Rhythm</li>
+        </ul>
+        <p>For more information on initializing the <span class="GNVariablesProductName">GNSDK for Desktop</span> modules, see “Initializing an Application.”</p>
+        <p>To initialize Rhythm, use the gnsdk_rhythm_initialize() function.</p><pre xml:space="preserve">error = gnsdk_rhythm_initialize(sdkmgr_handle);</pre>
+        <p class="note" data-mc-conditions="Default.ProdAuto,Default.ProdDesktop">If you are using MusicID to recognize music, you must enable Playlist and DSP data in your query. </p>
+        <p class="note" data-mc-conditions="Default.ODPOnly">If you are using MusicID to recognize music, you must enable Playlist and DSP data in your query. </p>
+        <h2>Creating a Rhythm Query</h2>
+        <p>Prior to generating a playlist or creating a radio station, you must create a Rhythm query. A Rhythm query requires a  seed GDO, which can be created with MusicID, or provided through some other means. Once you have a seed GDO, you call gnsdk_rhythm_query_create() to create a query handle, and then gnsdk_rhythm_query_set_gdo() to set the seed GDO&#160;into the query. For example, the following code calls the appropriate functions to create a Rhythm query:</p><pre xml:space="preserve">error = gnsdk_rhythm_query_create(user_handle, GNSDK_NULL, GNSDK_NULL, &amp;rhythm_query_handle);
+if (!error)
+   error = gnsdk_rhythm_query_set_gdo(rhythm_query_handle, seed_gdo);</pre>
+        <h2>Creating Recommendations For Queries and Radio Station Playlists</h2>
+        <p>Once you have a query with a seeded handle, you can create recommendations (in the form of a playlist) for that query or a radio station. Creating a playlist for a query uses less overhead, while creating a radio station allows for playlist changes through feedback or tuning. To generate a Rhythm query playlist, call gnsdk_rhythm_query_generate_recommendations() as shown below:</p><pre xml:space="preserve">error = gnsdk_rhythm_query_generate_recommendations(rhythm_query_handle, &amp;rhythm_playlist);</pre>
+        <p>Once you have a playlist, you can traverse the GDOs in it to retrieve track information.</p>
+        <p>To create a radio station, call gnsdk_rhythm_query_generate_station() after you have set the GDO&#160;for the query. The following code shows the creation of a query, setting of a&#160;GDO, and creation of a radio station:</p><pre xml:space="preserve">error = gnsdk_rhythm_query_create(user_handle, GNSDK_NULL, GNSDK_NULL, &amp;rhythm_query_handle);
+if (!error)
+   error = gnsdk_rhythm_query_set_gdo(rhythm_query_handle, seed_gdo);
+if (!error)
+   error = gnsdk_rhythm_query_generate_station(rhythm_query_handle, GNSDK_NULL, GNSDK_NULL, &amp;rhythm_station_handle);
+		</pre>
+        <p>The station handle is required for later use in providing feedback and tuning. To generate a radio station playlist, use the function gnsdk_rhythm_station_generate_playlist(). The following example shows the creation of a radio station playlist:</p><pre xml:space="preserve">gnsdk_rhythm_station_generate_playlist(rhythm_station_handle, &amp;rhythm_playlist);</pre>
+        <h2>Providing Feedback</h2>
+        <p>Once you have set the seed and created a station, you can not alter the seed. If you wish to change the seed for a radio station, you must create a new station. However, you can alter an already existing station based on feedback events from the end user. The following are supported feedback types and their effect on a radio station playlist:</p>
+        <ul>
+            <li value="1"><b>GNSDK_RHYTHM_EVENT_TRACK_PLAYED</b> - Track marked as played. Moves the play queue (drops track being played and adds additional track to end of queue)</li>
+            <li value="2"><b>GNSDK_RHYTHM_EVENT_TRACK_SKIPPED</b> - Track marked as skipped. Moves the play queue.</li>
+            <li value="3"><b>GNSDK_RHYTHM_EVENT_TRACK_LIKE</b> - Track marked as liked. Does not move the play queue.</li>
+            <li value="4"><b>GNSDK_RHYTHM_EVENT_TRACK_DISLIKE</b> - Track marked as disliked. Refreshes the playlist queue.</li>
+            <li value="5"><b>GNSDK_RHYTHM_EVENT_ARTIST_LIKE</b> - Artist marked as liked. Does not move the play queue.</li>
+            <li value="6"><b>GNSDK_RHYTHM_EVENT_ARTIST_DISLIKE</b> - Artist marked as disliked. Refreshes the playlist queue.</li>
+        </ul>
+        <p>You provide feedback to Rhythm with the fuction gnsdk_rhythm_station_event(). You must provide the radio station handle, event, and specific GDO&#160;that is affected by the feedback. For example, the following code sends an artist like event back to Rhythm:</p>
+        <p>&#160;</p><pre xml:space="preserve">
+// retrieve album 1 GDO from playlist
+error = gnsdk_manager_gdo_child_get(rhythm_playlist, GNSDK_GDO_CHILD_ALBUM, 1, &amp;album_gdo);
+// retrieve artist GDO			
+if (!error)
+   error = gnsdk_manager_gdo_child_get(album_gdo, GNSDK_GDO_CHILD_ARTIST, 1, &amp;artist_gdo);
+// send feedback that we like this artist
+if (!error) 
+   error = gnsdk_rhythm_station_event(rhythm_station_handle, GNSDK_RHYTHM_EVENT_ARTIST_LIKE, artist_gdo);</pre>
+        <p>
+            <h2>Tuning Playlists</h2>
+            <p>You can adjust a radio station or query playlist by setting options for Rhythm to follow. &#160;Use the function gnsdk_rhythm_station_option_set() to adjust playlist options for radio stations, or gnsdk_rhythm_query_option_set() for queries. Options are:&#160;</p>
+            <ul>
+                <li value="1"><b>GNSDK_RHYTHM_OPTION_ENABLE_EXTERNAL_IDS</b> - Response should include external IDs, which are 3rd-party IDs to external content (e.g., Amazon)</li>
+                <li value="2"><b>GNSDK_RHYTHM_OPTION_ENABLE_CONTENT_DATA</b>	- Response should include data for fetching content (e.g., images)</li>
+                <li value="3"><b>GNSDK_RHYTHM_OPTION_ENABLE_SONIC_DATA</b> - Response should include sonic attribute data. You must be licensed for this data.</li>
+                <li value="4"><b>GNSDK_RHYTHM_OPTION_RETURN_COUNT</b>	- How many tracks to return in playlist, range is 1-25, default is 5.</li>
+                <li value="5"><b>GNSDK_RHYTHM_OPTION_FOCUS_POPULARITY</b> - Playlist track popularity. Range is 0-1000 (most popular). Default is 1000.</li>
+                <li value="6"><b>GNSDK_RHYTHM_OPTION_FOCUS_SIMILARITY</b> - Playlist track similarity. Range is 0-1000 (most similar). Default is 1000.</li>
+            </ul>
+            <p>The following two options only affect query recommendations:</p>
+            <ul>
+                <li value="1">
+                    <p><b>GNSDK_RHYTHM_OPTION_RECOMMENDATION_MAX_TRACKS_PER_ARTIST</b>	- Specifies a maximum number of tracks per artist for recommended playlist results.</p>
+                </li>
+                <li value="2">
+                    <p><b>GNSDK_RHYTHM_OPTION_RECOMMENDATION_ROTATION_RADIO</b> - Enabling this option will cause results to be sequenced in a radio-like fashion, otherwise, you might, for example, get a number of tracks from the same artist (not 'radio-like'). Note that enabling this is not the same thing as creating a radio station - each recommendation query is likely to return the same or similar tracks given the same or similar seeds. Each recommendation query is considered a standalone query, and does not take into account any previous recommendation queries.</p>
+                </li>
+            </ul>
+            <p>The following option only affects radio stations:</p>
+            <ul>
+                <li value="1"><b>GNSDK_RHYTHM_OPTION_STATION_DMCA</b> - When creating a radio station or getting recommendations, you have the option to enable DMCA (Digital Millennium Copyright Act) rules, which reduces the repetition of songs and albums in conformance with DMCA guidelines. </li>
+            </ul>
+            <p>For example, the following code turns DMCA&#160; support on:</p><pre xml:space="preserve">gnsdk_rhythm_station_option_set(rhythm_station_handle, GNSDK_RHYTHM_OPTION_STATION_DMCA, "1");</pre>
+        </p>
+        <h2>Saving Radio Stations</h2>
+        <p>Rhythm saves all created radio stations within the Gracenote service. Stations can be recalled through the station ID, which  an application can store locally. To retrieve the station ID&#160;for storage, call gnsdk_rhythm_station_id(). </p>
+        <p> Once you have the station ID, an application can save it to persistent storage and recall it at any later date. Station IDs are permanently valid. To Retrieve a station handle, call gnsdk_rhythm_station_lookup(), and pass the station ID and user handle. The look up of the station ID can happen during the same execution or any later execution of the Rhythm software.</p>
+        <p>For example, the following code retrieves the station&#160;ID using the station handle, then uses it to retrieve the station handle:</p><pre xml:space="preserve">
+// retrieve station ID
+gnsdk_rhythm_station_id(rhythm_station_handle,&amp;station_id);
+
+// save the ID for later retrieval...					
+			
+// look up station handle given station ID			
+gnsdk_rhythm_station_lookup(station_id, user_handle, GNSDK_NULL, GNSDK_NULL, &amp;rhythm_station_handle);			
+			
+// use the handle for other Rhythm function...		</pre>
+        <p>
+            <h2>Shutting Down Rhythm</h2>
+        </p>
+        <p>When you are finished using Rhythm, you can use the gnsdk_Rhythm_shutdown() function to shut it down. Shutdown the  <span class="GNVariablesProductName">GNSDK for Desktop</span> modules you are using in the reverse order in which they were initialized.</p>
+        <p>
+            <h2>Sample Application</h2>
+        </p>
+        <p>A sample application for Rhythm is provided in rhythm/main.c.</p>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

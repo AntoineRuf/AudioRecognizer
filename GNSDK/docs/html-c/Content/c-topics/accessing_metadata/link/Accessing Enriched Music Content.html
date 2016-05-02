@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Accessing Enriched Content (Link)">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Accessing Enriched Music Content</title>
+        <link href="../../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../../index.html#c-topics/accessing_metadata/link/Accessing Enriched Music Content.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Accessing Enriched Content (Link)</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Accessing Enriched Music Content</span>
+        </div>
+        <h1>Accessing Enriched Music Content</h1>
+        <p>To access enriched metadata content, you can purchase additional metadata entitlements and use the Link module APIs in your application. For more information, see <a href="../../../shared-topics/concepts/Link Module Overview.html" class="GNBasic MCXref xref xrefGNBasic">Link Module Overview</a>.</p>
+        <p>You can use the Link module to retrieve enriched content, including:</p>
+        <ul>
+            <li value="1">Cover art</li>
+            <li value="2">Artist images</li>
+            <li value="3">Genre art</li>
+        </ul>
+        <p class="tip">If there was no match to Gracenote content for a query, you can use the default cover art symbol instead. For more information, see <a href="../../../shared-topics/gnsdk_best_practices/Best Practices for Image Dimensions.html#Using" class="GNBasic MCXref xref xrefGNBasic">Using a Default Image When Cover Art Is Missing</a>.</p>
+        <h2><a name="Retrievi"></a>Retrieving Cover Art and Artist Images</h2>
+        <p>To retrieve cover art or an artist image, you need an album or contributor <a href="javascript:void(0);" class="MCTextPopup MCTextPopupHotSpot MCTextPopup_Open MCTextPopupHotSpot_ MCTextPopupHotSpot_Popup #text #textPopup">GDO<span class="MCTextPopupBody popupBody"><span class="MCTextPopupArrow"></span>Gracenote Data Object: Containers most-commonly used to store information returned by a query. GDOs can contain metadata values (names, titles, external IDs, and so on) that can be accessed by an application using Value keys.  GDOs can also contain references to other GDOs, which can be accessed using Child GDO keys.</span></a> from media that has been identified using <span class="GNVariablesProductName">GNSDK for Desktop</span> recognition features. For example, you might have identified an album using a CD TOC or a text-based lookup, or you might have identified a contributor using a text-based lookup. For more information, see <a href="../../recognition/music/Music Recognition Overview.html" class="GNBasic MCXref xref xrefGNBasic">Music Recognition Overview</a>.</p>
+        <p>Once you have a GDO, you can use the Link APIs to retrieve enriched content immediately, or you can serialize the GDO and deserialize it later, when you are ready to retrieve content.</p>
+        <p>In general, to access enriched image content:</p>
+        <ol>
+            <li value="1">Initialize the Manager, Music, and Link modules.</li>
+            <li value="2">Create a Link query.</li>
+            <li value="3">Set the GDO for the query.</li>
+            <li value="4">Set the desired image size.</li>
+            <li value="5">Retrieve the image, specifying the image type.</li>
+            <li value="6">When finished using the image, free the image.</li>
+        </ol>
+        <p class="note" data-mc-conditions="Default.ProdAuto,Default.ProdDesktop"><span class="note">Note</span>: Images that are retrieved with an online query can be cached locally, depending on the lookup mode option, and whether caching has been enabled. For more information, see <a href="../../basic_app_design/Setting Local and Online Lookup Modes.html#Lookup" class="GNBasic MCXref xref xrefGNBasic">Lookup Modes</a> and <a href="../../basic_app_design/Using SQLite for Storage and Caching.html" class="GNBasic MCXref xref xrefGNBasic">Using  SQLite for Storage and Caching</a>.</p>
+        <p>Use the following function to create a Link query:</p><pre xml:space="preserve">gnsdk_link_query_create(user_handle, GNSDK_NULL, GNSDK_NULL, &amp;query_handle);</pre>
+        <p>In this example, the callback parameters have been set to&#160;GNSDK_NULL, but you can use them to provide a callback function that will give status updates for the query, if you wish. </p>
+        <p>Next, set the GDO for the query. The GDO should be one that you've retrieved using a <span class="GNVariablesProductName">GNSDK for Desktop</span> recognition feature, such as MusicID or MusicID-File:</p><pre xml:space="preserve">gnsdk_link_query_set_gdo(query_handle, input_gdo);</pre>
+        <p>Set the desired image size. For a list of available image sizes, see <a href="../../../shared-topics/concepts/Image Formats and Dimensions.html" class="GNBasic MCXref xref xrefGNBasic">Image Formats and Dimensions</a>.</p><pre xml:space="preserve">gnsdk_link_query_option_set(query_handle, GNSDK_LINK_OPTION_KEY_IMAGE_SIZE, 
+	GNSDK_LINK_OPTION_VALUE_IMAGE_SIZE_170);</pre>
+        <p>Finally, call the gnsdk_link_query_content_retrieve() function to retrieve the image. You must specify the type of image to retrieve, by using one of the following constants:</p>
+        <ul>
+            <li value="1">gnsdk_link_content_cover_art for album cover art</li>
+            <li value="2">gnsdk_link_content_genre_art for genre art</li>
+            <li value="3">gnsdk_link_content_image_artist for an artist image</li>
+        </ul><pre xml:space="preserve">gnsdk_link_query_content_retrieve(
+				query_handle, 
+				gnsdk_link_content_cover_art, 
+				1,
+				&amp;data_type, 
+				&amp;buffer, 
+				&amp;buffer_size);</pre>
+        <p>When finished using the image, free the image buffer:</p><pre xml:space="preserve">gnsdk_link_query_content_free(buffer);</pre>
+        <h2>Retrieving Genre Art</h2>
+        <p>Gracenote recommends retrieving and displaying genre art in the following cases:</p>
+        <ul>
+            <li value="1">You've identified an album or contributor, but no cover art or artist image is found.</li>
+            <li value="2">You are not able to identify an album or contributor, but you are still able to identify the genre of the album or contributor.</li>
+        </ul>
+        <h3>Retrieving Genre Art with a GDO</h3>
+        <p>If you've identified an album or contributor, but no cover art or artist image is found, you can retrieve genre art by using the identified GDO. Create a Link query, as described in <a href="#Retrievi" class="GNBasic MCXref xref xrefGNBasic selected">Retrieving Cover Art and Artist Images</a>, and set the image type to gnsdk_link_content_genre_art. </p>
+        <h3>Retrieving Genre Art without a GDO</h3>
+        <p>If you are not able to identify an album or contributor, you might still be able to identify the genre by using the ID3 tags of the MP3 file. Create a Link query, as described in <a href="#Retrievi" class="GNBasic MCXref xref xrefGNBasic selected">Retrieving Cover Art and Artist Images</a>, and set the image type to gnsdk_link_content_genre_art. However, instead of setting the GDO for the query, use the genre string to get the list element handle for the genre. </p>
+        <p>For example, use the following function to retrieve the list element handle:</p><pre xml:space="preserve">gnsdk_manager_list_get_element_by_string(genre_list_handle, genre_string, 
+		&amp;element_handle);</pre>
+        <p>Then set the list element handle for the Link query:</p><pre xml:space="preserve">gnsdk_link_query_set_list_element(query_handle, element_handle);</pre>
+        <h2>Setting Image Size Retrieval Order</h2>
+        <p>You can specify an order in which <span class="GNVariablesProductName">GNSDK for Desktop</span> will retrieve image sizes, by setting the image size option multiple times. The first size that you set will be the first image size that <span class="GNVariablesProductName">GNSDK for Desktop</span> tries to retrieve. If an image of that size isn't found, the second size will be the next size that <span class="GNVariablesProductName">GNSDK for Desktop</span> tries to retrieve, and so on. For example, the following code calls the gnsdk_link_query_option_set() function three times, so that <span class="GNVariablesProductName">GNSDK for Desktop</span> will try to retrieve images in the following order: 300, 450, 170:</p><pre xml:space="preserve">gnsdk_link_query_option_set(query_handle, GNSDK_LINK_OPTION_KEY_IMAGE_SIZE, 
+	GNSDK_LINK_OPTION_VALUE_IMAGE_SIZE_300);
+
+gnsdk_link_query_option_set(query_handle, GNSDK_LINK_OPTION_KEY_IMAGE_SIZE, 
+	GNSDK_LINK_OPTION_VALUE_IMAGE_SIZE_450);
+
+gnsdk_link_query_option_set(query_handle, GNSDK_LINK_OPTION_KEY_IMAGE_SIZE, 
+	GNSDK_LINK_OPTION_VALUE_IMAGE_SIZE_170);</pre>
+        <p>The images sizes that you set will apply to the query handle for the life of the handle. If you want to retrieve images of a different size, you'll need to call the gnsdk_link_query_options_clear() function to clear the options on the handle. Then you can reset the image sizes before retrieving additional images.</p>
+        <h2 class="example">Example: Accessing Album Cover Art</h2>
+        <p>This example shows how to access album cover art. It does a text search and finds images based on gdo type (album or contributor).
+ It also finds an image based on genre.</p>
+        <p>Sample Application: music_image_fetch/main.c</p>
+        <div class="MCRelationshipsProxy_0">
+            <p class="conceptHeading_concept_0">Related Information</p>
+            <p class="conceptItem_concept_0"><a href="../../../shared-topics/concepts/Link Module Overview.html">Link Module Overview</a>
+            </p>
+        </div>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

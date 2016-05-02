@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Implementing Advanced Recognition and Organization Features|Performing Advanced Video Recognition (Video Explore)">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>GDO Inputs for Video Find Queries</title>
+        <link href="../../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../../index.html#c-topics/recognition/video/GDO Inputs for Video Find Queries.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Implementing Advanced Recognition and Organization Features</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Performing Advanced Video Recognition (Video Explore)</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">GDO Inputs for Video Find Queries</span>
+        </div>
+        <h1><a name="GDOinputs">GDO Inputs for Video Find Queries</a>
+        </h1>
+        <p>This topic lists the valid Partial and <a href="javascript:void(0);" class="MCTextPopup MCTextPopupHotSpot MCTextPopup_Open MCTextPopupHotSpot_ MCTextPopupHotSpot_Popup #text #textPopup">Full GDO<span class="MCTextPopupBody popupBody"><span class="MCTextPopupArrow"></span>A GDO that contains all the information associated with the query match. See Partial GDO.</span></a> inputs for gnsdk_video_query_find*().</p>
+        <p>&#160;</p>
+        <p>Valid <a href="javascript:void(0);" class="MCTextPopup MCTextPopupHotSpot MCTextPopup_Open MCTextPopupHotSpot_ MCTextPopupHotSpot_Popup #text #textPopup">Partial GDO<span class="MCTextPopupBody popupBody"><span class="MCTextPopupArrow"></span>A GDO that contains a subset of information for the query match, but enough to perform additional processing.</span></a> Inputs:</p>
+        <table>
+            <tr>
+                <th>
+                    <p>Video Find Function</p>
+                </th>
+                <th>
+                    <p>Partial Products</p>
+                </th>
+                <th>
+                    <p>Partial AV Works</p>
+                </th>
+                <th>
+                    <p>Partial Contributors</p>
+                </th>
+                <th>
+                    <p>Partial Seasons</p>
+                </th>
+                <th>
+                    <p>Partial Series</p>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <p>gnsdk_video_query_find_product()</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+                <td>
+                    <p>&#160;</p>
+                </td>
+                <td>
+                    <p>&#160;</p>
+                </td>
+                <td>
+                    <p>&#160;</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>gnsdk_video_query_find_work()</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+                <td>
+                    <p>Usually identical to input <a href="javascript:void(0);" class="MCTextPopup MCTextPopupHotSpot MCTextPopup_Open MCTextPopupHotSpot_ MCTextPopupHotSpot_Popup #text #textPopup">GDO<span class="MCTextPopupBody popupBody"><span class="MCTextPopupArrow"></span>Gracenote Data Object: Containers most-commonly used to store information returned by a query. GDOs can contain metadata values (names, titles, external IDs, and so on) that can be accessed by an application using Value keys.  GDOs can also contain references to other GDOs, which can be accessed using Child GDO keys.</span></a>**</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>gnsdk_video_query_find_contributor()</p>
+                </td>
+                <td>
+                    <p> &#160;</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>gnsdk_video_query_find_season()</p>
+                </td>
+                <td>
+                    <p> &#160;</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>gnsdk_video_query_find_series()</p>
+                </td>
+                <td>
+                    <p> &#160;</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p>Valid Full GDO Inputs:</p>
+        <table>
+            <tr>
+                <th>
+                    <p>Video Find Function</p>
+                </th>
+                <th>
+                    <p>Full Products</p>
+                </th>
+                <th>
+                    <p>Full AV Works</p>
+                </th>
+                <th>
+                    <p>Full Contributors</p>
+                </th>
+                <th>
+                    <p>Full Seasons</p>
+                </th>
+                <th>
+                    <p>Full Series</p>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <p>gnsdk_video_query_find_product()</p>
+                </td>
+                <td>
+                    <p>Usually identical to input GDO**</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+                <td>
+                    <p> &#160;</p>
+                </td>
+                <td>
+                    <p>&#160;</p>
+                </td>
+                <td>
+                    <p>&#160;</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>gnsdk_video_query_find_work()</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>gnsdk_video_query_find_contributor()</p>
+                </td>
+                <td>
+                    <p> &#160;</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+                <td>
+                    <p>Usually identical to input GDO**</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>gnsdk_video_query_find_season()</p>
+                </td>
+                <td>
+                    <p> &#160;</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+                <td>
+                    <p>Usually identical to input GDO**</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>gnsdk_video_query_find_series()</p>
+                </td>
+                <td>
+                    <p> &#160;</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+                <td>
+                    <p>Yes</p>
+                </td>
+                <td>
+                    <p>Usually identical to input GDO**</p>
+                </td>
+            </tr>
+        </table>
+        <p>**Calling a Full GDO from its corresponding gnsdk_video_query_find_*() function usually returns a GDO that is identical to the input GDO.</p>
+        <p>&#160;</p>
+        <div class="MCRelationshipsProxy_0">
+            <p class="conceptHeading_concept_0">Related Information</p>
+            <p class="conceptItem_concept_0"><a href="../../../shared-topics/concepts/VideoExplore Overview.html">VideoExplore Overview</a>
+            </p>
+        </div>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

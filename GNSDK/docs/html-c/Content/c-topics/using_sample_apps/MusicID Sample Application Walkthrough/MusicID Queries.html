@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Getting Started|MusicID Sample Application Walkthrough">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>MusicID Queries</title>
+        <link href="../../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../../index.html#c-topics/using_sample_apps/MusicID Sample Application Walkthrough/MusicID Queries.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Getting Started</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">MusicID Sample Application Walkthrough</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">MusicID Queries</span>
+        </div>
+        <h1 class="Heading1">MusicID Queries</h1>
+        <p>An application can make a MusicID identification query in several ways, including text lookups, TOC lookups, fingerprint lookups, and so on. For a complete list of these options and examples, see <a href="../../../shared-topics/concepts/MusicID Overview.html" class="GNBasic MCXref xref xrefGNBasic">MusicID Overview</a>. </p>
+        <p>After identifying an element, Gracenote recommends using GDOs (Gracenote Data Objects) to do additional navigation and retrieve metadata. For information about GDOs, see <a href="../../../shared-topics/concepts/Gracenote Data Objects GDOs.html" class="GNBasic MCXref xref xrefGNBasic">About Gracenote Data Objects (GDOs)</a>.</p>
+        <p>However, in addition to GDOs, there are several unique identifier types that can access Gracenote media elements. To learn more about these non-<a href="javascript:void(0);" class="MCTextPopup MCTextPopupHotSpot MCTextPopup_Open MCTextPopupHotSpot_ MCTextPopupHotSpot_Popup #text #textPopup">GDO<span class="MCTextPopupBody popupBody"><span class="MCTextPopupArrow"></span>Gracenote Data Object: Containers most-commonly used to store information returned by a query. GDOs can contain metadata values (names, titles, external IDs, and so on) that can be accessed by an application using Value keys.  GDOs can also contain references to other GDOs, which can be accessed using Child GDO keys.</span></a> Gracenote identifiers, see <a href="../../advanced_topics/Working with Non GDO Identifiers.html" class="GNBasic MCXref xref xrefGNBasic">Working with Non-GDO Identifiers</a>.</p>
+        <p class="note">This sample application (musicid_gdo_navigation) uses unique identifiers called TUIs to perform the initial identification (lookup) query. TUI stands for "Title Unique Identfier" and is used for internal Gracenote identification. Compared to text lookups, TOC lookups, and fingerprint lookups, TUIs are rarely used. They are used here as a convenient way to find a specific Album. </p>
+        <h2 class="Heading2">Album Lookup</h2>
+        <p>After initialization, this sample application calls _do_sample_tui_lookups() to perform a number of album lookups. In turn, _do_sample_tui_lookups() calls _perform_sample_album_tui_lookup().</p>
+        <p>In _perform_sample_album_tui_lookup(), the sample application makes the following GNSDK calls to query a specific album:</p>
+        <ul>
+            <li value="1">
+                <p><strong>gnsdk_musicid_query_create()</strong>—Create the query handle.</p>
+            </li>
+            <li value="2">
+                <p><strong>gnsdk_manager_gdo_create_from_id()</strong>—Obtain GDO handle. This takes the TUI and TUI tag parameters that uniquely identify an album. Under the hood, this creates a stub GDO that is used, in turn, for the query method.</p>
+            </li>
+            <li value="3">
+                <p><strong>gnsdk_musicid_query_set_gdo()</strong>—Add the stub GDO from the last call to the query handle.</p>
+            </li>
+            <li value="4">
+                <p><strong>gnsdk_musicid_query_option_set()</strong>—Add the options for local lookup to the query handle.</p>
+            </li>
+            <li value="5">
+                <p><strong>gnsdk_musicid_query_find_albums()</strong>—Perform the query.</p>
+            </li>
+        </ul>
+        <h2>GDO Navigation and Display</h2>
+        <p>Each <span class="GNVariablesProductName">GNSDK for Desktop</span>&#160;identification query returns a GDO. GDO fields indicate how many matches were returned (none, single match, or multiple matches), which varies based on query criteria.</p>
+        <p> GDO metadata results can be either partial or full. Partial metadata may be sufficient for applications that only need to display basic information to the end user. Other applications may need full results. In all cases, applications should check to see if the GDO contains partial or full results and then determine if the partial is sufficient. For more information about full and partial results, see <a href="../../../shared-topics/concepts/Gracenote Data Objects GDOs.html" class="GNBasic MCXref xref xrefGNBasic">About Gracenote Data Objects (GDOs)</a>. For a list of partial results returned in GDOs, see the GNSDK Data Dictionary.</p>
+        <h3>Parsing the Returned Response GDO</h3>
+        <p>A query returns a Response GDO containing a child GDO for each match. Since we are querying on a specific Gracenote Identifier (TUI and TUI tag), we are only going to get one child GDO containing full metadata results. However, the code parses the returned GDO to handle the multiple matches possibility. This is done in the perform_sample_album_tui_lookup() function:</p><pre xml:space="preserve">
+/*
+ * Find number of matches using the GNSDK_GDO_VALUE_RESPONSE_RESULT_COUNT value key
+ */
+gnsdk_manager_gdo_value_get(response_gdo,GNSDK_GDO_VALUE_RESPONSE_RESULT_COUNT, 1, &amp;value_string);
+album_count = value_string ? atoi(value_string) : 0;
+
+/*
+ * Get child if album_count &gt; 0 using the GNSDK_GDO_CHILD_ALBUM child key
+ */
+gnsdk_manager_gdo_child_get(response_gdo,GNSDK_GDO_CHILD_ALBUM, 1, &amp;album_gdo);
+
+/*
+ * Find if child GDO contains full or partial results using the GNSDK_GDO_VALUE_FULL_RESULT value key.
+ */
+gnsdk_manager_gdo_value_get(album_gdo, GNSDK_GDO_VALUE_FULL_RESULT, 1, &amp;value_string);
+
+/*
+ * If this GDO only contains partial metadata (atoi(value_string) == 0), then re-query for the full results.
+ * First, however, set match back to the existing query handle then release the selected match as the
+ * query handle has it.			
+ */
+gnsdk_musicid_query_set_gdo(query_handle, album_gdo);
+gnsdk_manager_gdo_release(response_gdo);			
+			
+/*
+ * Query for this match in full
+ */
+gnsdk_musicid_query_find_albums(query_handle, &amp;match_type, &amp;response_gdo);
+</pre>
+        <h3>Parsing the Child GDO</h3>
+        <p>Once we have a Response GDO with a child GDO containing full results for our album query, we can then extract the child GDO values and display them. This is done in the _navigate_album_response_gdo() function, also called in _perform_sample_album_tui_lookup.</p>
+        <p>The query to get full results also returns a Response GDO. All queries return Response GDOs. This means that the _navigate_album_response_gdo() function has to repeat the call to get the child album GDO (see the code sample below). This time, however, the application is aware that the child GDO contains full results and does not need to re-test for this.</p><pre xml:space="preserve">
+/*
+ * Get the child album GDO containing full results from the album Response GDO
+ */
+gnsdk_manager_gdo_child_count(response_gdo, GNSDK_GDO_CHILD_ALBUM, &amp;child_count);
+if (child_count &gt; 0)
+{
+gnsdk_manager_gdo_child_get(response_gdo, GNSDK_GDO_CHILD_ALBUM, 1, &amp;album_gdo);
+    ... 
+</pre>
+        <p>After getting the child GDO, _navigate_album_response_gdo() does the following:</p>
+        <ol start="1">
+            <li value="1">Extracts and displays values (metadata) from the GDO using value keys.</li>
+            <li value="2">Calls functions to navigate additional child GDOs (sub-objects). These functions extract and display metadata values from those objects.</li>
+        </ol>
+        <h3>Extract Metadata and Display</h3>
+        <p>The navigate album function calls _display_gdo_value() to extract and display a metadata value. The display function calls gnsdk_manager_gdo_value() to extract values from the GDO using defined value keys, for example, GNSDK_GDO_VALUE_YEAR, GNSDK_GDO_VALUE_GENRE_LEVEL_1, GNSDK_GDO_VALUE_ALBUM_TRACK_COUNT, and so on.</p>
+        <p class="info">Your application does not need to free GDO values and they will remain valid until the GDO handle is released.</p>
+        <p>&#160;</p>
+        <h3>Navigate and Parse Additional Child GDOs</h3>
+        <p>In addition to _navigate_album_response_gdo(), which parses and displays album metadata, addtional functions are also called to parse child GDOs (sub-objects):</p>
+        <ul>
+            <li value="1">
+                <p><strong>_navigate_track_gdo()</strong> - Parse and display track GDO metadata.</p>
+            </li>
+            <li value="2">
+                <p><strong>_navigate_credit_gdo()</strong> - Parse and display credit GDO metadata.</p>
+            </li>
+            <li value="3">
+                <p><strong>_navigate_title_official_gdo()</strong> - Parse and display official title GDO metadata.</p>
+            </li>
+            <li value="4">
+                <p><strong>_navigate_contributor_gdo()</strong> - Parse and display contributor GDO metadata.</p>
+            </li>
+            <li value="5">
+                <p><strong>_navigate_name_official_gdo()</strong> - Parse and display official name GDO metadata.</p>
+            </li>
+        </ul>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

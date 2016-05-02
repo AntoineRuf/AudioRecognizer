@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Submitting Content to Gracenote|Editable GDOs">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Editable GDO Child and Value Keys</title>
+        <link href="../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../index.html#c-topics/submit/Editable GDO Child and Value.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Submitting Content to Gracenote</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Editable GDOs</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Editable GDO Child and Value Keys</span>
+        </div>
+        <h1>Editable GDO Child and Value Keys</h1>
+        <p>The following table lists child and value keys for the <a href="javascript:void(0);" class="MCTextPopup MCTextPopupHotSpot MCTextPopup_Open MCTextPopupHotSpot_ MCTextPopupHotSpot_Popup #text #textPopup">GDO<span class="MCTextPopupBody popupBody"><span class="MCTextPopupArrow"></span>Gracenote Data Object: Containers most-commonly used to store information returned by a query. GDOs can contain metadata values (names, titles, external IDs, and so on) that can be accessed by an application using Value keys.  GDOs can also contain references to other GDOs, which can be accessed using Child GDO keys.</span></a> types supported by editable GDOs. The child keys are relevant for use in any gnsdk_submit_edit_gdo_child_*() API. The value keys can be used for any gnsdk_submit_edit_gdo_value_*() API, except for the Genre and Role list-based keys. See <a href="javascript:void(0);" class="MCTextPopup MCTextPopupHotSpot MCTextPopup_Open MCTextPopupHotSpot_ MCTextPopupHotSpot_Popup #text #textPopup">Editable GDO<span class="MCTextPopupBody popupBody"><span class="MCTextPopupArrow"></span>A GDO with editable metadata. Only specific fields are editable to preserve the GDO's metadata integrity with Gracenote.</span></a> Considerations.</p>
+        <table>
+            <tr>
+                <td>
+                    <p>Context </p>
+                </td>
+                <td>
+                    <p>Child Keys </p>
+                </td>
+                <td>
+                    <p>Value Keys </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>GNSDK_GDO_CONTEXT_ALBUM </p>
+                </td>
+                <td>
+                    <p>GNSDK_GDO_CHILD_CREDIT</p>
+                    <p>GNSDK_GDO_CHILD_TRACK </p>
+                </td>
+                <td>
+                    <p>GNSDK_GDO_VALUE_ALBUM_LABEL</p>
+                    <p>GNSDK_GDO_VALUE_ALBUM_COMPILATION</p>
+                    <p>GNSDK_GDO_VALUE_ALBUM_DISC_IN_SET</p>
+                    <p>GNSDK_GDO_VALUE_ALBUM_TOTAL_IN_SET</p>
+                    <p>GNSDK_GDO_VALUE_ARTIST_DISPLAY (Required)</p>
+                    <p>GNSDK_GDO_VALUE_ARTIST_FAMILY (Optional)</p>
+                    <p>GNSDK_GDO_VALUE_ARTIST_GIVEN (Optional)</p>
+                    <p>GNSDK_GDO_VALUE_ARTIST_PREFIX (Optional)</p>
+                    <p>GNSDK_GDO_VALUE_DATE</p>
+                    <p>GNSDK_GDO_VALUE_DATE_RELEASE</p>
+                    <p>GNSDK_GDO_VALUE_GENRE (Required)</p>
+                    <p>GNSDK_GDO_VALUE_GENRE_META (Required; setting GNSDK_GDO_VALUE_GENRE automatically sets this value.)</p>
+                    <p>GNSDK_GDO_VALUE_GENRE_MICRO (Required; setting GNSDK_GDO_VALUE_GENRE automatically sets this value.)</p>
+                    <p>GNSDK_GDO_VALUE_PACKAGE_LANGUAGE</p>
+                    <p>GNSDK_GDO_VALUE_PACKAGE_LANGUAGE_DISPLAY</p>
+                    <p>GNSDK_GDO_VALUE_TITLE_DISPLAY (Required)</p>
+                    <p>GNSDK_GDO_VALUE_TITLE_SORTABLE</p>
+                    <p>GNSDK_GDO_VALUE_TOC_ALBUM (Required)</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>GNSDK_GDO_CONTEXT_TRACK </p>
+                </td>
+                <td>
+                    <p>GNSDK_GDO_CHILD_CREDIT </p>
+                </td>
+                <td>
+                    <p>GNSDK_GDO_VALUE_ARTIST_DISPLAY (Required)</p>
+                    <p>GNSDK_GDO_VALUE_ARTIST_FAMILY (Optional)</p>
+                    <p>GNSDK_GDO_VALUE_ARTIST_GIVEN (Optional)</p>
+                    <p>GNSDK_GDO_VALUE_ARTIST_PREFIX (Optional)</p>
+                    <p>GNSDK_GDO_VALUE_DATE</p>
+                    <p>GNSDK_GDO_VALUE_DATE_RELEASE</p>
+                    <p>GNSDK_GDO_VALUE_GENRE (Required)</p>
+                    <p>GNSDK_GDO_VALUE_GENRE_META (Required; setting GNSDK_GDO_VALUE_GENRE automatically sets this value.)</p>
+                    <p>GNSDK_GDO_VALUE_GENRE_MICRO (Required; setting GNSDK_GDO_VALUE_GENRE automatically sets this value.)</p>
+                    <p>GNSDK_GDO_VALUE_TITLE_DISPLAY (Required)</p>
+                    <p>GNSDK_GDO_VALUE_TITLE_SORTABLE</p>
+                    <p>GNSDK_GDO_VALUE_TRACK_NUMBER (Required)</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>GNSDK_GDO_CONTEXT_CREDIT </p>
+                </td>
+                <td>
+                    <p>N/A </p>
+                </td>
+                <td>
+                    <p>GNSDK_GDO_VALUE_NAME_DISPLAY (Required)</p>
+                    <p>GNSDK_GDO_VALUE_NAME_FAMILY (Optional)</p>
+                    <p>GNSDK_GDO_VALUE_NAME_GIVEN (Optional)</p>
+                    <p>GNSDK_GDO_VALUE_NAME_PREFIX (Optional)</p>
+                    <p>GNSDK_GDO_VALUE_ROLE (Required)</p>
+                    <p>GNSDK_GDO_VALUE_ROLE_CATEGORY (Required; setting GNSDK_GDO_VALUE_ROLE automatically sets this value.)</p>
+                </td>
+            </tr>
+        </table>
+        <p>&#160;</p>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

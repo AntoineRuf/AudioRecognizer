@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Accessing Core Metadata|Accessing Music Metadata">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Navigating Music GDOs</title>
+        <link href="../../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../../index.html#c-topics/accessing_metadata/music/Navigating Music GDOs.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Accessing Core Metadata</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Accessing Music Metadata</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Navigating Music GDOs</span>
+        </div>
+        <h1>Navigating Music GDOs</h1>
+        <p>Top-level music GDOs generally represent Albums and Tracks. An album or track query can return a response <a href="javascript:void(0);" class="MCTextPopup MCTextPopupHotSpot MCTextPopup_Open MCTextPopupHotSpot_ MCTextPopupHotSpot_Popup #text #textPopup">GDO<span class="MCTextPopupBody popupBody"><span class="MCTextPopupArrow"></span>Gracenote Data Object: Containers most-commonly used to store information returned by a query. GDOs can contain metadata values (names, titles, external IDs, and so on) that can be accessed by an application using Value keys.  GDOs can also contain references to other GDOs, which can be accessed using Child GDO keys.</span></a> containing 0-n matches (child GDOs). For example, a track query could return multiple album matches since the track may exist on more than one album. In this case, to display metadata information for one album, the end-user or your application needs to select the child GDO representing a specific album. For more information on managing multiple results, see <a href="../../../shared-topics/concepts/Gracenote Data Objects GDOs.html" class="GNBasic MCXref xref xrefGNBasic">About Gracenote Data Objects (GDOs)</a>.</p>
+        <p class="info">Queries can return matches (child GDOs) containing either full or partial metadata results. For information on handling this, see  <a href="../../../shared-topics/concepts/Gracenote Data Objects GDOs.html#Full" class="GNBasic MCXref xref xrefGNBasic">Full and Partial Metadata Results</a>. </p>
+        <p>The following code assumes that an initial query has already been performed and has returned a  response GDO. A GDO’s child objects are enumerated with an ordinal index, starting from 1 (not 0) for the first child object. From the response GDO, the following code accessses the first child album GDO.</p><pre xml:space="preserve">
+
+...Perform album query and get response GDO	
+
+gnsdk_uint32_t  ordinal_index = 1;
+	
+/*
+ * Get first child album GDO from response GDO
+ */
+gnsdk_gdo_handle_t&#160; album_gdo = GNSDK_NULL;
+gnsdk_manager_gdo_child_get(response_gdo, GNSDK_GDO_CHILD_ALBUM, ordinal_index, &amp;album_gdo);
+
+/*
+ * Get first child track GDO from album GDO 
+ */
+gnsdk_gdo_handle_t&#160; track_gdo = GNSDK_NULL;
+gnsdk_manager_gdo_child_get(album_gdo, GNSDK_GDO_CHILD_TRACK, ordinal_index, &amp;track_ gdo);
+
+</pre>
+        <p>Note that the <b>ordinal index</b> of a track GDO within an album GDO has no relationship to its track number within the album itself. To get the actual track number, use the GNSDK_GDO_VALUE_TRACK_NUMBER value key:</p><pre xml:space="preserve">
+gnsdk_cstr_t&#160; value = GNSDK_NULL; 
+gnsdk_manager_gdo_value_get(track_gdo, GNSDK_GDO_VALUE_TRACK_NUMBER, 1, &amp;value);
+</pre>
+        <p>Sample Application: musicid_gdo_navigation/main.c</p>
+        <p>This application uses MusicID to look up Album GDO content,	including Album	artist,	credits, title,	year, and genre. 	It demonstrates	how	to navigate	the	album GDO that returns track information.</p>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

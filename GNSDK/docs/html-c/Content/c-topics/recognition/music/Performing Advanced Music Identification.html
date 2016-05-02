@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Implementing Advanced Recognition and Organization Features">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Performing Advanced Music Identification</title>
+        <link href="../../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../../index.html#c-topics/recognition/music/Performing Advanced Music Identification.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Implementing Advanced Recognition and Organization Features</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Performing Advanced Music Identification</span>
+        </div>
+        <h1>Performing Advanced Music Identification</h1>
+        <p>MusicID-File provides three processing methods enabling advanced file-based media recognition. Each method utilizes the same population and result management APIs, so which method to use is determined by the application's requirement at the time of processing. MusicID-File returns a <a href="javascript:void(0);" class="MCTextPopup MCTextPopupHotSpot MCTextPopup_Open MCTextPopupHotSpot_ MCTextPopupHotSpot_Popup #text #textPopup">GDO<span class="MCTextPopupBody popupBody"><span class="MCTextPopupArrow"></span>Gracenote Data Object: Containers most-commonly used to store information returned by a query. GDOs can contain metadata values (names, titles, external IDs, and so on) that can be accessed by an application using Value keys.  GDOs can also contain references to other GDOs, which can be accessed using Child GDO keys.</span></a> for each result – providing as many as needed.</p>
+        <h2>TrackID</h2>
+        <p>The gnsdk_musicidfile_query_do_trackid() API provides TrackID processing.</p>
+        <h3 class="example">Example: Implementing TrackID</h3>
+        <p>Sample Application: musicid_file_trackid/main.c</p>
+        <p>Application Steps:</p>
+        <ol>
+            <li value="1">Authenticate caller, initialize GNSDK Manager, enable logging, and initialize local lookup</li>
+            <li value="2">Initialize MusicID File and DSP, get a User handle and load a locale</li>
+            <li value="3">Create a MusicID-File query handle</li>
+            <li value="4">Get a FileInfo object for each media file and add to query handle</li>
+            <li value="5">Fingerprint and set metadata for each media file in its FileInfo object</li>
+            <li value="6">Perform two MusicID-File TrackID lookups, first with RETURN_SINGLE, second with RETURN_ALL</li>
+            <li value="7">Display results</li>
+            <li value="8">Release resources and shutdown GNSDK and MusicID File module</li>
+        </ol>
+        <p><b>Sample output:</b>
+        </p><pre>GNSDK Product Version    : 3.05.0.721 	(built 2013-04-02 22:29-0700)
+-------TrackID with 'RETURN_SINGLE' option:-------
+Warning: input file does not contain enough data to generate a fingerprint:
+data\kardinal_offishall_01_3s.wav
+
+Printing results for 6 files:
+
+*File 1 of 6*
+
+	Single result.
+	Album count: 1
+	Match 1 - Album title:		Crimson Tonight [Live]
+
+*File 2 of 6*
+
+	Single result.
+	Album count: 1
+	Match 1 - Album title:		Crimson Tonight [Live]
+
+*File 3 of 6*
+
+	Single result.
+	Album count: 1
+	Match 1 - Album title:		Crimson Tonight [Live]
+
+*File 4 of 6*
+
+	Single result.
+	Album count: 1
+	Match 1 - Album title:		Sugar Baby
+
+*File 5 of 6*
+
+	Single result.
+	Album count: 1
+	Match 1 - Album title:		Quest For Fire
+
+*File 6 of 6*
+
+	Single result.
+	Album count: 1
+	Match 1 - Album title:		Firestarter Volume 1 - Quest For Fire
+
+
+-------TrackID with 'RETURN_ALL' option:-------
+Warning: input file does not contain enough data to generate a fingerprint:
+data\kardinal_offishall_01_3s.wav
+
+Printing results for 6 files:
+
+*File 1 of 6*
+
+	Multiple results.
+	Album count: 1
+	Match 1 - Album title:		Crimson Tonight [Live]
+
+*File 2 of 6*
+
+	Multiple results.
+	Album count: 1
+	Match 1 - Album title:		Crimson Tonight [Live]
+
+*File 3 of 6*
+
+	Multiple results.
+	Album count: 1
+	Match 1 - Album title:		Crimson Tonight [Live]
+
+*File 4 of 6*
+
+	Multiple results.
+	Album count: 3
+	Match 1 - Album title:		Country Blues
+	Match 2 - Album title:		SÃ¥nger Om KÃ¤rlek [Disc 2]
+	Match 3 - Album title:		His Folkways Years 1963-1968 [Disc 2]
+
+*File 5 of 6*
+
+	Multiple results.
+	Album count: 1
+	Match 1 - Album title:		Quest For Fire
+
+*File 6 of 6*
+
+	Multiple results.
+	Album count: 6
+	Match 1 - Album title:		Firestarter Volume 1 - Quest For Fire
+	Match 2 - Album title:		New English File Advanced
+	Match 3 - Album title:		Jazzblues
+	Match 4 - Album title:		èµ·ãã¦ã‹ã‚‰å¯ã‚‹ã¾ã§è‹±ä¼šè©±ã¾ã‚‹ã”ã¨ç·´ç¿’å¸³2
+	Match 5 - Album title:		ç¬¬66å›ž ä¸­å›½èªžæ¤œå®šè©¦é¨“ 3ç´š
+	Match 6 - Album title:		Quest For Fire         </pre>
+        <h2>AlbumID</h2>
+        <p>The gnsdk_musicidfile_query_do_albumid() API provides AlbumID processing.</p>
+        <h3 class="example">Example: Implementing AlbumID</h3>
+        <p>Sample Application: musicid_file_albumid/main.c</p>
+        <p>Application steps:</p>
+        <ol>
+            <li value="1">Authenticate caller, initialize GNSDK Manager, enable logging, and initialize local lookup</li>
+            <li value="2">Initialize MusicID File and DSP, get a User handle and load a locale</li>
+            <li value="3">Create a MusicID-File query handle</li>
+            <li value="4">Get a FileInfo object for each media file and add to query handle</li>
+            <li value="5">Fingerprint and set metadata for each media file in its FileInfo object</li>
+            <li value="6">Perform two MusicID-File Album ID lookups, first with RETURN_SINGLE, second with RETURN_ALL</li>
+            <li value="7">Display results</li>
+            <li value="8">Release resources and shutdown GNSDK and MusicID File module</li>
+        </ol>
+        <p><b>Sample output:</b>
+        </p><pre>
+GNSDK Product Version    : 3.05.0.721 	(built 2013-04-02 22:29-0700)
+-------AlbumID with 'RETURN_SINGLE' option:-------
+Warning: input file does contain enough data to generate a fingerprint:
+data\kardinal_offishall_01_3s.wav
+
+Printing results for 6 files:
+
+*File 1 of 6*
+
+	Single result.
+	Album count: 1
+	Match 1 - Album title:		Quest For Fire
+
+*File 2 of 6*
+
+	Single result.
+	Album count: 1
+	Match 1 - Album title:		Quest For Fire
+
+*File 3 of 6*
+
+	Single result.
+	Album count: 1
+	Match 1 - Album title:		Sugar Baby
+
+*File 4 of 6*
+
+	Single result.
+	Album count: 1
+	Match 1 - Album title:		Crimson Tonight [Live]
+
+*File 5 of 6*
+
+	Single result.
+	Album count: 1
+	Match 1 - Album title:		Crimson Tonight [Live]
+
+*File 6 of 6*
+
+	Single result.
+	Album count: 1
+	Match 1 - Album title:		Crimson Tonight [Live]
+
+
+-------AlbumID with 'RETURN_ALL' option:-------
+Warning: input file does contain enough data to generate a fingerprint:
+data\kardinal_offishall_01_3s.wav
+
+Printing results for 6 files:
+
+*File 1 of 6*
+
+	Multiple results.
+	Album count: 6
+	Match 1 - Album title:		Firestarter Volume 1 - Quest For Fire
+	Match 2 - Album title:		New English File Advanced
+	Match 3 - Album title:		Jazzblues
+	Match 4 - Album title:		èµ·ãã¦ã‹ã‚‰å¯ã‚‹ã¾ã§è‹±ä¼šè©±ã¾ã‚‹ã”ã¨ç·´ç¿’å¸³2
+	Match 5 - Album title:		ç¬¬66å›ž ä¸­å›½èªžæ¤œå®šè©¦é¨“ 3ç´š
+	Match 6 - Album title:		Quest For Fire
+
+*File 2 of 6*
+
+	Multiple results.
+	Album count: 2
+	Match 1 - Album title:		Firestarter Volume 1 - Quest For Fire
+	Match 2 - Album title:		Quest For Fire
+
+*File 3 of 6*
+
+	Multiple results.
+	Album count: 3
+	Match 1 - Album title:		Country Blues
+	Match 2 - Album title:		SÃ¥nger Om KÃ¤rlek [Disc 2]
+	Match 3 - Album title:		His Folkways Years 1963-1968 [Disc 2]
+
+*File 4 of 6*
+
+	Multiple results.
+	Album count: 1
+	Match 1 - Album title:		Crimson Tonight [Live]
+
+*File 5 of 6*
+
+	Multiple results.
+	Album count: 1
+	Match 1 - Album title:		Crimson Tonight [Live]
+
+*File 6 of 6*
+
+	Multiple results.
+	Album count: 1
+	Match 1 - Album title:		Crimson Tonight [Live]          </pre>
+        <h2>LibraryID</h2>
+        <p>The gnsdk_musicidfile_query_do_libraryid() API provides LibraryID processing.</p>
+        <p>Response GDOs from LibraryID queries are only available via status and result callbacks. This is because all LibraryID GDOs are freed after the process finishes.</p>
+        <h3 class="example">Example: Implementing LibraryID</h3>
+        <p>Sample Application: musicid_file_libraryid/main.c</p>
+        <p>Application steps:</p>
+        <ol>
+            <li value="1">Authenticate caller, initialize the GNSDK, enable logging, and initialize local lookup</li>
+            <li value="2">Initialize DSP and MusicID File, load a locale, and get a User handle</li>
+            <li value="3">Create a MusicID-File query handle</li>
+            <li value="4">Perform LibraryID query, passing callbacks</li>
+            <li value="5">Fingerprint media file in callback</li>
+            <li value="6">Add metadata to media file in callback</li>
+            <li value="7">Handle and display statuses and results in callbacks</li>
+            <li value="8">Release resouces and shutdown GNSDK and MusicID-File</li>
+        </ol>
+        <p><b>Sample output:</b>
+        </p><pre>
+GNSDK Product Version    : 3.05.0.798 	(built 2013-05-08 16:09-0700)
+
+MID-File Status: 1 of 6 - fileinfo_processing_begin - data\01_stone_roses.wav
+
+MID-File Status: 2 of 6 - fileinfo_processing_begin - data\04_stone_roses.wav
+
+MID-File Status: 3 of 6 - fileinfo_processing_begin - data\Dock Boggs - Sugar Baby - 01.wav
+
+MID-File Status: 4 of 6 - fileinfo_processing_begin - data\Kardinal Offishall - Quest For Fire - 15 - Go Ahead Den.wav
+
+MID-File Status: 5 of 6 - fileinfo_processing_begin - data\kardinal_offishall_01_3s.wav
+
+MID-File Status: 6 of 6 - fileinfo_processing_begin - data\stone roses live.wav
+
+MID-File Status: 1 of 6 - fileinfo_query - data\Kardinal Offishall - Quest For Fire - 15 - Go Ahead Den.wav
+
+MID-File Status: 1 of 6 - fileinfo_query - data\Kardinal Offishall - Quest For Fire - 15 - Go Ahead Den.wav
+
+MID-File Status: 2 of 6 - fileinfo_query - data\Dock Boggs - Sugar Baby - 01.wav
+
+MID-File Status: 2 of 6 - fileinfo_query - data\Dock Boggs - Sugar Baby - 01.wav
+
+MID-File Status: 3 of 6 - fileinfo_query - data\04_stone_roses.wav
+
+MID-File Status: 4 of 6 - fileinfo_query - data\01_stone_roses.wav
+Warning: input file does not contain enough data to generate a fingerprint:
+data\kardinal_offishall_01_3s.wav
+
+MID-File Status: 5 of 6 - fileinfo_query - data\stone roses live.wav
+
+MID-File Status: 2 of 6 - fileinfo_query - data\Dock Boggs - Sugar Baby - 01.wav
+
+MID-File Result: 
+	Album count: 1
+	Match 1 - Album title:		Crimson Tonight [Live]
+
+MID-File Result: 
+	Album count: 1
+	Match 1 - Album title:		Sugar Baby
+
+MID-File Result: 
+	Album count: 1
+	Match 1 - Album title:		Firestarter Volume 1 - Quest For Fire
+
+MID-File Status: 1 of 6 - (null) - data\Kardinal Offishall - Quest For Fire - 15 - Go Ahead Den.wav
+
+MID-File Status: 2 of 6 - (null) - data\Dock Boggs - Sugar Baby - 01.wav
+
+MID-File Status: 3 of 6 - (null) - data\04_stone_roses.wav
+
+MID-File Status: 4 of 6 - (null) - data\01_stone_roses.wav
+
+MID-File Status: 5 of 6 - (null) - data\stone roses live.wav
+
+MID-File Status: 6 of 6 - (null) - data\kardinal_offishall_01_3s.wav
+      </pre>
+        <div class="MCRelationshipsProxy_0">
+            <p class="conceptHeading_concept_0">Related Information</p>
+            <p class="conceptItem_concept_0"><a href="../../../shared-topics/concepts/MusicID-File Overview.html">MusicID-File Overview</a>
+            </p>
+        </div>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Implementing Recognition Features|Recognizing Music">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Identifying Music Using a CD TOC</title>
+        <link href="../../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../../index.html#c-topics/recognition/music/Identifying Music Using a CD TOC.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Implementing Recognition Features</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Recognizing Music</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Identifying Music Using a CD TOC</span>
+        </div>
+        <h1>Identifying Music Using a CD TOC</h1>
+        <p>You can use MusicID-CD to identify an audio CD TOC. For more information, see <a href="../../../shared-topics/concepts/CD TOC Recognition.html" class="GNBasic MCXref xref xrefGNBasic">CD&#160;TOC&#160;Recognition</a>.</p>
+        <h2 class="example">Example: Identifying an Album Using a CD TOC</h2>
+        <p>The example below illustrates a simple TOC lookup for local and online systems. The code for the local and online lookups is the same, except for two areas. If you are performing a local lookup, you must initialize the SQLite and Local Lookup libraries, in addition to the other <span class="GNVariablesProductName">GNSDK for Desktop</span> libraries:</p><pre>gnsdk_storage_sqlite_initialize(sdkmgr_handle);
+&#160;&#160;&#160;&#160;&#160;&#160;&#160; 
+gnsdk_lookup_local_initialize(sdkmgr_handle);</pre>
+        <p>You must also set the query option to do a local lookup:</p><pre>gnsdk_musicid_query_option_set(
+&#160;&#160;&#160;&#160;&#160;&#160;&#160; query_handle,
+&#160;&#160;&#160;&#160;&#160;&#160;&#160; GNSDK_MUSICID_OPTION_USE_LOOKUP_LOCAL,
+&#160;&#160;&#160;&#160;&#160;&#160;&#160; "true"
+&#160;&#160;&#160;&#160;&#160;&#160;&#160; );</pre>
+        <p>Other than these additions, setting up queries and processing results works in the same way for both local and online lookups.</p>
+        <p>Sample Application: musicid_lookup_album_toc/main.c</p>
+        <p>Application Steps:</p>
+        <ol>
+            <li value="1">Authenticate caller and initialize GNSDK and MusicID modules.</li>
+            <li value="2">Initialize SQLite, local lookup, logging, load a locale, and get a User handle</li>
+            <li value="3">Perform album query using CD TOC.</li>
+            <li value="4">Access and display metadata from matches and pick one.</li>
+            <li value="5">Release resources and shutdown GNSDK and MusicID modules.</li>
+        </ol>
+        <p><b>Sample output:</b>
+        </p><pre>GNSDK Product Version    : 3.05.0.721 	(built 2013-04-02 22:29-0700)
+
+*****MusicID TOC Query*****
+    Match count: 8
+          Title: Come Away With Me
+          Title: è¿œèµ°é«˜é£ž
+          Title: Come Away With Me
+          Title: Come Away With Me
+          Title: Feels Like Home
+          Title: Norah Jones: Come Away With Me
+          Title: Come Away With Me
+          Title: Feels Like Home
+    Final album:
+          Title: Come Away With Me     </pre>
+        <div class="MCRelationshipsProxy_0">
+            <p class="conceptHeading_concept_0">Related Information</p>
+            <p class="conceptItem_concept_0"><a href="../../../shared-topics/concepts/CD TOC Recognition.html">CD&#160;TOC&#160;Recognition</a>
+            </p>
+        </div>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

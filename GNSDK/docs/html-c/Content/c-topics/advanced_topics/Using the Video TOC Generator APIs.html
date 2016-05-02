@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Advanced Topics">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Using the Video TOC Generator APIs</title>
+        <link href="../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../index.html#c-topics/advanced_topics/Using the Video TOC Generator APIs.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Advanced Topics</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Using the Video TOC Generator APIs</span>
+        </div>
+        <h1>Using the Video TOC Generator APIs</h1>
+        <p>The Gracenote SDK provides APIs for reading TOC (Table of Contents) information from DVD and Blu Ray discs. From this information, the APIs can generate an XML TOC string that you can use to look up the DVD in the Gracenote Service. </p>
+        <p>To use the TOC generator utility APIs, include the <code>gnsdk_tocgen.h</code> header file and call the TOC generator initialization function:</p><pre>
+#include "gnsdk_tocgen.h"
+gnsdk_tocgen_initialize();
+</pre>
+        <p>After initialization, your application needs to make a call to recognize the TOC source. This API takes a path (e.g., "D:") to the device and generates a handle for use in later calls:</p><pre>
+gnsdk_tocgen_handle_t handle = GNSDK_NULL;
+gnsdk_char_t* device_path = "D:";
+gnsdk_tocgen_read_source(device_path, GNSDK_TOCGEN_OPTION_FLAG_DEFAULT, &amp;handle);
+</pre>
+        <p>As you can see, the call takes an options define, but, currently, only the default one is available.</p>
+        <p>Once you have a handle, your application can call the API that generates an XML TOC string, which you can use to query the Gracenote Service:</p><pre xml:space="preserve">
+gnsdk_str_t toc = GNSDK_NULL;
+gnsdk_tocgen_generate_toc(handle, GNSDK_TOCGEN_TOC_GNXML, &amp;toc);</pre>
+        <p><b>Example generated XML TOC string</b>:</p><pre xml:space="preserve" style="font-size:100%">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;DVD_THIN_TOC VER="1" ANGLED="FALSE"&gt;
+  &lt;VIDEO_TS&gt;
+    &lt;REGION&gt;FE&lt;/REGION&gt;
+    &lt;VTS_ATTR CNT="22"&gt;
+      &lt;VTS N="1"&gt;
+        &lt;VIDEO_ATTR&gt;
+          &lt;COMPRESSION_MODE TYPE="1"/&gt;
+          &lt;TV_SYSTEM TYPE="0"/&gt;
+          &lt;ASPECT_RATIO TYPE="3"/&gt;
+          &lt;DISP_MODE TYPE="2"/&gt;
+          &lt;CC_FIELD1 TYPE="1"/&gt;
+          &lt;CC_FIELD2 TYPE="0"/&gt;
+          &lt;SRC_PIC_RESOLUTION TYPE="0"/&gt;
+          &lt;SRC_PIC_LETTERBOXED TYPE="0"/&gt;
+          &lt;FILM_CAMERA_MODE TYPE="0"/&gt;
+        &lt;/VIDEO_ATTR&gt;
+        &lt;TITLE_UNIT_ARRAY CNT="1"&gt;
+          &lt;TITLE_UNIT CNT="28" N="1"&gt;6389 6865 5693 8331 2280 5786 8492 6553 11184
+ 12656 6248 8730 4561 5770 7995 3354 4176 5109 5444 10969 6261 4458 5281 13466 4203 6397
+ 6173 45&lt;/TITLE_UNIT&gt;
+        &lt;/TITLE_UNIT_ARRAY&gt;
+      &lt;/VTS&gt;
+
+   ... More VTS Elements
+
+    &lt;/VTS_ATTR&gt;
+  &lt;/VIDEO_TS&gt;
+&lt;/DVD_THIN_TOC&gt;
+</pre>
+        <p>You can use the <code>gnsdk_tocgen_source_info()</code> call to return information about the disc:</p><pre>
+gnsdk_tocgen_source_info(handle, GNSDK_TOCGEN_INFO_KEY_MEDIA_TYPE, &amp;value);
+</pre>
+        <p>The above call returns the media type (e.g., 'DVD'). Other information available includes the disc region, disc book type (e.g., 'DVD-ROM'), if the disc is certified, and directory name. See the API reference for a complete list.</p>
+        <p>Other TOC generator APIs are available to return the build date and version:</p><pre xml:space="preserve">
+gnsdk_tocgen_get_version();     // Return TOC gen version
+gnsdk_tocgen_get_build_date();  // Return TOC gen build date
+</pre>
+        <h2>Releasing Resources and Shutting Down</h2>
+        <p>When you are done with a particular resource (handle, TOC string) you should release it:</p><pre>
+gnsdk_tocgen_release(handle);  // Release TOC handle
+gnsdk_tocgen_free_toc(toc);    // Release TOC string
+</pre>
+        <p>Last, but not least, you should call the TOC generator shutdown API:</p><pre>
+gnsdk_tocgen_shutdown();
+</pre>
+        <p><b>Note:</b> If the initialization call returns an error, <b>do not</b> call shutdown.</p>
+        <h2>TOC Generator Sample Utility Program</h2>
+        <p>The <span class="GNVariablesProductName">GNSDK for Desktop</span> comes with a utility sample program - <code>/utilities/samples_c/tocgen/main.c</code> - that illustrates how to use the TOC generator APIs. It generates an XML TOC string.</p><pre xml:space="preserve">
+usage:  sample device-path
+
+    device-path   Path to device drive/data
+    sample 2TOWERS_D1
+
+Note: If your volume name has spaces then it needs to be in quotes:
+      sample "/Volume/Taken 2"
+
+</pre>
+        <p><b>Sample Output for DVD 'The Proposal':</b>
+        </p><pre xml:space="preserve">...\utilities\samples\tocgen&gt; sample D:
+
+
+TOCGEN Product Version    : 3.05.0.780 	(built 2013-04-26 12:29-0700)
+
+Media Type: DVD
+Disc Region: FE
+Certified: Yes
+Disc Book Type: (DVD-ROM)
+
+&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;DVD_THIN_TOC VER="1" ANGLED="FALSE"&gt;
+  &lt;VIDEO_TS&gt;
+    &lt;REGION&gt;FE&lt;/REGION&gt;
+    &lt;VTS_ATTR CNT="22"&gt;
+    &lt;/VTS_ATTR&gt;
+
+     ...VTS Elements
+
+  &lt;/VIDEO_TS&gt;
+&lt;/DVD_THIN_TOC&gt;
+
+
+</pre>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

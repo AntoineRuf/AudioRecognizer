@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Basic Application Design Tasks|Setup and Initialization">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Configuring Logging</title>
+        <link href="../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../index.html#c-topics/basic_app_design/Configuring Logging.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Basic Application Design Tasks</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Setup and Initialization</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Configuring Logging</span>
+        </div>
+        <h1>Configuring Logging</h1>
+        <p>There are 3 approaches you can take to implementing logging using the GNSDK:</p>
+        <ol>
+            <li value="1">
+                <p><strong>Enable GNSDK logging</strong> - This creates log file(s) that you and Gracenote Global Services &amp;&#160;Support can use to evaluate and debug any problems your application might encounter when using the SDK.</p>
+            </li>
+            <li value="2">
+                <p><strong>Enable GNSDK logging and add to it</strong> - Use the *_logging_write() APIs to add your application's log entries to the GNSDK logs.</p>
+            </li>
+            <li value="3">
+                <p><strong>Implement your own logging mechanism (via the logging callback)</strong>.</p>
+            </li>
+        </ol>
+        <p>The most typical use case for <span class="GNVariablesProductName">GNSDK for Desktop</span> logging is to configure a single log file to capture all logged messages and errors from both your application and the SDK. </p>
+        <h2>Enabling GNSDK Logging</h2>
+        <p>To enable Gracenote SDK logging, use the gnsdk_manager_logging_enable() function. For example:</p><pre xml:space="preserve">
+/*
+ * Enable SDK logging
+ */
+gnsdk_manager_logging_enable(
+      "sample.log",           // File path
+      GNSDK_LOG_PKG_GNSDK,    // Include all GNSDK package IDs, including your app's ID
+      GNSDK_LOG_LEVEL_ALL,    // Include all level entries (warning, info, debug and error)
+      GNSDK_LOG_OPTION_ALL,   // All logging options
+      0,                      // Max size of log in bytes: 0 means a new log file will be created each run
+      GNSDK_FALSE             // GNSDK_TRUE = old logs will be renamed and saved
+);
+</pre>
+        <p>The GNSDK_LOG_OPTION_ALL define encompasses all logging options which include category (info, debug, warning and error), timestamp, source information (file and line number), package ID, thread ID, and if logging should be done asychronously. See the API reference for more information.</p>
+        <p>The GNSDK_LOG_PKG_GNSDK define means that all GNSDK package IDs will be logged. Use the GNSDK_LOG_PKG_GCSL if you just want all low-level Gracenote Client Standard Library (GCSL) package IDs. Use GNSDK_LOG_PKG_ALL for both GNSDK and GCSL package IDs. In most cases, GNSDK_LOG_PKG_GNSDK should be sufficient.</p>
+        <p>The GNSDK_LOG_LEVEL_ALL options means that all levels (error, warning, info, and debug) will be logged. There are options available if you just want messages for specific levels.</p>
+        <p>The <span class="GNVariablesProductName">GNSDK for Desktop</span> logging system can manage multiple logs simultaneously. Each call to the enable API can enable a new log, if the provided log file name is unique. Additionally, each log can have its own filters and options.</p>
+        <h2>Adding to GNSDK Logs</h2>
+        <p>Your application can write to the GNSDK logs using the gnsdk_manager_logging_write() and gnsdk_manager_logging_vwrite() functions. Use the latter function to pass a variable number of parameters - see the API reference for more information.</p>
+        <p>The SDK allows an application to register one or more of its own package IDs into the GNSDK logging system with the gnsdk_manager_logging_register_package() call. The application can then enable, disable or filter its own logging messages based on the registered package IDs. For example:</p><pre xml:space="preserve">
+/*
+ * Log entries are identified by the 'package' that logs them. Here we generate
+ * a package ID for our application to allow us to log entries of our own in the GNSDK log
+ * The package ID must be in the range GNSDKPKG_ID_APP_START to MAX_GNSDK_PKG_ID
+ */
+#define MYAPP_PACKAGE_ID   GNSDKPKG_ID_APP_START+0x01
+
+/*
+ * Register our package ID with the logging system - this will make our logging
+ * entries show up with the package description of "Sample App"
+ */
+gnsdk_manager_logging_register_package(MYAPP_PACKAGE_ID, "Sample App");
+
+/*
+ * Sample write to log file
+ */
+gnsdk_manager_logging_write(
+	150,                    // Source line number(optional)
+	"main.c",               // Source file (optional)
+	MYAPP_PACKAGE_ID,       // Package ID of application making call
+	GNSDK_LOG_LEVEL_ERROR,  // Error mask for this logging message
+	"Error info: %s",       // Error message format
+	info                    // Error message format argument
+	);
+</pre>
+        <p>The logging system determines the applicability of a log message for each enabled log, and, if appropriate, writes a log message to multiple enabled logs.</p>
+        <h2>Implementing Callback Logging</h2>
+        <p>You also have the option to direct <span class="GNVariablesProductName">GNSDK for Desktop</span> to allow a logging callback, where you can determine how best to capture and disseminate specific logged messages. For example, your callback function could write to its own log files or pass the messages to an external logging framework, such as the Unix Syslog or the Windows Event Log.</p>
+        <p>Enabling callback is done with the gnsdk_manager_logging_enable_callback() API. The logging
+callback can be enabled alongside, or instead of, file logging. Your application can call this API multiple times with different Package IDs to enable multiple Package IDs. The package and filter
+will apply only to the logging message sent to the callback. To disable the logging callback, call gnsdk_manager_logging_enable_callback with the callback parameter set to GNSDK_NULL for each enabled PackageID.</p>
+        <p><b>For example:</b>
+        </p><pre xml:space="preserve">
+/*
+ * Register our callback with the GNSDK Manager
+ */
+gnsdk_manager_logging_enable_callback(
+    _logging_callback_fn,
+    GNSDK_NULL,            // Optional data passed to the callback
+    GNSDK_LOG_PKG_ALL,     // Messages from all libraries
+    GNSDK_LOG_LEVEL_ALL,   // Message of all levels
+    GNSDK_LOG_OPTION_ALL   // All logging options: timestamps, thread IDs, etc
+    );
+
+ ...
+			
+static gnsdk_void_t GNSDK_CALLBACK_API
+    _logging_callback_fn(
+        gnsdk_void_t*     user_data,
+        gnsdk_uint16_t    package_id,
+        gnsdk_uint32_t    mask,
+        gnsdk_cstr_t      format,
+        va_list           argptr
+      )
+{
+
+    /*
+     * Map the GNSDK level to the Syslog level and pass along the message
+     */
+    if (mask &amp; GNSDK_LOG_LEVEL_ERROR)
+    {
+	    vsyslog(LOG_ERR, format, argptr);
+    }
+    else if (mask &amp; GNSDK_LOG_LEVEL_WARNING)
+    {
+	    vsyslog(LOG_WARNING, format, argptr);
+    }
+    else if (mask &amp; GNSDK_LOG_LEVEL_INFO)
+    {
+	    vsyslog(LOG_INFO, format, argptr);
+    }
+    else if (mask &amp; GNSDK_LOG_LEVEL_DEBUG)
+    {
+	    vsyslog(LOG_DEBUG, format, argptr);
+    }
+
+} /* _logging_callback_fn() */
+
+</pre>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

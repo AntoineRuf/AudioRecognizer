@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="API Reference Documentation">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>C Data Model</title>
+        <link href="../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../index.html#c-topics/c_doc_roadmaps/C-DataModelOnline.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><a class="MCBreadcrumbsLink" href="C-APIRefDocsOnline.html">API Reference Documentation</a><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">C Data Model Documentation</span>
+        </div>
+        <h1>C Data Model</h1>
+        <p>The <span class="GNVariablesProductName">GNSDK for Desktop</span>C data model represents Gracenote media elements and metadata. The model establishes interrelationships among Gracenote Data Objects (GDOs) and the metadata they contain or reference. A table-based version of the data model is here: <a href="../../api_ref_c/html/data_model.html">C Data Model</a>.</p>
+        <p>This table maps <a href="javascript:void(0);" class="MCTextPopup MCTextPopupHotSpot MCTextPopup_Open MCTextPopupHotSpot_ MCTextPopupHotSpot_Popup #text #textPopup">GDO<span class="MCTextPopupBody popupBody"><span class="MCTextPopupArrow"></span>Gracenote Data Object: Containers most-commonly used to store information returned by a query. GDOs can contain metadata values (names, titles, external IDs, and so on) that can be accessed by an application using Value keys.  GDOs can also contain references to other GDOs, which can be accessed using Child GDO keys.</span></a> types to their corresponding Child GDOs and values. The table also links directly to the corresponding GDO and value APIs documented in the <span class="GNVariablesProductName">GNSDK for Desktop</span>API Reference. The data model table provides the following information:</p>
+        <table>
+            <col style="width: 184px;" />
+            <col style="width: 324px;" />
+            <thead>
+                <tr>
+                    <th>Table Column</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>GDO Elements</td>
+                    <td>This column lists GDO elements for each type. Each entry links to its documentation in the API Reference.</td>
+                </tr>
+                <tr>
+                    <td>Child and Value Keys</td>
+                    <td>This column lists CHILD and VALUE keys for the GDO Element. CHILD keys return GDO types. For example, GNSDK_GDO_CHILD_ALBUM returns the type GNSDK_GDO_TYPE_ALBUM. These relationships are shown as superscripted<sup> table_ref</sup> links. Click the link to go to the associated GDO type within the table that the CHILD key returns.</td>
+                </tr>
+                <tr>
+                    <td>Dependent List</td>
+                    <td>This column lists metadata that is locale- or list-dependent. These are values that may vary depending on the locale used by query as well as general metadata that is represented as lists in the API. Examples include genre, artist origin, artist era, artist type, mood, tempo, contributor lists, roles, and others. For more information about locale-dependent values and their corresponding List types, see <a href="../basic_app_design/Using Locales.html" class="GNBasic MCXref xref xrefGNBasic">Using Locales</a>.</td>
+                </tr>
+                <tr>
+                    <td>In Partial</td>
+                    <td>This column lists metadata returned in GDO partial results.For information about GDO&#160;partial and full results, see <a href="../../shared-topics/concepts/Gracenote Data Objects GDOs.html" class="GNBasic MCXref xref xrefGNBasic">About Gracenote Data Objects (GDOs)</a>.</td>
+                </tr>
+                <tr>
+                    <td>Multi</td>
+                    <td>This column lists elements that can contain multiple results.</td>
+                </tr>
+                <tr>
+                    <td>Serialized</td>
+                    <td>This column lists metadata returned in serialized GDOs.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

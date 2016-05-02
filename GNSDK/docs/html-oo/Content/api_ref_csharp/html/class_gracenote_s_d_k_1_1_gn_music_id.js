@@ -1,0 +1,26 @@
+var class_gracenote_s_d_k_1_1_gn_music_id =
+[
+    [ "GnMusicId", "class_gracenote_s_d_k_1_1_gn_music_id.html#a3a81ba73e87243505a6852f47ce47f99", null ],
+    [ "GnMusicId", "class_gracenote_s_d_k_1_1_gn_music_id.html#ab7dc4b791af55efd4e633b99eca7f3d4", null ],
+    [ "GnMusicId", "class_gracenote_s_d_k_1_1_gn_music_id.html#a0e739841d6232e27220fee03b64287e5", null ],
+    [ "GnMusicId", "class_gracenote_s_d_k_1_1_gn_music_id.html#a3b07e20dad6faae8cd6d7a2a09dcaffe", null ],
+    [ "Dispose", "class_gracenote_s_d_k_1_1_gn_music_id.html#a827f092264e6c77856b6804c81a59b2b", null ],
+    [ "EventHandler", "class_gracenote_s_d_k_1_1_gn_music_id.html#a46c4c8c832629b796174c685a553ebf5", null ],
+    [ "FindAlbums", "class_gracenote_s_d_k_1_1_gn_music_id.html#af7a63f8da261ec6800cc2a10587b0389", null ],
+    [ "FindAlbums", "class_gracenote_s_d_k_1_1_gn_music_id.html#aacfcbdf57738882b91f752f5f48f5e6b", null ],
+    [ "FindAlbums", "class_gracenote_s_d_k_1_1_gn_music_id.html#afcf858097dc516e8dc34143d0e30bc9a", null ],
+    [ "FindAlbums", "class_gracenote_s_d_k_1_1_gn_music_id.html#a5e3686d41af543fac0f44de58eab26a5", null ],
+    [ "FindAlbums", "class_gracenote_s_d_k_1_1_gn_music_id.html#aeba5a9948cda466917d8feabfcd2bb06", null ],
+    [ "FindAlbums", "class_gracenote_s_d_k_1_1_gn_music_id.html#a318bc6dad49dfc80a4feb3b142874223", null ],
+    [ "FindMatches", "class_gracenote_s_d_k_1_1_gn_music_id.html#ade8ddffd62ba45952f7513aae373f187", null ],
+    [ "FingerprintBegin", "class_gracenote_s_d_k_1_1_gn_music_id.html#a808c6afcd5d72f8724817aa1753544a8", null ],
+    [ "FingerprintDataGet", "class_gracenote_s_d_k_1_1_gn_music_id.html#a2f7b2f12ab6c21fa2a2d4490023e26af", null ],
+    [ "FingerprintEnd", "class_gracenote_s_d_k_1_1_gn_music_id.html#ab516846b57acafe1d5bb6dd0b8f68a48", null ],
+    [ "FingerprintFromSource", "class_gracenote_s_d_k_1_1_gn_music_id.html#af26d5057539ed4e9de6aad998bb2aa39", null ],
+    [ "FingerprintWrite", "class_gracenote_s_d_k_1_1_gn_music_id.html#a5c98ba9bcebac2f73a160dc2be5c4bbe", null ],
+    [ "IsCancelled", "class_gracenote_s_d_k_1_1_gn_music_id.html#ab91aec90d89f594636e87591c65c5089", null ],
+    [ "Options", "class_gracenote_s_d_k_1_1_gn_music_id.html#a9cf858a14e59955944a9eceef3781ad4", null ],
+    [ "SetCancel", "class_gracenote_s_d_k_1_1_gn_music_id.html#aeeec51959b69f67537d2843ebbecce11", null ],
+    [ "BuildDate", "class_gracenote_s_d_k_1_1_gn_music_id.html#a2392b5f15fbb23f5b83d3808e0f663d1", null ],
+    [ "Version", "class_gracenote_s_d_k_1_1_gn_music_id.html#ae4598c75d7df1143c00e57fe87cefdb8", null ]
+];

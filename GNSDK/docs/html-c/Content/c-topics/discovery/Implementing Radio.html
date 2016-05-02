@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Implementing Recognition Features|Recognizing Music">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Implementing Radio</title>
+        <link href="../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../index.html#c-topics/discovery/Implementing Radio.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Implementing Recognition Features</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Recognizing Music</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Implementing Radio</span>
+        </div>
+        <h1>Implementing Radio</h1>
+        <p>Radio:</p>
+        <ul>
+            <li value="1">Is a subset of MusicID-Stream.</li>
+            <li value="2">Recognizes streaming audio from traditional radio sources, including AM/FM, HD, DAB, and others.</li>
+            <li value="3">Recognizes music automatically without the need to start or stop recognition.</li>
+            <li value="4">Supports broadcast metadata such as title, artist, or station.</li>
+        </ul>
+        <p>Implementing Radio in an application involves the following steps:</p>
+        <ol>
+            <li value="1">Initializing the MusicID-Stream module.</li>
+            <li value="2">Registering callbacks</li>
+            <li value="3">Creating a MusicID-Stream channel</li>
+            <li value="4">Listen to the audio source and handling callbacks.</li>
+            <li value="5">Releasing the channel.</li>
+        </ol>
+        <h2>Initializing the MusicID-Stream Module</h2>
+        <p>Before using Radio, follow the usual steps to initialize <span class="GNVariablesProductName">GNSDK for Desktop</span>. The following <span class="GNVariablesProductName">GNSDK for Desktop</span> modules must be initialized:</p>
+        <ul>
+            <li value="1">GNSDK Manager</li>
+            <li value="2">GNSDK&#160;Logging (optional)</li>
+            <li value="3">SQLite</li>
+            <li value="4">DSP</li>
+            <li value="5">Locale (optional)</li>
+            <li value="6">User</li>
+            <li value="7">MusicID </li>
+        </ul>
+        <p>For more information on initializing the <span class="GNVariablesProductName">GNSDK for Desktop</span> modules, see “Initializing an Application.”</p>
+        <p>To initialize Radio, use the gnsdk_musicidstream_initialize() function.</p><pre xml:space="preserve">error = gnsdk_musicidstream_initialize(sdkmgr_handle);</pre>
+        <h2>Registering Callbacks</h2>
+        <p>Radio listens to an audio stream and identifies music without the need for user intervention. Radio returns information to the application through the use of callbacks. The following callbacks are available:</p>
+        <ul>
+            <li value="1"><code style="font-weight: bold;">callback_status</code>: Used during identification when an online query is performed.</li>
+            <li value="2"><code style="font-weight: bold;">callback_processing_status</code>:&#160;Provide this callback only if Gracenote Global Services and Support advises it.</li>
+            <li value="3"><code style="font-weight: bold;">callback_identifying_status</code>: Used during audio processing when a significant event occurs such as large classification change or transition.</li>
+            <li value="4"><code style="font-weight: bold;">callback_result_available</code>: Called when a result has been determined by MusicID-Stream for a given audio stream within a channel.</li>
+            <li value="5"><code style="font-weight: bold;">callback_error</code>:&#160;Called if an error occurs during identification.</li>
+        </ul>
+        <p>It is usually not necessary to use <code>callback_status</code> or <code>callback_processing_status</code> for Radio.</p>
+        <h2>Creating a MusicID-Stream Channel</h2>
+        <p>The callback functions must be registered with MusicID-Stream when you create a channel. &#160;The channel is how MusicID-Stream listens to the audio. The following code sets up the callbacks for use with the channel, and provides a channel handle. It uses the channel creation option <code>gnsdk_musicidstream_preset_radio</code>, which indicates that the audio is coming in from a direct line in.</p><pre xml:space="preserve">
+gnsdk_musicidstream_callbacks_t callbacks      = {0};
+
+callbacks.callback_identifying_status = 
+   _musicidstream_identifying_status_callback;
+callbacks.callback_result_available   = 
+   _musicidstream_result_available_callback;
+callbacks.callback_error              = 
+   _musicidstream_completed_with_error_callback;
+	
+/* Create the channel handle */
+error = gnsdk_musicidstream_channel_create(
+	user_handle,
+	gnsdk_musicidstream_preset_radio,
+	&amp;callbacks,          /* User callback functions */
+	GNSDK_NULL,          /* Optional data passed to the callbacks */
+	&amp;channel_handle
+);</pre>
+        <p>Once you have a channel handle, you enable automatic recognition mode using <code>gnsdk_musicidstream_channel_automatic_set()</code>.</p>
+        <p>You can create a .wav file to fingerprint your audio using <code>GNWaveFileCreate()</code>. Once you have a .wav file you can fingerprint it using <code>gnsdk_musicidstream_channel_audio_begin()</code>, and stop listening with <code>gnsdk_musicidstream_channel_audio_end()</code>.</p>
+        <p>
+            <h2>Handling Callbacks</h2>
+        </p>
+        <p>Each callback has its own signature and passes information to your application as it is generated. &#160;When results from an identification occur, the <code style="font-weight: normal;">callback_result_available</code> is called. It is passed in a response <a href="javascript:void(0);" class="MCTextPopup MCTextPopupHotSpot MCTextPopup_Open MCTextPopupHotSpot_ MCTextPopupHotSpot_Popup #text #textPopup">GDO<span class="MCTextPopupBody popupBody"><span class="MCTextPopupArrow"></span>Gracenote Data Object: Containers most-commonly used to store information returned by a query. GDOs can contain metadata values (names, titles, external IDs, and so on) that can be accessed by an application using Value keys.  GDOs can also contain references to other GDOs, which can be accessed using Child GDO keys.</span></a> containing the identifying information of the album on the channel. This GDO can be used to display information, or for further processing as input into other Gracenote software.</p>
+        <p>
+            <h2>Shutting Down Radio</h2>
+        </p>
+        <p>When you are finished using Radio, release the channel using <code>gnsdk_musicidstream_channel_release()</code>. After the channel is released, shutdown the  <span class="GNVariablesProductName">GNSDK for Desktop</span> modules you are using in the reverse order in which they were initialized.</p>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

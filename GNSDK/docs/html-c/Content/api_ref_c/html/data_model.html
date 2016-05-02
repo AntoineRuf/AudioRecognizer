@@ -1,0 +1,712 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+	<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+	<title>GNSDK C API Reference: GDO C Data Model</title>
+	<link href="tabs.css" rel="stylesheet" type="text/css"/>
+	<link href="doxygen.css" rel="stylesheet" type="text/css" />
+	<link href="navtree.css" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="resize.js"></script>
+	<script type="text/javascript" src="navtree.js"></script>
+	<script type="text/javascript">
+	$(document).ready(initResizable);
+	</script>
+	</head>
+	<body>
+	<div id="top"><!-- do not remove this div! -->
+	<div id="titlearea">
+	<table cellspacing="0" cellpadding="0">
+	<tbody>
+	<tr style="height: 56px;">
+	<td id="projectlogo"><img alt="Logo" src="logo.jpg"/></td>
+	<td style="padding-left: 0.5em;">
+	<div id="projectname">GNSDK C API Reference
+	</div>
+	</td>
+	</tr>
+	</tbody>
+	</table>
+	</div>
+	<body>
+	<blockquote>
+	<h1>GNSDK C Data Model</h1>
+	<p>This topic presents the GNSDK C data model. It shows interrelationships among Gracenote Data Objects (GDOs) and the metadata they contain or reference. The data model table represents all GDO Types.
+	<dl>
+	<dt>GDO Elements</dt>
+	<dd>This column lists GDO elements for each type. Each entry links to its documentation in the API Reference. </dd>
+	<dt>Child and Value Keys</dt>
+	<dd>This column lists CHILD and VALUE keys for the GDO Element. CHILD keys return GDO types. For example, GNSDK_GDO_CHILD_ALBUM returns the type GNSDK_GDO_TYPE_ALBUM. These relationships are shown as superscripted <sup>table_ref</sup> links. Click the link to go to the associated GDO type within the table that the CHILD key returns. </dd>
+	<dt>Dependent List</dt>
+	<dd>This column lists metadata that is locale- or list-dependent. These are values that may vary depending on the locale used by query as well as general metadata that is represented as lists in the API. Examples include genre, artist origin, artist era, artist type, mood, tempo, contributor lists, roles, and others.</dd>
+	<dt>In Partial</dt>
+	<dd>This column lists metadata returned in GDO partial results. For information about working with GDO partial and full results, see "Gracenote Data Objects (GDOs)" in the GNSDK Developer's Guide. </dd>
+	<dt>Multi</dt>
+	<dd>This column lists elements that can contain multiple results.</dd>
+	<dt>Serialized</dt>
+	<dd>This column lists metadata returned in serialized GDOs.</dd>
+	</dl>
+	<br>
+	<p><b>Note</b>: Unlike other GDO Keys, GNSDK_GDO_CHILD_MATCH does not return its own GDO type. Instead it returns one of GNSDK_GDO_TYPE_ALBUM or GNSDK_GDO_TYPE_CONTRIBUTOR, depending on what was matched. </p>
+	</blockquote>
+	<p>&#160;</p>
+	<table border="1">
+<th>GDO Element</th><th>Child and Value Keys</th><th>Dependent List</th><th>In Partial</th><th>Multi</th><th>Serialized</th><th>Submittable</th>
+<tr><td id="GNSDK_GDO_TYPE_ALBUM">GNSDK_GDO_TYPE_ALBUM</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_OFFICIAL<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th>Y</th><th></th><th></th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_REGIONAL<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_TLS<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_ARTIST<a href="#GNSDK_GDO_TYPE_ARTIST"><SUP>table ref</SUP></a></td><td>&#160</td><th>Y</th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TRACK<a href="#GNSDK_GDO_TYPE_TRACK"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TRACK_MATCHED<a href="#GNSDK_GDO_TYPE_TRACK"><SUP>table ref</SUP></a></td><td>&#160</td><th>Y</th><th>Y</th><th>Y</th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_CREDIT</td><td>&#160</td><th></th><th>Y</th><th></th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_CONTENT<a href="#GNSDK_GDO_TYPE_CONTENT"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_AUDIO_WORK<a href="#GNSDK_GDO_TYPE_AUDIO_WORK"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DISPLAY_LANGUAGE</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DISPLAY_SCRIPT</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_FULL_RESULT</td><td></td><th>Y</th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GLOBALID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNID</td><td></td><th>Y</th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNUID</td><td></td><th>Y</th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PRODUCTID</td><td></td><th>Y</th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DISCOVER_SEED</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI</td><td></td><th>Y</th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI_TAG</td><td></td><th>Y</th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TEXT_MATCH_SCORE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PACKAGE_LANGUAGE_DISPLAY</td><td>GNSDK_LIST_TYPE_LANGUAGES</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PACKAGE_LANGUAGE</td><td></td><th>Y</th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_YEAR</td><td></td><th>Y</th><th></th><th></th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GENRE_LEVEL1</td><td>GNSDK_LIST_TYPE_GENRES</td><th>Y</th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GENRE_LEVEL2</td><td>GNSDK_LIST_TYPE_GENRES</td><th>Y</th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GENRE_LEVEL3</td><td>GNSDK_LIST_TYPE_GENRES</td><th>Y</th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ALBUM_LABEL</td><td></td><th></th><th></th><th></th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ALBUM_TOTAL_IN_SET</td><td></td><th></th><th></th><th></th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ALBUM_DISC_IN_SET</td><td></td><th></th><th></th><th></th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ALBUM_TRACK_COUNT</td><td></td><th>Y</th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ALBUM_COMPILATION</td><td></td><th>Y</th><th></th><th></th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_CLASSICAL_DATA</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ALBUMID_MATCH_SCORE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TRACK_MATCHED_NUM</td><td></td><th></th><th>Y</th><th>Y</th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TRACK_MATCHED_IDENT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_ARTIST">GNSDK_GDO_TYPE_ARTIST</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_NAME_OFFICIAL<a href="#GNSDK_GDO_TYPE_NAME"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_CONTRIBUTOR<a href="#GNSDK_GDO_TYPE_CONTRIBUTOR"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th>Y</th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_ASSET">GNSDK_GDO_TYPE_ASSET</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_CONTENT_VALUE</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ASSET_URL</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ASSET_SIZE</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ASSET_DIMENSION</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ASSET_BYTES</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td id="GNSDK_GDO_TYPE_AUDIO_WORK">GNSDK_GDO_TYPE_AUDIO_WORK</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_OFFICIAL<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_REGIONAL<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_TLS<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_CREDIT</td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNUID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PRODUCTID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DISCOVER_SEED</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI_TAG</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_COMPOSITION_FORM</td><td>GNSDK_LIST_TYPE_COMPOSITION_FORM</td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_CONTENT">GNSDK_GDO_TYPE_CONTENT</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_ASSET<a href="#GNSDK_GDO_TYPE_ASSET"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_CONTENT_VALUE</td><td></td><th></th><th></th><th>Y</th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI</td><td></td><th></th><th></th><th>Y</th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI_TAG</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_CONTENT_TYPE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_CONTENT_MIMETYPE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_CONTRIBUTOR">GNSDK_GDO_TYPE_CONTRIBUTOR</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_NAME_OFFICIAL<a href="#GNSDK_GDO_TYPE_NAME"><SUP>table ref</SUP></a></td><td>&#160</td><th>Y</th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_NAME_REGIONAL<a href="#GNSDK_GDO_TYPE_NAME"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_CONTRIBUTOR<a href="#GNSDK_GDO_TYPE_CONTRIBUTOR"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_CREDIT<a href="#GNSDK_GDO_TYPE_CREDIT"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_CONTENT<a href="#GNSDK_GDO_TYPE_CONTENT"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_FULL_RESULT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNUID</td><td></td><th></th><th></th><th>Y</th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PRODUCTID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI</td><td></td><th></th><th></th><th>Y</th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI_TAG</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TEXT_MATCH_SCORE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_IDENT</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TRACK_MATCH_TYPE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TEXT_MATCH_SCORE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_BIOGRAPHY</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_BIOGRAPHY_LANGUAGE</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ORIGIN_LEVEL1</td><td>GNSDK_LIST_TYPE_ORIGINS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ORIGIN_LEVEL2</td><td>GNSDK_LIST_TYPE_ORIGINS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ORIGIN_LEVEL3</td><td>GNSDK_LIST_TYPE_ORIGINS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ORIGIN_LEVEL4</td><td>GNSDK_LIST_TYPE_ORIGINS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ERA_LEVEL1</td><td>GNSDK_LIST_TYPE_ERAS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ERA_LEVEL2</td><td>GNSDK_LIST_TYPE_ERAS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ERA_LEVEL3</td><td>GNSDK_LIST_TYPE_ERAS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ARTISTTYPE_LEVEL1</td><td>GNSDK_LIST_TYPE_ARTISTTYPES</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ARTISTTYPE_LEVEL2</td><td>GNSDK_LIST_TYPE_ARTISTTYPES</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_BIRTH_DATE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_BIRTH_PLACE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_BIRTH_PLACE_LANGUAGE</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DEATH_DATE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DEATH_PLACE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DEATH_PLACE_LANGUAGE</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_MEDIA_SPACE</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GENRE_LEVEL1</td><td>GNSDK_LIST_TYPE_GENRES</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GENRE_LEVEL2</td><td>GNSDK_LIST_TYPE_GENRES</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GENRE_LEVEL3</td><td>GNSDK_LIST_TYPE_GENRES</td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_CREDIT">GNSDK_GDO_TYPE_CREDIT</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_NAME_OFFICIAL<a href="#GNSDK_GDO_TYPE_NAME"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_CONTRIBUTOR<a href="#GNSDK_GDO_TYPE_CONTRIBUTOR"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_WORK<a href="#GNSDK_GDO_TYPE_VIDEO_WORK"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_SEASON<a href="#GNSDK_GDO_TYPE_VIDEO_SEASON"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_SERIES<a href="#GNSDK_GDO_TYPE_VIDEO_SERIES"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ROLE</td><td>GNSDK_LIST_TYPE_ROLES</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ROLE_ID</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ROLE_BILLING</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_CHARACTER_NAME</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RANK</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ARTISTTYPE_LEVEL1</td><td>GNSDK_LIST_TYPE_ARTISTTYPES</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ARTISTTYPE_LEVEL1</td><td>GNSDK_LIST_TYPE_ARTISTTYPES</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ORIGIN_LEVEL1</td><td>GNSDK_LIST_TYPE_ORIGINS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ORIGIN_LEVEL2</td><td>GNSDK_LIST_TYPE_ORIGINS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ORIGIN_LEVEL3</td><td>GNSDK_LIST_TYPE_ORIGINS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ORIGIN_LEVEL4</td><td>GNSDK_LIST_TYPE_ORIGINS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ERA_LEVEL1</td><td>GNSDK_LIST_TYPE_ERAS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ERA_LEVEL2</td><td>GNSDK_LIST_TYPE_ERAS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ERA_LEVEL3</td><td>GNSDK_LIST_TYPE_ERAS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_EXTERNAL_ID">GNSDK_GDO_TYPE_EXTERNAL_ID</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_EXTERNALID_VALUE</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_EXTERNALID_SOURCE</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_EXTERNALID_TYPE</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_EXTERNALID_DATA</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td id="GNSDK_GDO_TYPE_LYRIC">GNSDK_GDO_TYPE_LYRIC</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_ARTIST<a href="#GNSDK_GDO_TYPE_ARTIST"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_CREDIT</td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_OFFICIAL<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_LYRIC_SAMPLE<a href="#GNSDK_GDO_TYPE_LYRIC_SAMPLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_ALBUM<a href="#GNSDK_GDO_TYPE_ALBUM"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_FULL_RESULT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNUID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PRODUCTID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI_TAG</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_LYRICIST</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PUBLISHER</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_LYRIC_SAMPLE">GNSDK_GDO_TYPE_LYRIC_SAMPLE</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_ARTIST<a href="#GNSDK_GDO_TYPE_ARTIST"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_CREDIT</td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_OFFICIAL<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_LYRIC_SAMPLE<a href="#GNSDK_GDO_TYPE_LYRIC_SAMPLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_ALBUM<a href="#GNSDK_GDO_TYPE_ALBUM"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_FULL_RESULT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNUID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PRODUCTID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI_TAG</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_LYRICIST</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PUBLISHER</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_MATCH_ACR">GNSDK_GDO_TYPE_MATCH_ACR</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_OFFICIAL<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_WORK<a href="#GNSDK_GDO_TYPE_VIDEO_WORK"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_ADVERT<a href="#GNSDK_GDO_TYPE_VIDEO_ADVERT"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TVAIRING<a href="#GNSDK_GDO_TYPE_TVAIRING"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_ALBUM<a href="#GNSDK_GDO_TYPE_ALBUM"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_EXTERNAL_ID<a href="#GNSDK_GDO_TYPE_EXTERNAL_ID"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_CHANNEL_NUM</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_CHANNEL_NAME</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_CHANNEL_GNID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_MATCH_POSITION_MS</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_MATCH_INFO">GNSDK_GDO_TYPE_MATCH_INFO</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_CONTENT<a href="#GNSDK_GDO_TYPE_CONTENT"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI_TAG</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_MATCH_INFO_TYPE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_NAME">GNSDK_GDO_TYPE_NAME</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DISPLAY_LANGUAGE</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DISPLAY</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GLOBALID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_RESPONSE_ACR">GNSDK_GDO_TYPE_RESPONSE_ACR</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_MATCH_ACR<a href="#GNSDK_GDO_TYPE_MATCH_ACR"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_START</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_END</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_TOTAL</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_RESPONSE_ALBUM">GNSDK_GDO_TYPE_RESPONSE_ALBUM</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_ALBUM<a href="#GNSDK_GDO_TYPE_ALBUM"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_NEEDS_DECISION</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RESULT_COUNT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_START</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_END</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_TOTAL</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_RESPONSE_CONTRIBUTOR">GNSDK_GDO_TYPE_RESPONSE_CONTRIBUTOR</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_CONTRIBUTOR<a href="#GNSDK_GDO_TYPE_CONTRIBUTOR"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_NEEDS_DECISION</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RESULT_COUNT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_START</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_END</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_TOTAL</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_RESPONSE_LYRIC">GNSDK_GDO_TYPE_RESPONSE_LYRIC</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_LYRIC<a href="#GNSDK_GDO_TYPE_LYRIC_SAMPLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_NEEDS_DECISION</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RESULT_COUNT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_START</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_END</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_TOTAL</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_RESPONSE_MATCH">GNSDK_GDO_TYPE_RESPONSE_MATCH</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_MATCH<a href="#GNSDK_GDO_TYPE_RESPONSE_MATCH"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_NEEDS_DECISION</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RESULT_COUNT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_START</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_END</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_TOTAL</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_RESPONSE_MATCH_INFO">GNSDK_GDO_TYPE_RESPONSE_MATCH_INFO</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_NEEDS_DECISION</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RESULT_COUNT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_START</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_END</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_TOTAL</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_RESPONSE_SUGGESTIONS">GNSDK_GDO_TYPE_RESPONSE_SUGGESTIONS</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_NEEDS_DECISION</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RESULT_COUNT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_START</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_END</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_TOTAL</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SUGGESTION_TEXT</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SUGGESTION_TYPE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_RESPONSE_TRACK">GNSDK_GDO_TYPE_RESPONSE_TRACK</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TRACK<a href="#GNSDK_GDO_TYPE_TRACK"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_NEEDS_DECISION</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RESULT_COUNT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_START</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_END</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_TOTAL</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_RESPONSE_TVAIRING">GNSDK_GDO_TYPE_RESPONSE_TVAIRING</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TVAIRING<a href="#GNSDK_GDO_TYPE_TVAIRING"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_NEEDS_DECISION</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RESULT_COUNT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_START</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_END</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_TOTAL</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_RESPONSE_TVCHANNEL">GNSDK_GDO_TYPE_RESPONSE_TVCHANNEL</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TVCHANNEL<a href="#GNSDK_GDO_TYPE_TVCHANNEL"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_RESPONSE_TVPROGRAM">GNSDK_GDO_TYPE_RESPONSE_TVPROGRAM</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TVPROGRAM<a href="#GNSDK_GDO_TYPE_TVPROGRAM"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_RESPONSE_TVPROVIDER">GNSDK_GDO_TYPE_RESPONSE_TVPROVIDER</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TVPROVIDER<a href="#GNSDK_GDO_TYPE_TVPROVIDER"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_RESPONSE_VIDEOCLIP">GNSDK_GDO_TYPE_RESPONSE_VIDEOCLIP</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td id="GNSDK_GDO_TYPE_RESPONSE_VIDEO_OBJECT">GNSDK_GDO_TYPE_RESPONSE_VIDEO_OBJECT</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_WORK<a href="#GNSDK_GDO_TYPE_VIDEO_WORK"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_PRODUCT<a href="#GNSDK_GDO_TYPE_VIDEO_PRODUCT"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_SERIES<a href="#GNSDK_GDO_TYPE_VIDEO_SERIES"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_SEASON<a href="#GNSDK_GDO_TYPE_VIDEO_SEASON"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_CONTRIBUTOR<a href="#GNSDK_GDO_TYPE_CONTRIBUTOR"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_NEEDS_DECISION</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RESULT_COUNT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_START</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_END</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_TOTAL</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_RESPONSE_VIDEO_PRODUCT">GNSDK_GDO_TYPE_RESPONSE_VIDEO_PRODUCT</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_PRODUCT<a href="#GNSDK_GDO_TYPE_VIDEO_PRODUCT"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_NEEDS_DECISION</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RESULT_COUNT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_START</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_END</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_TOTAL</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_RESPONSE_VIDEO_SEASON">GNSDK_GDO_TYPE_RESPONSE_VIDEO_SEASON</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_SEASON<a href="#GNSDK_GDO_TYPE_VIDEO_SEASON"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_NEEDS_DECISION</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RESULT_COUNT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_START</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_END</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_TOTAL</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_RESPONSE_VIDEO_SERIES">GNSDK_GDO_TYPE_RESPONSE_VIDEO_SERIES</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_SERIES<a href="#GNSDK_GDO_TYPE_VIDEO_SERIES"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_NEEDS_DECISION</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RESULT_COUNT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_START</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_END</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_TOTAL</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_RESPONSE_VIDEO_WORK">GNSDK_GDO_TYPE_RESPONSE_VIDEO_WORK</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_WORK<a href="#GNSDK_GDO_TYPE_VIDEO_WORK"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_NEEDS_DECISION</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RESULT_COUNT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_START</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_END</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RESPONSE_RANGE_TOTAL</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_TITLE">GNSDK_GDO_TYPE_TITLE</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DISPLAY_LANGUAGE</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DISPLAY</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SORTABLE</td><td></td><th></th><th></th><th></th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SORTABLE_SCHEME</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SORTABLE_LANGUAGE</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PREFIX</td><td></td><th></th><th>Y</th><th></th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_MAIN_TITLE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_EDITION</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_TRACK">GNSDK_GDO_TYPE_TRACK</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_OFFICIAL<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th>Y</th><th></th><th></th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_REGIONAL<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_TLS<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_ARTIST<a href="#GNSDK_GDO_TYPE_ARTIST"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_CREDIT</td><td>&#160</td><th></th><th>Y</th><th></th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_CONTENT<a href="#GNSDK_GDO_TYPE_CONTENT"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_ALBUM<a href="#GNSDK_GDO_TYPE_TRACK"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_AUDIO_WORK<a href="#GNSDK_GDO_TYPE_AUDIO_WORK"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TRACK_NUMBER</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_MATCHED</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_MATCH_POSITION_MS</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_MATCH_DURATION_MS</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_FULL_RESULT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNID</td><td></td><th>Y</th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNUID</td><td></td><th>Y</th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PRODUCTID</td><td></td><th>Y</th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DISCOVER_SEED</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI</td><td></td><th>Y</th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI_TAG</td><td></td><th>Y</th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_IDENT</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TRACK_MATCH_TYPE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TEXT_MATCH_SCORE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DURATION</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DURATION_UNITS</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_YEAR</td><td></td><th>Y</th><th></th><th></th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GENRE_LEVEL1</td><td>GNSDK_LIST_TYPE_GENRES</td><th>Y</th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GENRE_LEVEL2</td><td>GNSDK_LIST_TYPE_GENRES</td><th>Y</th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GENRE_LEVEL3</td><td>GNSDK_LIST_TYPE_GENRES</td><th>Y</th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TEMPO_LEVEL1</td><td>GNSDK_LIST_TYPE_TEMPOS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TEMPO_LEVEL2</td><td>GNSDK_LIST_TYPE_TEMPOS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TEMPO_LEVEL3</td><td>GNSDK_LIST_TYPE_TEMPOS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_MOOD_LEVEL1</td><td>GNSDK_LIST_TYPE_MOODS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_MOOD_LEVEL2</td><td>GNSDK_LIST_TYPE_MOODS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_TVAIRING">GNSDK_GDO_TYPE_TVAIRING</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TVPROGRAM<a href="#GNSDK_GDO_TYPE_TVPROGRAM"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TVCHANNEL<a href="#GNSDK_GDO_TYPE_TVCHANNEL"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_FULL_RESULT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI</td><td></td><th></th><th></th><th>Y</th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI_TAG</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNUID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DATE_START</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DATE_END</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DURATION</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DURATION_UNITS</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING_TYPE</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING_TYPE_ID</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING_DESC</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING_REASON</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_EPGVIEWINGTYPE</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_EPGAUDIOTYPE</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_EPGVIDEOTYPE</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_EPGCAPTIONTYPE</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_TVCHANNEL">GNSDK_GDO_TYPE_TVCHANNEL</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_CONTENT<a href="#GNSDK_GDO_TYPE_CONTENT"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_FULL_RESULT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNUID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PRODUCTID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI_TAG</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RANK</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_CHANNEL_NUM</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_CHANNEL_NAME</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_CHANNEL_CALLSIGN</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_IDENT</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ONID</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ONID</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TSID</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SID</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td id="GNSDK_GDO_TYPE_TVPROGRAM">GNSDK_GDO_TYPE_TVPROGRAM</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_OFFICIAL<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_SUBTITLE<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_CREDIT<a href="#GNSDK_GDO_TYPE_CREDIT"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_SERIES<a href="#GNSDK_GDO_TYPE_VIDEO_SERIES"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_WORK<a href="#GNSDK_GDO_TYPE_VIDEO_WORK"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_CONTENT<a href="#GNSDK_GDO_TYPE_CONTENT"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_FULL_RESULT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNUID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PRODUCTID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI_TAG</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_LISTING</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_EPGCATEGORY_L1</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_EPGCATEGORY_L2</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_EPGPRODUCTIONTYPE</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SERIES_EPISODE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SERIES_EPISODE_COUNT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SEASON_EPISODE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SEASON_EPISODE_COUNT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SEASON_NUMBER</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SEASON_COUNT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_TVPROVIDER">GNSDK_GDO_TYPE_TVPROVIDER</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_NAME_OFFICIAL<a href="#GNSDK_GDO_TYPE_NAME"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNUID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PRODUCTID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI_TAG</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PLACE</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_VIDEOCLIP">GNSDK_GDO_TYPE_VIDEOCLIP</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_OFFICIAL<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_CONTENT<a href="#GNSDK_GDO_TYPE_CONTENT"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI_TAG</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td id="GNSDK_GDO_TYPE_VIDEO_ADVERT">GNSDK_GDO_TYPE_VIDEO_ADVERT</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_OFFICIAL<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_NAME_BRAND<a href="#GNSDK_GDO_TYPE_NAME"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_FULL_RESULT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNUID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PRODUCTID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI_TAG</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td id="GNSDK_GDO_TYPE_VIDEO_CHAPTER">GNSDK_GDO_TYPE_VIDEO_CHAPTER</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_OFFICIAL<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_CREDIT<a href="#GNSDK_GDO_TYPE_CREDIT"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ORDINAL</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DURATION</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DURATION_UNITS</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_NOTES</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_VIDEO_DISC">GNSDK_GDO_TYPE_VIDEO_DISC</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_OFFICIAL<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_SIDE<a href="#GNSDK_GDO_TYPE_VIDEO_SIDE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNUID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PRODUCTID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI</td><td></td><th></th><th></th><th>Y</th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI_TAG</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ORDINAL</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_MATCHED</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_NOTES</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_VIDEO_FEATURE">GNSDK_GDO_TYPE_VIDEO_FEATURE</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_OFFICIAL<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_CHAPTER<a href="#GNSDK_GDO_TYPE_VIDEO_CHAPTER"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_CREDIT<a href="#GNSDK_GDO_TYPE_CREDIT"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_WORK<a href="#GNSDK_GDO_TYPE_VIDEO_WORK"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ORDINAL</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_MATCHED</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_VIDEO_FEATURE_TYPE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_VIDEO_PRODUCTION_TYPE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_VIDEO_PRODUCTION_TYPE_ID</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DATE_RELEASE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DATE_ORIGINAL_RELEASE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_NOTES</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ASPECT_RATIO</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ASPECT_RATIO_TYPE</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DURATION</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DURATION_UNITS</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GENRE_LEVEL1</td><td>GNSDK_LIST_TYPE_GENRES</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GENRE_LEVEL2</td><td>GNSDK_LIST_TYPE_GENRES</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GENRE_LEVEL3</td><td>GNSDK_LIST_TYPE_GENRES</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PLOT_SYNOPSIS</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PLOT_SUMMARY</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PLOT_TAGLINE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING_TYPE</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING_TYPE_ID</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING_DESC</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING_REASON</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td id="GNSDK_GDO_TYPE_VIDEO_LAYER">GNSDK_GDO_TYPE_VIDEO_LAYER</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_FEATURE<a href="#GNSDK_GDO_TYPE_VIDEO_FEATURE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ORDINAL</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_MATCHED</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ASPECT_RATIO</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ASPECT_RATIO_TYPE</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TV_SYSTEM</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_REGION_CODE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_VIDEO_REGION</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_VIDEO_REGION_DESC</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_MEDIA_TYPE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_VIDEO_PRODUCT">GNSDK_GDO_TYPE_VIDEO_PRODUCT</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_OFFICIAL<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_DISC<a href="#GNSDK_GDO_TYPE_VIDEO_DISC"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_CONTENT<a href="#GNSDK_GDO_TYPE_CONTENT"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_FULL_RESULT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNUID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PRODUCTID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI_TAG</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PACKAGE_LANGUAGE_DISPLAY</td><td>GNSDK_LIST_TYPE_LANGUAGES</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PACKAGE_LANGUAGE</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_VIDEO_PRODUCTION_TYPE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_VIDEO_PRODUCTION_TYPE_ID</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GENRE_LEVEL1</td><td>GNSDK_LIST_TYPE_GENRES</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GENRE_LEVEL2</td><td>GNSDK_LIST_TYPE_GENRES</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GENRE_LEVEL3</td><td>GNSDK_LIST_TYPE_GENRES</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING_TYPE</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING_TYPE_ID</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING_DESC</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING_REASON</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DATE_RELEASE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DATE_ORIGINAL_RELEASE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ASPECT_RATIO</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ASPECT_RATIO_TYPE</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_VIDEO_REGION</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_VIDEO_REGION_DESC</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DURATION</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DURATION_UNITS</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_NOTES</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_COMMERCE_TYPE</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_VIDEO_SEASON">GNSDK_GDO_TYPE_VIDEO_SEASON</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_OFFICIAL<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_FRANCHISE<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_WORK<a href="#GNSDK_GDO_TYPE_VIDEO_WORK"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_SERIES<a href="#GNSDK_GDO_TYPE_VIDEO_SERIES"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_PRODUCT<a href="#GNSDK_GDO_TYPE_VIDEO_PRODUCT"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_CONTENT<a href="#GNSDK_GDO_TYPE_CONTENT"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_CREDIT<a href="#GNSDK_GDO_TYPE_CREDIT"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_FULL_RESULT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNUID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PRODUCTID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI_TAG</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ORIGIN_LEVEL1</td><td>GNSDK_LIST_TYPE_ORIGINS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ORIGIN_LEVEL2</td><td>GNSDK_LIST_TYPE_ORIGINS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ORIGIN_LEVEL3</td><td>GNSDK_LIST_TYPE_ORIGINS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ORIGIN_LEVEL4</td><td>GNSDK_LIST_TYPE_ORIGINS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GENRE_LEVEL1</td><td>GNSDK_LIST_TYPE_GENRES</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GENRE_LEVEL2</td><td>GNSDK_LIST_TYPE_GENRES</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GENRE_LEVEL3</td><td>GNSDK_LIST_TYPE_GENRES</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_VIDEO_PRODUCTION_TYPE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_VIDEO_PRODUCTION_TYPE_ID</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DATE_ORIGINAL_RELEASE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DURATION</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DURATION_UNITS</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_FRANCHISE_NUM</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_FRANCHISE_COUNT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SEASON_NUMBER</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SEASON_COUNT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PLOT_SYNOPSIS</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PLOT_SYNOPSIS_LANGUAGE</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PLOT_TAGLINE</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING_TYPE</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING_TYPE_ID</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING_DESC</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING_REASON</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SERIAL_TYPE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_WORK_TYPE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_AUDIENCE</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_VIDEO_MOOD</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_STORY_TYPE</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_REPUTATION</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SCENARIO</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SETTING_ENVIRONMENT</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SETTING_TIME_PERIOD</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SOURCE</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_STYLE</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TOPIC</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_VIDEO_SERIES">GNSDK_GDO_TYPE_VIDEO_SERIES</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_OFFICIAL<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_FRANCHISE<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_WORK<a href="#GNSDK_GDO_TYPE_VIDEO_WORK"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_SEASON<a href="#GNSDK_GDO_TYPE_VIDEO_SEASON"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_PRODUCT<a href="#GNSDK_GDO_TYPE_VIDEO_PRODUCT"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_CONTENT<a href="#GNSDK_GDO_TYPE_CONTENT"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_CREDIT<a href="#GNSDK_GDO_TYPE_CREDIT"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_FULL_RESULT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNUID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PRODUCTID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI_TAG</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ORIGIN_LEVEL1</td><td>GNSDK_LIST_TYPE_ORIGINS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ORIGIN_LEVEL2</td><td>GNSDK_LIST_TYPE_ORIGINS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ORIGIN_LEVEL3</td><td>GNSDK_LIST_TYPE_ORIGINS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ORIGIN_LEVEL4</td><td>GNSDK_LIST_TYPE_ORIGINS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GENRE_LEVEL1</td><td>GNSDK_LIST_TYPE_GENRES</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GENRE_LEVEL2</td><td>GNSDK_LIST_TYPE_GENRES</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GENRE_LEVEL3</td><td>GNSDK_LIST_TYPE_GENRES</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_VIDEO_PRODUCTION_TYPE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_VIDEO_PRODUCTION_TYPE_ID</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DATE_ORIGINAL_RELEASE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DURATION</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DURATION_UNITS</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_FRANCHISE_NUM</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_FRANCHISE_COUNT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PLOT_SYNOPSIS</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PLOT_SYNOPSIS_LANGUAGE</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PLOT_TAGLINE</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING_TYPE</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING_TYPE_ID</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING_DESC</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING_REASON</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SERIAL_TYPE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_WORK_TYPE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_AUDIENCE</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_VIDEO_MOOD</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_STORY_TYPE</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_REPUTATION</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SCENARIO</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SETTING_ENVIRONMENT</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SETTING_TIME_PERIOD</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SOURCE</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_STYLE</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TOPIC</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_VIDEO_SIDE">GNSDK_GDO_TYPE_VIDEO_SIDE</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_OFFICIAL<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_LAYER<a href="#GNSDK_GDO_TYPE_VIDEO_LAYER"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ORDINAL</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_MATCHED</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_NOTES</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td id="GNSDK_GDO_TYPE_VIDEO_WORK">GNSDK_GDO_TYPE_VIDEO_WORK</td><td>&#160</td><td>&#160</td><td>&#160</td><td>&#160</td><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_OFFICIAL<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_REGIONAL<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_FRANCHISE<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_TITLE_SERIES<a href="#GNSDK_GDO_TYPE_TITLE"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_CREDIT<a href="#GNSDK_GDO_TYPE_CREDIT"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_PRODUCT<a href="#GNSDK_GDO_TYPE_VIDEO_PRODUCT"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_SEASON<a href="#GNSDK_GDO_TYPE_VIDEO_SEASON"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_VIDEO_SERIES<a href="#GNSDK_GDO_TYPE_VIDEO_SERIES"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_CHILD_CONTENT<a href="#GNSDK_GDO_TYPE_CONTENT"><SUP>table ref</SUP></a></td><td>&#160</td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_FULL_RESULT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GNUID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PRODUCTID</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI_TAG</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TUI_MATCH_PRODUCT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ORIGIN_LEVEL1</td><td>GNSDK_LIST_TYPE_ORIGINS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ORIGIN_LEVEL2</td><td>GNSDK_LIST_TYPE_ORIGINS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ORIGIN_LEVEL3</td><td>GNSDK_LIST_TYPE_ORIGINS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_ORIGIN_LEVEL4</td><td>GNSDK_LIST_TYPE_ORIGINS</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GENRE_LEVEL1</td><td>GNSDK_LIST_TYPE_GENRES</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GENRE_LEVEL2</td><td>GNSDK_LIST_TYPE_GENRES</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_GENRE_LEVEL3</td><td>GNSDK_LIST_TYPE_GENRES</td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_VIDEO_PRODUCTION_TYPE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_VIDEO_PRODUCTION_TYPE_ID</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DATE_ORIGINAL_RELEASE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DURATION</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_DURATION_UNITS</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_FRANCHISE_NUM</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_FRANCHISE_COUNT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SERIES_EPISODE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SERIES_EPISODE_COUNT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SEASON_EPISODE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SEASON_EPISODE_COUNT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SEASON_NUMBER</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SEASON_COUNT</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PLOT_SYNOPSIS</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PLOT_SYNOPSIS_LANGUAGE</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_PLOT_TAGLINE</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING_TYPE</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING_TYPE_ID</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING_DESC</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_RATING_REASON</td><td></td><th></th><th></th><th>Y</th><th>Y</th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SERIAL_TYPE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_WORK_TYPE</td><td></td><th></th><th></th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_AUDIENCE</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_VIDEO_MOOD</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_STORY_TYPE</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_REPUTATION</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SCENARIO</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SETTING_ENVIRONMENT</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SETTING_TIME_PERIOD</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_SOURCE</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_STYLE</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+<tr><td>&#160</td><td>GNSDK_GDO_VALUE_TOPIC</td><td></td><th></th><th>Y</th><th></th><th></th></tr>
+</table>

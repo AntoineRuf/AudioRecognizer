@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Implementing Advanced Recognition and Organization Features">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Using the MusicID-File APIs</title>
+        <link href="../../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../../index.html#c-topics/recognition/music/Using the MusicID-File APIs.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Implementing Advanced Recognition and Organization Features</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Using the MusicID-File APIs</span>
+        </div>
+        <h1>Using the MusicID-File APIs</h1>
+        <p>In general, your application should take the following steps when using one of the MusicID-File methods for identification - TrackID, AlbumID or LibraryID:</p>
+        <p><b>TrackID</b> and <b>AlbumID</b></p>
+        <ol>
+            <li value="1">Initialize the GNSDK and the MusicID-File and DSP (for fingerprinting) modules</li>
+            <li value="2">Create a MusicID-File query handle</li>
+            <li value="3">Create a FileInfo object for each media file you want to submit and add to MusicID-File query handle</li>
+            <li value="4">Add identification (fingerprinting and metadata) to each FileInfo object</li>
+            <li value="5">Set query options</li>
+            <li value="6">Make TrackID or AlbumID query</li>
+            <li value="7">Handle query results and statuses</li>
+            <li value="8">Release resources and shutdown MusicID-File, DSP, and GNSDK</li>
+        </ol>
+        <p><b>LibraryID</b>
+        </p>
+        <ol>
+            <li value="1">Initialize the GNSDK and the MusicID-File and DSP (for fingerprinting) modules</li>
+            <li value="2">Author callback functions to handle fingerprinting, metadata, returned statuses, returned results, etc.</li>
+            <li value="3">Create a MusicID-File query handle with callbacks array</li>
+            <li value="4">Create a FileInfo object for each media file you want to submit and add to MusicID-File query handle</li>
+            <li value="5">Set query options</li>
+            <li value="6">Make LibraryID query</li>
+            <li value="7">In callbacks, add identification (fingerprinting and metadata) to each FileInfo object</li>
+            <li value="8">In callbacks, handle query results and statuses</li>
+            <li value="9">Release resources and shutdown MusicID-File, DSP, and GNSDK</li>
+        </ol>
+        <h2>Initialization</h2>
+        <p>Your application needs to have the following include, which by default includes all GNSDK modules:</p><pre xml:space="preserve">
+#include "gnsdk.h"  // Includes all modules
+</pre>
+        <p>To use MusicID-File and DSP, you need to make the following calls after initializing the GNSDK and getting a Manager handle:</p><pre>
+gnsdk_musicidfile_initialize(sdkmgr_handle);
+gnsdk_dsp_initialize(sdkmgr_handle);          /* Required for fingerprinting */	
+</pre>
+        <h2>Creating a MusicID-File Query Handle</h2>
+        <p>After standard application initialization, the next step is to create a MusicID-File query handle:</p>
+        <p><b>TrackID and AlbumID</b>
+        </p><pre xml:space="preserve">
+/*
+ * Create the MusicID-File query handle 
+ */
+gnsdk_musicidfile_query_create(
+      user_handle,
+      GNSDK_NULL,       /* Callback function for status and progress */
+      GNSDK_NULL,       /* Callback data */
+      &amp;query_handle
+   );
+</pre>
+        <p><b>LibraryID</b>
+        </p>
+        <p>LibraryID requires you to create the query handle with the callbacks that will be used for all processing:</p><pre xml:space="preserve">
+/*
+* Create array of callbacks
+*/
+gnsdk_musicidfile_callbacks_t midf_callbacks = {
+      _musicidfile_status_callback,  /* Status callback */
+      _get_fingerprint_callback,     /* Fingerprinting callback */
+      _get_metadata_callback,        /* Set metadata calback */
+      _result_available_callback,    /* Results callback */
+      GNSDK_NULL,                    /* Results not found callback */
+      GNSDK_NULL                     /* MusicID complete callback */
+   };
+
+/*
+ * Create the MusicID-File handle
+ */
+gnsdk_musicidfile_query_create(
+      user_handle,
+      &amp;midf_callbacks, /* Array of callbacks */
+      GNSDK_NULL,      /* Callback user data */
+      &amp;query_handle    /* Query handle */
+   );
+</pre>
+        <h2>Creating FileInfo Objects</h2>
+        <p>For each media file that you want to submit, you need to create a file information object for it (this adds it to the query handle at the same time) and get its handle:</p><pre xml:space="preserve">
+/*
+ * Create a File Info object and add to query 
+ */
+gnsdk_musicidfile_query_fileinfo_create(
+      query_handle,              /* MusicID-File query handle to create FileInfo for */
+      "data/01_stone_roses.wav", /* Media file path */
+      GNSDK_NULL,                /* No callback function for status and progress */
+      GNSDK_NULL,                /* No callback data */
+      &amp;fileinfo_handle           /* Pointer to receive created FileInfo */
+    );
+</pre>
+        <p>FileInfo objects are used to contain the metadata that will be used in identification and will also contain results after a query has completed. MusicID-File matches each FileInfo to a track within an album.</p>
+        <p><b>Note:</b> FileInfo objects are freed when the MusicID-File query handle is released.</p>
+        <h2>Setting MusicID-File Query Options</h2>
+        <p>To set an option for your MusicID-File query, use the gnsdk_musicidfile_query_option_set() API. For example, the following sets the option to use local lookup. By default, a lookup is handled online, but many applications will want to start with a local query first then, if no match is returned, fall back to an online query.</p><pre>
+gnsdk_musicidfile_query_option_set(
+      query_handle,
+      GNSDK_MUSICIDFILE_OPTION_LOOKUP_MODE,
+      GNSDK_LOOKUP_MODE_LOCAL
+   );
+</pre>
+        <p>Besides local lookup, there are options for returning the following: alternate names for contributor data, classical music data, fetching content (e.g., images) data, external IDs, playlist data, and sonic data. You can also set the preferred language and thread priority. For LibraryID, you can also set the batch size. See the API reference for a complete list and more information.</p>
+        <h2>Setting Media File Identification</h2>
+        <p>For TrackID and AlbumID, setting media file identification is done before making the query, for LibraryID, this is done after the query is made through callbacks.</p>
+        <h4>Fingerprinting</h4>
+        <p>The MusicID-File fingerprinting APIs give your application the ability to provide audio data as an identification mechanism. This enables MusicID-File to perform identification based on the audio itself, as opposed to performing identification using only the associated metadata. Use the MusicID-File fingerprinting APIs either before processing has begun (TrackID or AlbumID), or during a gnsdk_musicidfile_callback_get_fingerprint_fn callback (LibraryID).</p>
+        <p>There are 3 fingerprinting APIs:</p>
+        <ul>
+            <li value="1"><b>gnsdk_musicidfile_fileinfo_fingerprint_begin()</b> - Initializes fingerprint generation for a FileInfo handle.</li>
+            <li value="2"><b>gnsdk_musicidfile_fileinfo_fingerprint_end()</b> - Finalizes fingerprint generation for a FileInfo handle. </li>
+            <li value="3"><b>gnsdk_musicidfile_fileinfo_fingerprint_write()</b> - Provides uncompressed audio data to a FileInfo handle for fingerprint generation. </li>
+        </ul>
+        <p>Example:</p><pre xml:space="preserve">
+gnsdk_musicidfile_fileinfo_fingerprint_begin(
+      fileinfo_handle,   /* FileInfo handle to generate the fingerprint for */
+      11025,             /* Sample frequency of audio to be provided: 11 kHz, 22 kHz, or 44 kHz */
+      16,                /* Sample rate of audio to be provided (in 8-bit, 16-bit, or 32-bit bytes per sample) */
+      1                  /* Number of channels (1 or 2) */
+   );  
+
+gnsdk_musicidfile_fileinfo_fingerprint_write(
+      fileinfo_handle,   /* FileInfo handle to generate the fingerprint for */
+      pcm_audio,         /* Pointer to audio data buffer that matches the audio format set in gnsdk_musicidfile_FileInfo_fingerprint_begin() */
+      num_bytes,         /* Size of audio data buffer (in bytes) */
+      &amp;complete          /* Pointer to receive whether the fingerprint generation has received enough audio data */
+   );
+</pre>
+        <h3>Setting Metadata</h3>
+        <p>Use the gnsdk_musicidfile_fileinfo_metadata_set() and gnsdk_musicidfile_fileinfo_metadata_get() APIs to set and get metadata information for a FileInfo object. Note that MusicID-File will not process FileInfos that do not contain metadata.</p>
+        <p><b>For example:</b>
+        </p><pre xml:space="preserve">
+/*
+ * Set Artist 
+ */
+gnsdk_musicidfile_fileinfo_metadata_set(
+      fileinfo_handle,
+      GNSDK_MUSICIDFILE_FILEINFO_VALUE_ALBUMARTIST,
+      "Kardinal Offishall"
+   );
+
+/*
+ * Set Album Title
+ */
+gnsdk_musicidfile_fileinfo_metadata_set(
+      fileinfo_handle,
+      GNSDK_MUSICIDFILE_FILEINFO_VALUE_ALBUMTITLE,
+      "Quest for Fire"
+   );
+</pre>
+        <p>Other metadata options include getting/setting CDDB IDs, fingerprint, path and filename, FileInfo identifier (set when FileInfo created), media ID (from Gracenote), source filename (from parsing) and application, Media Unique ID (MUI), Tag ID (aka Product ID), TOC offsets, track artist/number/title, and TUI (Title Unique Identifier). See the API reference for a complete list and more information.</p>
+        <h2>Performing the Query</h2>
+        <p>Each ID method has its own query function:</p>
+        <ul>
+            <li value="1"><b>TrackID</b> - gnsdk_musicidfile_query_do_trackid()</li>
+            <li value="2"><b>AlbumID</b> - gnsdk_musicidfile_query_do_albumid()</li>
+            <li value="3"><b>LibraryID</b> - gnsdk_musicidfile_query_do_libraryid()</li>
+        </ul>
+        <p>Each API takes a MusicID-File query handle and a set of query flags. These flags indicate options specific to that query. These include:</p>
+        <ul>
+            <li value="1"><b>Asynchronous</b> - Processes MusicID-File on a separate thread and returns immediately</li>
+            <li value="2"><b>Default options</b> - Use default MusicID-File processing options - request a single, best album match. See the GNSDK_MUSICIDFILE_QUERY_FLAG_DEFAULT define in the API reference for more information </li>
+            <li value="3"><b>No threads</b> - Disallows MusicID-File from creating threads for background gathering of fingerprints and metadata</li>
+            <li value="4"><b>Album responses</b> - Only album matches are returned (default)</li>
+            <li value="5"><b>Album or contributor match responses</b> - Album and contributor matches are returned</li>
+            <li value="6"><b>Return all</b> - Have MusicID-File return all results found for each given FileInfo</li>
+            <li value="7"><b>Return single</b> - Have MusicID-File return the single best result for each given FileInfo (default)</li>
+        </ul>
+        <p>See the API reference for more information on the defines for these options.</p>
+        <p><b>Example query:</b>
+        </p><pre>
+/*
+ * Set options and perform the Query 
+ */
+gnsdk_uint32_t midf_options = GNSDK_MUSICIDFILE_QUERY_FLAG_RETURN_ALL |
+                              MIDF_QUERY_FLAG | 
+                              GNSDK_MUSICIDFILE_QUERY_FLAG_NO_THREADS;
+gnsdk_musicidfile_query_do_trackid(query_handle, midf_options);
+</pre>
+        <p>Note that you can get a query's status at any time with the gnsdk_musicidfile_query_status() API</p>
+        <h2>Getting Results</h2>
+        <p>After making your query, you can use the following call to make sure processing has completed within a certain time period</p><pre xml:space="preserve">
+gnsdk_musicidfile_query_wait_for_complete(
+      query_handle, 
+      GNSDK_MUSICIDFILE_TIMEOUT_INFINITE,  /* Time to wait in milliseconds or until done (INFINITE) */
+      GNSDK_NULL                           /* Pointer to error returned upon completion */   
+   );	
+</pre>
+        <p><b>TrackID</b> and <b>AlbumID</b></p>
+        <p>Once the query completes, you can use the following call to get the number of FileInfo objects:</p><pre>
+gnsdk_uint32_t  count = 0;
+gnsdk_musicidfile_query_fileinfo_count(query_handle, &amp;count);
+</pre>
+        <p>Once you have the count, and it is greater than 0, you can use that as an index to retrieve FileInfo objects. If more than 1, typically this would be done in a loop:</p><pre>
+/*
+ * For each file in the query...
+ */ 
+for (i = 0; i &lt; count; i++)
+{
+    gnsdk_musicidfile_query_fileinfo_get_by_index(query_handle, i, &amp;fileinfo_handle);
+    ...
+}
+</pre>
+        <p>Note that you also have the option to assign an identifer string when creating a FileInfo object and then use the identifier to retrive the FileInfo object with the gnsdk_musicidfile_query_fileinfo_get_by_ident() API </p>
+        <p>Once you have the FileInfo object, you should check its status to make sure it completed successfully. If it did, you can then get its Response <a href="javascript:void(0);" class="MCTextPopup MCTextPopupHotSpot MCTextPopup_Open MCTextPopupHotSpot_ MCTextPopupHotSpot_Popup #text #textPopup">GDO<span class="MCTextPopupBody popupBody"><span class="MCTextPopupArrow"></span>Gracenote Data Object: Containers most-commonly used to store information returned by a query. GDOs can contain metadata values (names, titles, external IDs, and so on) that can be accessed by an application using Value keys.  GDOs can also contain references to other GDOs, which can be accessed using Child GDO keys.</span></a>:</p><pre xml:space="preserve">
+gnsdk_musicidfile_fileinfo_status_t  fileinfo_status = gnsdk_musicidfile_fileinfo_unprocessed;
+gnsdk_error_info_t*                  p_error_info    = GNSDK_NULL;
+gnsdk_gdo_handle_t                   results_gdo     = GNSDK_NULL;
+
+/*
+ * Check status. If ok, get Response GDO
+ */
+gnsdk_musicidfile_fileinfo_status(fileinfo, &amp;fileinfo_status, &amp;p_error_info);
+if (gnsdk_musicidfile_fileinfo_error != fileinfo_status)
+{
+    if ((gnsdk_musicidfile_fileinfo_result_single == fileinfo_status) || 
+        (gnsdk_musicidfile_fileinfo_result_all == fileinfo_status))
+    {
+        gnsdk_musicidfile_fileinfo_get_response_gdo(fileinfo, &amp;response_gdo);
+
+        ...Parse Response GDO
+    }
+}
+</pre>
+        <p><b>LibraryID</b>
+        </p>
+        <p>With LibraryID, results are returned in a results available callback:</p><pre>
+static gnsdk_void_t	GNSDK_CALLBACK_API
+       _result_available_callback(
+            const gnsdk_void_t*               user_data,
+            gnsdk_musicidfile_query_handle_t  query_handle,
+            gnsdk_gdo_handle_t                response_gdo,
+            gnsdk_uint32_t                    current_album,
+            gnsdk_uint32_t                    total_albums,
+            gnsdk_bool_t*                     p_abort
+   )
+ {
+	
+      ...Parse Response GDO
+
+ }  /* _result_available_callback() */
+</pre>
+        <p>In LibraryID, note that no additional call needs to be made to get the Response GDO, it is simply passed to the callback.</p>
+        <p>For all ID methods, once you have the Response GDO, you can access and display GDO metadata as usual.</p>
+        <h2>Releasing Resources and Shutting Down</h2>
+        <p>In addition to the usual releasing of resources (user handle, locale handle, GDOs, etc.), the following are specific to MusicID-File:</p><pre>
+/*
+ * Release MusicID-File - this releases all associated FileInfo objects
+ */
+gnsdk_musicidfile_query_release(query_handle);
+gnsdk_musicidfile_shutdown();
+</pre>
+        <p>Note the following:</p>
+        <ul>
+            <li value="1">You should <b>not</b> call shutdown if the initialize function call fails</li>
+            <li value="2">Releasing the MusicID-File query handle also releases all associated FileInfo objects.</li>
+            <li value="3">For each module you initialize, you can either call the shutdown for that module or just call GNSDK Manager shutdown - gnsdk_manager_shutdown() - which will shut down all libraries.</li>
+        </ul>
+        <div class="MCRelationshipsProxy_0">
+            <p class="conceptHeading_concept_0">Related Information</p>
+            <p class="conceptItem_concept_0"><a href="../../../shared-topics/concepts/MusicID-File Overview.html">MusicID-File Overview</a>
+            </p>
+        </div>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

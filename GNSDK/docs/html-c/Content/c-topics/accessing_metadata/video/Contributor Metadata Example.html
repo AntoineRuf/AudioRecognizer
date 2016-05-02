@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Accessing Core Metadata|Accessing Video Metadata|Video Metadata Reference">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Contributor Metadata Example</title>
+        <link href="../../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../../index.html#c-topics/accessing_metadata/video/Contributor Metadata Example.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Accessing Core Metadata</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Accessing Video Metadata</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Contributor Metadata Example</span>
+        </div>
+        <h1>Contributor Metadata Example</h1>
+        <p>The following is intended to give the reader some idea of the metadata returned in a gnsdk_video_query_find_contributors() API call. The output was generated using the sample code in the "Find Contributors" article. 
+        </p><pre>
+&lt;CONTRIBUTOR_RESPONSE&gt;
+  &lt;RANGE_START&gt;1&lt;/RANGE_START&gt;
+  &lt;RANGE_END&gt;10&lt;/RANGE_END&gt;
+  &lt;RANGE_TOTAL&gt;43&lt;/RANGE_TOTAL&gt;
+  &lt;CONTRIBUTOR ORD="1"&gt;
+    &lt;NAME_OFFICIAL&gt;
+      &lt;DISPLAY&gt;Christian Bale&lt;/DISPLAY&gt;
+    &lt;/NAME_OFFICIAL&gt;
+    &lt;BIOGRAPHY LANG="eng"&gt;Welsh actor Christian Bale first drew attention on the silver screen when he was 
+    13 for his role as a English boy trapped in a Japanese internment camp in the World War II drama Empire 
+    of the Sun. After starring in the Disney musical film Newsies, he was cast opposite Winona Ryder in 
+    Little Women; ...(more)
+    &lt;/BIOGRAPHY&gt;
+    &lt;BIRTH_DATE ORD="1"&gt;1974-01-30&lt;/BIRTH_DATE&gt;
+    &lt;BIRTH_PLACE ORD="1"&gt;Haverfordwest, Wales, United Kingdom&lt;/BIRTH_PLACE&gt;
+    &lt;CREDIT&gt;
+      &lt;NAME_OFFICIAL&gt;
+        &lt;DISPLAY&gt;Christian Bale&lt;/DISPLAY&gt;
+      &lt;/NAME_OFFICIAL&gt;
+      &lt;CHARACTER&gt;Batman&lt;/CHARACTER&gt;
+      &lt;RANK&gt;1&lt;/RANK&gt;
+      &lt;CONTRIBUTOR&gt;
+        &lt;NAME_OFFICIAL&gt;
+          &lt;DISPLAY&gt;Christian Bale&lt;/DISPLAY&gt;
+        &lt;/NAME_OFFICIAL&gt;
+      &lt;/CONTRIBUTOR&gt;
+      &lt;VIDEO_WORK ORD="1"&gt;
+        &lt;DATE_ORIGINAL&gt;2012-07-20&lt;/DATE_ORIGINAL&gt;
+      &lt;/VIDEO_WORK&gt;
+    &lt;/CREDIT&gt;
+    
+    ....More Credits
+    
+  &lt;/CONTRIBUTOR&gt;
+  &lt;CONTRIBUTOR ORD="2"&gt;
+    &lt;NAME_OFFICIAL&gt;
+      &lt;DISPLAY&gt;Heath Ledger&lt;/DISPLAY&gt;
+    &lt;/NAME_OFFICIAL&gt;
+    &lt;BIOGRAPHY LANG="eng"&gt;The death of actor Heath Ledger in 2008, at age 28, sent shock waves through the 
+    film world, particularly among his legions of fans who had only just discovered his intense screen charisma. 
+    Having grown up in Perth, Australia, Ledger waited until he finished high school before setting out on a path 
+    that would lead him quickly to Hollywood success. ...(more) 
+    &lt;/BIOGRAPHY&gt;
+    &lt;BIRTH_DATE ORD="1"&gt;1979-04-04&lt;/BIRTH_DATE&gt;
+    &lt;BIRTH_PLACE ORD="1"&gt;Perth, Western Australia, Australia&lt;/BIRTH_PLACE&gt;
+    &lt;DEATH_DATE ORD="1"&gt;2008-01-22&lt;/DEATH_DATE&gt;
+    &lt;DEATH_PLACE ORD="1"&gt;New York City, New York, United States&lt;/DEATH_PLACE&gt;
+    &lt;CREDIT&gt;
+      &lt;NAME_OFFICIAL&gt;
+        &lt;DISPLAY&gt;Heath Ledger&lt;/DISPLAY&gt;
+      &lt;/NAME_OFFICIAL&gt;
+      &lt;CHARACTER&gt;Tony&lt;/CHARACTER&gt;
+      &lt;RANK&gt;1&lt;/RANK&gt;
+      &lt;CONTRIBUTOR&gt;
+        &lt;NAME_OFFICIAL&gt;
+          &lt;DISPLAY&gt;Heath Ledger&lt;/DISPLAY&gt;
+        &lt;/NAME_OFFICIAL&gt;
+      &lt;/CONTRIBUTOR&gt;
+      &lt;VIDEO_WORK ORD="1"&gt;
+        &lt;DATE_ORIGINAL&gt;2009&lt;/DATE_ORIGINAL&gt;
+      &lt;/VIDEO_WORK&gt;
+    &lt;/CREDIT&gt;
+    
+    ... More Credits
+    
+    &lt;/CONTRIBUTOR&gt;
+    
+    ... More Contributors
+    
+ &lt;/CONTRIBUTOR_RESPONSE&gt;</pre>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

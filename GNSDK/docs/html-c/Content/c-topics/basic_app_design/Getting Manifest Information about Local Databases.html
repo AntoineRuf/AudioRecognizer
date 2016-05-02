@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Basic Application Design Tasks|Setup and Initialization">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Getting Manifest Information about Local Databases</title>
+        <link href="../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../index.html#c-topics/basic_app_design/Getting Manifest Information about Local Databases.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Basic Application Design Tasks</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Setup and Initialization</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Getting Manifest Information about Local Databases</span>
+        </div>
+        <h1>Getting Manifest Information about Local Databases</h1>
+        <p><span class="GNVariablesProductName">GNSDK for Desktop</span> provides local databases, which differ based on region, configuration, and other factors. You can retrieve manifest information about your local databases, including database versions, available image sizes, and available locale configurations. Your application can use this information to request data more efficiently. For example, to avoid making queries for unsupported locales, you can retrieve the valid locale configurations contained in your local lists cache.
+</p>
+        <p>To get database versions and available image sizes, use the following functions:
+</p>
+        <ul>
+            <li value="1">gnsdk_lookup_local_storage_info_get(): Returns information for a particular local database and local storage key  </li>
+            <li value="2">gnsdk_lookup_local_storage_info_count(): Returns a count of the values available for a particular local database and local storage key</li>
+        </ul>
+        <h2>Images</h2>
+        <p><span class="GNVariablesProductName">GNSDK for Desktop</span> provides album cover art, and artist and genre images in different sizes. You can retrieve the available image sizes by using the GNSDK_LOOKUP_LOCAL_STORAGE_IMAGE_SIZE key with the gnsdk_lookup_local_storage_info_get() function. This allows you to request images in available sizes only, rather than spending cycles requesting image sizes that are not available.</p>
+        <p>Use the gnsdk_lookup_local_storage_info_count() function to provide ordinals to the gnsdk_lookup_local_storage_info_get() function to get the image sizes.</p>
+        <p>For example, the following code retrieves the available image sizes:</p><pre xml:space="preserve">gnsdk_uint32_t count=0;
+gnsdk_uint32_t ordinal=0;
+gnsdk_cstr_t available_image_size = GNSDK_NULL;
+gnsdk_error_t error = GNSDK_SUCCESS;
+
+error = gnsdk_lookup_local_storage_info_count(
+			GNSDK_LOOKUP_LOCAL_STORAGE_CONTENT, 
+			GNSDK_LOOKUP_LOCAL_STORAGE_IMAGE_SIZE, &amp;count);
+if (!error)
+{
+    for (ordinal=1; ordinal&lt;=count; ordinal++)
+    {
+        error = gnsdk_lookup_local_storage_info_get(
+			GNSDK_LOOKUP_LOCAL_STORAGE_CONTENT, 
+			GNSDK_LOOKUP_LOCAL_STORAGE_IMAGE_SIZE, 
+			ordinal, &amp;available_image_size);
+    }
+}
+</pre>
+        <p>Once you have retrieved the available image sizes, you can set the image size for a query using the gnsdk_link_query_option_set() function. For more information about retrieving images, see <a href="../accessing_metadata/link/Accessing Enriched Music Content.html" class="GNBasic MCXref xref xrefGNBasic">Accessing Enriched Music Content</a>.</p>
+        <h2><a name="Database"></a>Local Database Versions</h2>
+        <p>To retrieve the version number for a local database, use the GNSDK_LOOKUP_LOCAL_STORAGE_GDB_VERSION key with the gnsdk_lookup_local_storage_info_get() function. Use an ordinal of 1 to get the database version.</p>
+        <p>For example, the following code retrieves the local database versions:</p><pre xml:space="preserve">
+gnsdk_cstr_t version = GNSDK_NULL;
+gnsdk_error_t error = GNSDK_SUCCESS;
+
+error = gnsdk_lookup_local_storage_info_get(
+			GNSDK_LOOKUP_LOCAL_STORAGE_CONTENT, 
+			GNSDK_LOOKUP_LOCAL_STORAGE_GDB_VERSION, 1, &amp;version);
+if (!error)
+{
+    error = gnsdk_lookup_local_storage_info_get(
+			GNSDK_LOOKUP_LOCAL_STORAGE_METADATA, 
+			GNSDK_LOOKUP_LOCAL_STORAGE_GDB_VERSION, 1, &amp;version);
+}
+if (!error)
+{
+    error = gnsdk_lookup_local_storage_info_get(
+			GNSDK_LOOKUP_LOCAL_STORAGE_TOCINDEX, 
+			GNSDK_LOOKUP_LOCAL_STORAGE_GDB_VERSION, 1, &amp;version);
+}
+if (!error)
+{
+    error = gnsdk_lookup_local_storage_info_get(
+			GNSDK_LOOKUP_LOCAL_STORAGE_TEXTINDEX, 
+			GNSDK_LOOKUP_LOCAL_STORAGE_GDB_VERSION, 1, &amp;version);
+}
+</pre>
+        <h2>Locales</h2>
+        <p>To retrieve the valid locale configurations available in your local lists cache, use the gnsdk_manager_locale_available_get() function. Locale configurations are combinations of values that you can use to set the locale for your application. The function returns the following values:</p>
+        <ul>
+            <li value="1">Group</li>
+            <li value="2">Language</li>
+            <li value="3">Region</li>
+            <li value="4">Descriptor</li>
+        </ul>
+        <p> To get each locale configuration, use the gnsdk_manager_locale_available_count() function to provide ordinals to the gnsdk_manager_locale_available_get() function.</p>
+        <p>For example, the following code retrieves the available locale configurations:</p><pre xml:space="preserve">gnsdk_locale_handle_t locale_handle = GNSDK_NULL;
+gnsdk_cstr_t type = GNSDK_NULL;
+gnsdk_cstr_t region = GNSDK_NULL;
+gnsdk_cstr_t descriptor = GNSDK_NULL;
+gnsdk_cstr_t language = GNSDK_NULL;
+gnsdk_uint32_t count = 0;
+gnsdk_uint32_t ordinal = 0;
+gnsdk_error_t error = GNSDK_SUCCESS;
+
+error = gnsdk_manager_locale_available_count(&amp;count);
+			
+if (!error)
+{
+    for(ordinal=1; ordinal&lt;=count; ordinal++)
+    {
+        error = gnsdk_manager_locale_available_get(
+			ordinal, &amp;type, &amp;language, 
+			&amp;region, &amp;descriptor);
+    }
+}
+</pre>
+        <p>You can use the returned values  directly in the gnsdk_manager_locale_load() function to load a locale. For more information about loading locales, see <a href="Using Locales.html" class="GNBasic MCXref xref xrefGNBasic">Using Locales</a>.</p>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

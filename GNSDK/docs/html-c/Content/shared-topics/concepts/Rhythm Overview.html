@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Concepts|Discovery Features">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Rhythm Overview</title>
+        <link href="../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../index.html#shared-topics/concepts/Rhythm Overview.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Concepts</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Discovery Features</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Rhythm</span>
+        </div>
+        <h1 class="Heading1">Rhythm Overview</h1>
+        <p>Rhythm enables seamless integration of any audio source with online music services within a single application. Depending on the supported features of each online music service, an identified track can be used to link to a service to:</p>
+        <ul>
+            <li value="1">	Play that song</li>
+            <li value="2">	Play more songs from that artist/album or</li>
+            <li value="3">Create an adaptive radio session</li>
+        </ul>
+        <p>The identified track can be from any music source including terrestrial radio, CD, audio file or even another music service provided the track has been identified using Gracenote recognition technology.</p>
+        <p>Gracenote Rhythm allows you to create highly relevant and personalized adaptive radio stations and music recommendations for end users. Radio stations can be created with seed artists and tracks or a combination of genre, era, and mood, and can support Digital Millennium Copyright Act (DCMA) sequencing rules.</p>
+        <p>Rhythm includes the ability for an end user to specify whether they have played a track, like or dislike it, or want to skip past it.  Rhythm can reconfigure the radio station playlist to more closely reflect end user preferences. In addition, it supports cover art retrieval, third-party links, and metadata content exploration.</p>
+        <p>Rhythm can:</p>
+        <ul>
+            <li value="1"><b>Create a Radio Station:</b> Creating a radio station requires a User ID and a seed (artist, track, genre, era, or mood).  Creating a radio station generates a track playlist.</li>
+            <li value="2"><b>Adapt to User Feedback:</b> End users can provide feedback (play, like, dislike, skip) about songs in the current radio station’s playlist.  This can result in modifying a playlist or generating a new one altogether.</li>
+            <li value="3"><b>Tune a Radio Station:</b> Reconfigure an existing radio station playlist based on track popularity and similarity.</li>
+            <li value="4"><b>Create a Playlist:</b> Rhythm can create a track playlist without the overhead of creating a radio station.</li>
+        </ul>
+        <p>Radio station creation returns a radio station ID and a track playlist.  The radio ID is used in subsequent actions on the station, its playlist, or its tuning parameters.  Rhythm builds radio stations using GDOs.  MusicID can retrieve the necessary GDOs by looking up artist names, album titles, or track titles.  To create a playlist, Rhythm uses:</p>
+        <ul>
+            <li value="1">Artist ID</li>
+            <li value="2">Track TUI&#160;(Title Unique Identifier)</li>
+            <li value="3">Genre, mood, or era attributes</li>
+            <li value="4">More than one of the above in combination</li>
+        </ul>
+        <p>Multiple seed stations create a greater variety of results.  Once you create a radio station, you can examine its entire playlist (up to 25 tracks at a time).  End users can take various feedback event actions on the playlist such as:</p>
+        <ul>
+            <li value="1">Track like</li>
+            <li value="2">Track dislike</li>
+            <li value="3">Track skipped</li>
+            <li value="4">Track played</li>
+            <li value="5">Artist like</li>
+            <li value="6">Artist dislike</li>
+        </ul>
+        <p>When feedback is sent, Rhythm reconfigures the station’s playlist accordingly. Rhythm supports the retrieval of the playlist at any time before or after feedback is provided.</p>
+        <p>A station’s behavior may also be tuned by changing playlist generation behavior.  For example, you can get difference responses based on options for popularity or similarity. </p>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

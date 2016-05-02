@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Basic Application Design Tasks">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Testing an Application</title>
+        <link href="../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../index.html#c-topics/basic_app_design/Testing an Application.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Basic Application Design Tasks</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Testing an Application</span>
+        </div>
+        <h1><a name="_Toc334991770"></a>Testing an Application</h1>
+        <p>Gracenote helps you validate and ship your Gracenote-enabled application. Read the following sections carefully to learn the procedures you must follow to release your application.</p>
+        <h2><a name="_Toc334991771"></a>Enabling Test Mode</h2>
+        <p>When you are ready to begin testing your Gracenote-enabled application, send an email to <a href="mailto:DevSupport@gracenote.com">DevSupport@gracenote.com </a>to register your client application. Gracenote support will send back information that will allow you to test your application.</p>
+        <h2>Setting Environment Variables</h2>
+        <p>Some <span class="GNVariablesProductName">GNSDK for Desktop</span> options can be set via environment variables, to allow you to enable certain features to improve your application testing. Using environment variables means that these options do not need to be accessed through your application.</p>
+        <p><span class="GNVariablesProductName">GNSDK for Desktop</span> examines the environment variables listed in the following table:</p>
+        <table style="width: 100%;mc-caption-repeat: true;">
+            <col style="width: 347px;" />
+            <col />
+            <thead>
+                <tr>
+                    <th>Environment variable</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>GNSDK_ASYNC_LOGGING=TRUE/FALSE</td>
+                    <td>By default, logging is performed on a separate thread. If you require that no extra threads be created, or just want the logging to operate synchronously (log messages committed to file immediately), set this variable to FALSE.</td>
+                </tr>
+                <tr>
+                    <td>GNSDK_DEBUG_LOG=&lt;log filename&gt;</td>
+                    <td>Set this variable to a valid file name to enable <span class="GNVariablesProductName">GNSDK for Desktop</span> debug logging to the given file name.</td>
+                </tr>
+                <tr>
+                    <td>GNSDK_PROXY_HOST=hostname:port</td>
+                    <td>
+                        <p>Set this variable to set <span class="GNVariablesProductName">GNSDK for Desktop</span> to connect through a proxy server. If the proxy server also requires a user name and password also set those variables.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>GNSDK_PROXY_USER=&lt;proxy username&gt;</p>
+                    </td>
+                    <td>Sets a user name for the proxy server.</td>
+                </tr>
+                <tr>
+                    <td>GNSDK_PROXY_PASS=&lt;proxy password&gt;</td>
+                    <td>Sets a password for the proxy server.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2><a name="_Toc334991772"></a>Enabling Full Access to Gracenote Service</h2>
+        <p>When you are finished with development, ship your device to Gracenote for validation. Be sure to include any access codes or registration information needed to unlock your application for execution.</p>
+        <p>Gracenote ensures that Gracenote metadata is exchanged properly between your device and Gracenote Service.  Gracenote also verifies that the device, and any packaging, is in compliance with the terms of the License Agreement. This is not a bug-testing service—it is a verification process to protect the integrity and display of Gracenote metadata.</p>
+        <p>Once Gracenote has verified your device and received your signed License Agreement, it enables the full complement of registered users (as stated in your License Agreement) for the application. For more information, refer to your license agreement.</p>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Accessing Core Metadata|Accessing Music Metadata">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Accessing External IDs </title>
+        <link href="../../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../../index.html#c-topics/accessing_metadata/music/Accessing External IDs.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Accessing Core Metadata</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Accessing Music Metadata</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Accessing External IDs</span>
+        </div>
+        <h1>Accessing External IDs </h1>
+        <p><span class="GNVariablesProductName">GNSDK for Desktop</span> can match identified media with External IDs (XIDs). These are third-party identifiers provided by preferred Gracenote partners that allow applications to match identified media to merchandise IDs in online stores and other services – facilitating transactions by helping connect queries directly to commerce. Gracenote has several preferred partnerships and pre-matches partner XIDs to Gracenote media IDs. Entitled applications can retrieve these IDs and present them to users. </p>
+        <p>XIDs are only available using <a href="javascript:void(0);" class="MCTextPopup MCTextPopupHotSpot MCTextPopup_Open MCTextPopupHotSpot_ MCTextPopupHotSpot_Popup #text #textPopup">GDO<span class="MCTextPopupBody popupBody"><span class="MCTextPopupArrow"></span>Gracenote Data Object: Containers most-commonly used to store information returned by a query. GDOs can contain metadata values (names, titles, external IDs, and so on) that can be accessed by an application using Value keys.  GDOs can also contain references to other GDOs, which can be accessed using Child GDO keys.</span></a> keys.  So for albums for example, you set ENABLE_LINK, call find_albums(), then the resultant album GDO will have the XIDs in it.</p>
+        <p>To access XIDs for an Album:</p>
+        <ol>
+            <li value="1">Initialize manager and music modules.</li>
+            <li value="2">Pass in a source GDO.</li>
+            <li value="3">Call gnsdk_*_query_option_Set() with the option OPTION_ENABLE_EXTERNAL_ID_DATA.</li>
+            <li value="4">Call gnsdk_*_query_find_albums() and navigate through the returned Album GDO for possible XIDs.</li>
+            <li value="5">Get the External IDs using gnsdk_manager_gdo_value_get() and GNSDK_GDO_VALUE_EXTERNALID_VALUE.</li>
+            <li value="6">Get the External IDs data using gnsdk_manager_gdo_value_get() and GNSDK_GDO_VALUE_EXTERNALID_DATA.</li>
+        </ol>
+        <p>The following table lists options for gnsdk_*_query_option_Set() to access XIDs (External IDs).</p>
+        <table>
+            <col />
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <th>To Retrieve</th>
+                    <th>Function</th>
+                    <th>Use</th>
+                </tr>
+                <tr>
+                    <td>XIDs</td>
+                    <td>
+                        <p>gnsdk_*_query_option_set() </p>
+                    </td>
+                    <td>GNSDK_*_OPTION_ENABLE_EXTERNAL_ID_DATA query key. </td>
+                </tr>
+            </tbody>
+        </table>
+        <p>where * is MUSICID or MUSICIDFILE. </p>
+        <h2 class="example">Example</h2><pre xml:space="preserve">...
+if (GNSDK_SUCCESS == error)
+{
+    gnsdk_uint32_t  count = 0;
+    gnsdk_uint32_t  i = 0;
+    gnsdk_gdo_handle_t   xid_gdo  = GNSDK_NULL;
+    error = gnsdk_manager_gdo_child_count(album_gdo, GNSDK_GDO_CHILD_EXTERNAL_ID, &amp;count);
+    if (GNSDK_SUCCESS == error)
+    {
+        printf( "   We have %d xid child\n", count );
+        for (i = 1; i &amp;lt;= count; i++)
+        {
+            error = gnsdk_manager_gdo_child_get( album_gdo, GNSDK_GDO_CHILD_EXTERNAL_ID, i, &amp;xid_gdo );
+            if (GNSDK_SUCCESS == error)
+            {
+                error = gnsdk_manager_gdo_value_get( xid_gdo, GNSDK_GDO_VALUE_EXTERNALID_VALUE, 1, &amp;value );
+                if (GNSDK_SUCCESS == error)
+                {
+                    printf( "   xid_value: %s\n", value );
+                }
+                if (GNSDKERR_NotFound == GNSDKERR_ERROR_CODE(error))
+                {
+                    /*These fields are optional so it is totally fine if they are not found at all*/
+                    error = GNSDK_SUCCESS;
+                }
+                error = gnsdk_manager_gdo_value_get( xid_gdo, GNSDK_GDO_VALUE_EXTERNALID_SOURCE, 1, &amp;value );
+                if (GNSDK_SUCCESS == error)
+                {
+                    printf( "   xid_source: %s\n", value );
+                }
+                if (GNSDKERR_NotFound == GNSDKERR_ERROR_CODE(error))
+                {
+                    /*These fields are optional so it is totally fine if they are not found at all*/
+                    error = GNSDK_SUCCESS;
+                }
+                error = gnsdk_manager_gdo_value_get( xid_gdo, GNSDK_GDO_VALUE_EXTERNALID_TYPE, 1, &amp;value );
+                if (GNSDK_SUCCESS == error)
+                {
+                    printf( "   xid_type: %s\n", value );
+                }
+                if (GNSDKERR_NotFound == GNSDKERR_ERROR_CODE(error))
+                {
+                    /*These fields are optional so it is totally fine if they are not found at all*/
+                    error = GNSDK_SUCCESS;
+                }
+		 error = gnsdk_manager_gdo_value_get( xid_gdo, GNSDK_GDO_VALUE_EXTERNALID_DATA, 1, &amp;value );
+		 if (GNSDK_SUCCESS == error)
+		 {
+		     printf( "        xid_data: %s\n", value );
+		 }
+		 if (GNSDKERR_NotFound == GNSDKERR_ERROR_CODE(error))
+		 {
+		     /*These fields are optional so it is totally fine if they are not found at all*/
+		     error = GNSDK_SUCCESS;
+		}				
+            }
+            gnsdk_manager_gdo_release(xid_gdo);
+        }
+    }
+}</pre>
+        <div class="MCRelationshipsProxy_0">
+            <p class="conceptHeading_concept_0">Related Information</p>
+            <p class="conceptItem_concept_0"><a href="../../../shared-topics/concepts/Third-Party Identifiers and Preferred Partners.html">Third-Party Identifiers and Preferred Partners</a>
+            </p>
+        </div>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

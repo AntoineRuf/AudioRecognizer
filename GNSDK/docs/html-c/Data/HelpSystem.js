@@ -1,0 +1,9 @@
+var xmlHelpSystemData = "";
+xmlHelpSystemData += '<?xml version=\"1.0\" encoding=\"utf-8\"?>';
+xmlHelpSystemData += '<WebHelpSystem DefaultUrl=\"Content/shared-topics/front_back_matter/C-HelpSystemTitlePageOnline.html\" Toc=\"Data/Toc.js\" Index=\"Data/Index.js\" Concepts=\"Data/Concepts.js\" BrowseSequence=\"Data/BrowseSequence.js\" Glossary=\"Data/Glossary.js\" SearchDatabase=\"Data/Search.js\" Alias=\"Data/Alias.xml\" Synonyms=\"Data/Synonyms.xml\" SearchFilterSet=\"Data/Filters.js\" SkinName=\"GNHTML5\" Skins=\"Default,GNHTML5\" BuildTime=\"7/14/2015 12:47:50 PM\" BuildVersion=\"11.0.1.21039\" TargetType=\"WebHelp2\" SkinTemplateFolder=\"Skin/\" InPreviewMode=\"false\" MoveOutputContentToRoot=\"false\" MakeFileLowerCase=\"false\" UseCustomTopicFileExtension=\"true\" CustomTopicFileExtension=\"html\" PreventExternalUrls=\"false\" EnableResponsiveOutput=\"false\" ResultsPerPage=\"20\">';
+xmlHelpSystemData += '    <CatapultSkin Version=\"1\" SkinType=\"WebHelp2\" Comment=\"HTML5 skin\" Anchors=\"Width,Height\" Width=\"800\" Height=\"600\" Top=\"0\" Left=\"0\" Bottom=\"0\" Right=\"0\" Tabs=\"TOC\" DefaultTab=\"TOC\" UseBrowserDefaultSize=\"True\" UseDefaultBrowserSetup=\"True\" AutoSyncTOC=\"true\" Name=\"Default\" />';
+xmlHelpSystemData += '    <CatapultSkin Version=\"2\" SkinType=\"WebHelp2\" Comment=\"HTML5 skin\" Anchors=\"Width,Height\" Width=\"800\" Height=\"600\" Top=\"0\" Left=\"0\" Bottom=\"0\" Right=\"0\" Tabs=\"TOC\" DefaultTab=\"TOC\" UseBrowserDefaultSize=\"True\" UseDefaultBrowserSetup=\"true\" AutoSyncTOC=\"true\" NavigationLinkTop=\"true\" NavigationLinkBottom=\"false\" Name=\"GNHTML5\">';
+xmlHelpSystemData += '        <WebHelpOptions HideNavigationOnStartup=\"false\" />';
+xmlHelpSystemData += '    </CatapultSkin>';
+xmlHelpSystemData += '</WebHelpSystem>';
+MadCap.Utilities.Xhr._FilePathToXmlStringMap.Add('HelpSystem', xmlHelpSystemData);

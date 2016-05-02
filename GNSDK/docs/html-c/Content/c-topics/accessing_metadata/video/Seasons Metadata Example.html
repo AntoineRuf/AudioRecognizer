@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Accessing Core Metadata|Accessing Video Metadata|Video Metadata Reference">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Seasons Metadata  Example</title>
+        <link href="../../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../../index.html#c-topics/accessing_metadata/video/Seasons Metadata Example.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Accessing Core Metadata</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Accessing Video Metadata</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Seasons Metadata Example</span>
+        </div>
+        <h1>Seasons Metadata  Example</h1>
+        <p>The following is intended to give the reader some idea of the metadata returned in a gnsdk_video_query_find_seasons() API call. The output was generated using the sample code in the "Find Seasons" article.</p><pre>
+&lt;VIDEO_SEASON&gt;
+  &lt;TITLE_OFFICIAL LANG="eng"&gt;
+    &lt;DISPLAY&gt;Season 1&lt;/DISPLAY&gt;
+  &lt;/TITLE_OFFICIAL&gt;
+  &lt;DATE_ORIGINAL&gt;1990-12-22&lt;/DATE_ORIGINAL&gt;
+  &lt;SEASON_NUMBER&gt;1&lt;/SEASON_NUMBER&gt;
+  &lt;SEASON_COUNT&gt;30&lt;/SEASON_COUNT&gt;
+  &lt;VIDEO_WORK ORD="1"&gt;
+    &lt;TITLE_OFFICIAL LANG="eng" ORD="1"&gt;
+      &lt;DISPLAY&gt;Simpsons Roasting on an Open Fire&lt;/DISPLAY&gt;
+    &lt;/TITLE_OFFICIAL&gt;
+    &lt;SERIES_EPISODE&gt;1&lt;/SERIES_EPISODE&gt;
+    &lt;SERIES_EPISODE_COUNT&gt;525&lt;/SERIES_EPISODE_COUNT&gt;
+    &lt;SEASON_EPISODE&gt;1&lt;/SEASON_EPISODE&gt;
+    &lt;SEASON_EPISODE_COUNT&gt;13&lt;/SEASON_EPISODE_COUNT&gt;
+  &lt;/VIDEO_WORK&gt;
+  &lt;VIDEO_WORK ORD="2"&gt;
+    &lt;TITLE_OFFICIAL LANG="eng" ORD="1"&gt;
+      &lt;DISPLAY&gt;Bart the Genius&lt;/DISPLAY&gt;
+    &lt;/TITLE_OFFICIAL&gt;
+    &lt;SERIES_EPISODE&gt;2&lt;/SERIES_EPISODE&gt;
+    &lt;SERIES_EPISODE_COUNT&gt;525&lt;/SERIES_EPISODE_COUNT&gt;
+    &lt;SEASON_EPISODE&gt;2&lt;/SEASON_EPISODE&gt;
+    &lt;SEASON_EPISODE_COUNT&gt;13&lt;/SEASON_EPISODE_COUNT&gt;
+  &lt;/VIDEO_WORK&gt;
+  &lt;VIDEO_WORK ORD="3"&gt;
+    &lt;TITLE_OFFICIAL LANG="eng" ORD="1"&gt;
+      &lt;DISPLAY&gt;Homer&amp;apos;s Odyssey&lt;/DISPLAY&gt;
+    &lt;/TITLE_OFFICIAL&gt;
+    &lt;SERIES_EPISODE&gt;3&lt;/SERIES_EPISODE&gt;
+    &lt;SERIES_EPISODE_COUNT&gt;525&lt;/SERIES_EPISODE_COUNT&gt;
+    &lt;SEASON_EPISODE&gt;3&lt;/SEASON_EPISODE&gt;
+    &lt;SEASON_EPISODE_COUNT&gt;13&lt;/SEASON_EPISODE_COUNT&gt;
+  &lt;/VIDEO_WORK&gt;
+  
+  ... More Video Works
+  
+  &lt;VIDEO_SERIES ORD="1"&gt;
+    &lt;TITLE_OFFICIAL LANG="eng"&gt;
+      &lt;DISPLAY&gt;The Simpsons&lt;/DISPLAY&gt;
+    &lt;/TITLE_OFFICIAL&gt;
+  &lt;/VIDEO_SERIES&gt;
+&lt;/VIDEO_SEASON&gt;  </pre>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>

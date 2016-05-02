@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="index.xml" data-mc-path-to-help-system="../../../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Implementing Applications|Implementing Advanced Recognition and Organization Features|Performing Advanced Video Recognition (Video Explore)">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Find Seasons</title>
+        <link href="../../../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Tablet.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../../Skins/Default/Stylesheets/Components/Mobile.css" rel="stylesheet" data-mc-generated="True" />
+        <link href="../../../Resources/Stylesheets/BookStyles.css" rel="stylesheet" />
+        <script src="../../../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <p class="MCWebHelpFramesetLink MCWebHelpFramesetLinkTop"><a href="../../../../index.html#c-topics/recognition/video/Find Seasons.html">Open topic with navigation</a>
+        </p>
+        <div class="MCBreadcrumbsBox_0"><span class="MCBreadcrumbsPrefix">You are here: </span><span class="MCBreadcrumbsSelf">Implementing Applications</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Implementing Advanced Recognition and Organization Features</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbsSelf">Performing Advanced Video Recognition (Video Explore)</span><span class="MCBreadcrumbsDivider"> &gt; </span><span class="MCBreadcrumbs">Find Seasons</span>
+        </div>
+        <h1>Find Seasons</h1>
+        <p>This example demonstrates using VideoExplore to perform a Seasons query (gnsdk_video_query_find_seasons()). While this example focuses on looking up a video Season using a TUI and TUI tag, the basic query steps are similar for most GNSDK lookups.</p>
+        <p>A Season is an ordered collection of Works, typically representing a season of a TV series. For example: CSI: Miami (Season One), CSI: Miami (Season Two), CSI: Miami (Season Three).</p>
+        <p>Sample code: </p>
+        <p>video_seasons_lookup/main.c
+        </p>
+        <p>Application steps:</p>
+        <ol>
+            <li value="1">Authenticate caller, initialize GNSDK and Video module, load a locale, enable SDK logging, and get a user handle</li>
+            <li value="2">Create query from TUI and TUI Tag</li>
+            <li value="3">Get Seasons <a href="javascript:void(0);" class="MCTextPopup MCTextPopupHotSpot MCTextPopup_Open MCTextPopupHotSpot_ MCTextPopupHotSpot_Popup #text #textPopup">GDO<span class="MCTextPopupBody popupBody"><span class="MCTextPopupArrow"></span>Gracenote Data Object: Containers most-commonly used to store information returned by a query. GDOs can contain metadata values (names, titles, external IDs, and so on) that can be accessed by an application using Value keys.  GDOs can also contain references to other GDOs, which can be accessed using Child GDO keys.</span></a></li>
+            <li value="4">Display title and other metadata</li>
+            <li value="5">Release resources and shutdown GNSDK and Video module</li>
+        </ol>
+        <p><strong>Sample output:</strong>
+        </p><pre xml:space="preserve">
+GNSDK Product Version	: 3.2.0.274 	(built 2012-11-30 09:09-0800)
+
+*****Sample Video Seasons Search: 'Simpsons First Season'*****
+
+Perform the search...
+
+Title: Season 1
+
+Episodes:
+	1 : Simpsons Roasting on an Open Fire
+	2 : Bart the Genius
+	3 : Homer's Odyssey
+	4 : There's No Disgrace Like Home
+	5 : Bart The General
+	6 : Moaning Lisa
+	7 : The Call of the Simpsons
+	8 : The Telltale Head
+	9 : Life on the Fast Lane
+	10 : Homer's Night Out
+	11 : The Crepes of Wrath
+	12 : Krusty Gets Busted
+	13 : Some Enchanted Evening
+	</pre>
+        <p class="onlineFooter">© 2000 to present. Gracenote, Inc. All rights reserved.</p>
+        <p><a href="mailto:doc_feedback@gracenote.com?subject=Gracenote Documentation Feedback" target="_blank" title="Send comments about this topic to Gracenote Technical Publications." alt="Send comments about this topic to Gracenote Technical Publications.">How can we improve this documentation?</a>
+        </p>
+    </body>
+</html>
